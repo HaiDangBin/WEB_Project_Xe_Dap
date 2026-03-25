@@ -20,6 +20,58 @@
             --accent-color: #f39c12;
             /* Màu cam nhấn cho giá/giỏ hàng */
             --light-bg: #f8f9fa;
+            --blue-dark: #1C0770;
+        }
+
+        header {
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s ease-in-out;
+            /* Hiệu ứng chuyển ảnh mượt */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 320px;
+            width: 81%;
+            margin: 0 auto;
+            border-radius: 20px;
+
+        }
+
+        .navbar {
+            margin-bottom: 10px;
+        }
+
+        /* Lớp để ẩn chữ khi cần (đã làm ở bước trước) */
+        .d-none {
+            display: none !important;
+        }
+
+        .d-none {
+            display: none !important;
+        }
+
+        .header-banner {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s ease-in-out;
+            /* Hiệu ứng chuyển ảnh mượt */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 320px;
+            width: 81%;
+            margin: 0 auto;
+            border-radius: 20px;
+        }
+
+        /* Thêm lớp shadow để chữ dễ đọc hơn trên nền ảnh */
+        .header-banner h1,
+        .header-banner p {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .card-img-top {
@@ -67,11 +119,115 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
+
+        .navbar {
+            background-color: var(--blue-dark);
+        }
+
+        #detail-content img {
+            transition: transform 0.3s ease;
+        }
+
+        #detail-content img:hover {
+            transform: scale(1.02);
+            /* Hiệu ứng phóng to nhẹ khi di chuột */
+        }
+
+        .navbar-brand:hover {
+            color: #27ae60 !important;
+            /* Đổi màu khi quay lại shop */
+        }
+
+        .search-wrapper {
+            position: relative;
+            display: inline-block;
+            /* Vùng đệm giúp chuột di chuyển xuống không bị mất hover */
+        }
+
+        /* Nút kính lúp màu xanh lá */
+        .search-trigger {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* Khung Dropdown bao ngoài */
+        .search-dropdown {
+            position: absolute;
+            top: 100%;
+            right: -20px;
+            /* Căn chỉnh vị trí */
+            width: 450px;
+            /* Độ rộng lớn như trong ảnh */
+            background: white;
+            border: 2px solid #0a0a0a;
+            /* Viền xanh lá */
+            border-radius: 20px;
+            /* Bo góc cực lớn */
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+            /* Hiệu ứng ẩn/hiện mượt mà */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        /* TẠO MŨI TÊN TRỎ LÊN */
+        .search-dropdown::before {
+            content: "";
+            position: absolute;
+            top: -12px;
+            /* Đẩy lên trên viền */
+            right: 32px;
+            /* Căn đúng tâm nút kính lúp */
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 12px solid #0d0e0d;
+            /* Màu trùng với viền */
+        }
+
+        /* Hiệu ứng khi Hover */
+        .search-wrapper:hover .search-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Ô nhập liệu màu xám bên trong */
+        .search-box-inner {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box-inner input {
+            width: 100%;
+            padding: 12px 20px;
+            background-color: #f5f5f5;
+            /* Nền xám nhạt */
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .inner-icon {
+            position: absolute;
+            right: 15px;
+            color: #333;
+            font-size: 18px;
+        }
     </style>
 </head>
 
 <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bolder" href="index.html">☘️ E-BIKE SHOP</a>
             <div class="collapse navbar-collapse">
@@ -86,12 +242,16 @@
                                     <div class="col-md-2-5 col-md-3">
                                         <h6 class="fw-bold text-uppercase">XE ĐẠP ĐIỆN</h6>
                                         <ul class="list-unstyled">
-                                            <li><a href="" class="dropdown-item px-0">XE ĐẠP ĐIỆN OSAKAR</a></li>
-                                            <li><a href="" class="dropdown-item px-0">XE ĐẠP ĐIỆN DETECH</a></li>
-                                            <li><a href="" class="dropdown-item px-0">XE ĐẠP ĐIỆN HOT GIRL</a></li>
+                                            <li><a href="index.html?brand=osakar" class="dropdown-item px-0">XE ĐẠP ĐIỆN
+                                                    OSAKAR</a></li>
+                                            <li><a href="index.html?brand=tailg" class="dropdown-item px-0">XE ĐẠP ĐIỆN
+                                                    TAILG</a></li>
+                                            <li><a href="index.html?brand=nijia" class="dropdown-item px-0">XE ĐẠP ĐIỆN
+                                                    NIJIA</a></li>
                                             <li><a href="" class="dropdown-item px-0">XE ĐẠP ĐIỆN PEGA-HKBIKE</a></li>
                                             <li><a href="" class="dropdown-item px-0">XE ĐẠP ĐIỆN DK BIKE</a></li>
-                                            <li><a href="" class="dropdown-item px-0">XE ĐẠP ĐIỆN YADEA</a></li>
+                                            <li><a href="index.html?brand=yadea" class="dropdown-item px-0">XE ĐẠP ĐIỆN
+                                                    YADEA</a></li>
                                             <li><a href="" class="dropdown-item px-0">XE ĐẠP ĐIỆN ASAMA</a></li>
                                         </ul>
                                     </div>
@@ -140,16 +300,39 @@
 
                         </ul>
                     </li>
-                    <li class="nav-item mx-3"><a href="#" class="nav-link text-white fw-bold">VỀ CHÚNG TÔI</a></li>
-                    <li class="nav-item mx-3"><a href="#" class="nav-link text-white fw-bold">BLOG</a></li>
+                    <li class="nav-item dropdown mx-3"><a href="#" class="nav-link dropdown-toggle text-white fw-bold"
+                            role="button" data-bs-toggle="dropdown">VỀ CHÚNG TÔI</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="" class="dropdown-item">GIỚI THIỆU</a></li>
+                            <li><a href="" class="dropdown-item">LIÊN HỆ</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-3"><a href="#" class="nav-link dropdown-toggle text-white fw-bold"
+                            role="button" data-bs-toggle="dropdown">BLOG</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="" class="dropdown-item">TIN TỨC</a></li>
+                            <li><a href="" class="dropdown-item">BẢO DƯỠNG XE ĐIỆN</a></li>
+
+                        </ul>
+                    </li>
                 </ul>
 
             </div>
             <div class="navbar-nav ms-auto align-items-center">
-                <button class="btn btn-light" type="button">
-                    <i class="bi bi-search"></i>
-                </button>
-                <a class="nav-link btn btn-primary bg-white text-dark ms-3" href="#">Giỏ hàng (<span
+                <div class="search-wrapper">
+                    <button class="search-trigger">
+                        <i class="bi bi-search"></i>
+                    </button>
+
+                    <div class="search-dropdown">
+                        <div class="search-box-inner">
+                            <input type="text" placeholder="Tìm kiếm xe điện" id="main-search">
+                            <i class="bi bi-search inner-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <a class="nav-link btn btn-primary bg-white text-dark ms-2" href="#">Giỏ hàng (<span
                         id="cart-count">0</span>)</a>
             </div>
         </div>
@@ -170,23 +353,76 @@
         let cartCount = 0;
 
         function renderProducts() {
-            products.forEach(p => {
-                productList.innerHTML += `
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100 product-card">
-                            <img src="${p.img}" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">${p.name}</h5>
-                                <p class="text-danger fw-bold">${p.price.toLocaleString()} VNĐ</p>
-                                <div class="d-grid gap-2">
-                                    <a href="product-detail.html?id=${p.id}" class="btn btn-outline-dark">Chi tiết</a>
-                                    <button class="btn btn-primary" onclick="addToCart()">Thêm giỏ hàng</button>
-                                </div>
-                            </div>
-                        </div>
+            const productList = document.getElementById('product-list');
+            const header = document.querySelector('header');
+            const headerTitle = header.querySelector('h1');
+            const headerDesc = header.querySelector('p');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const brandFilter = urlParams.get('brand');
+
+            // --- LOGIC XỬ LÝ HEADER (HÌNH ẢNH & CHỮ) ---
+            if (brandFilter) {
+                // Mặc định ẩn chữ khi có brand (để chuẩn bị cho các hãng có ảnh)
+                headerTitle.classList.add('d-none');
+                headerDesc.classList.add('d-none');
+
+                if (brandFilter === 'osakar') {
+                    // Hiển thị ảnh cho Osakar
+                    header.style.backgroundImage = "url('assets/img/BANNER_OSAKAR2.webp')";
+                }
+                else if (brandFilter === 'tailg') {
+                    // KHÔNG DÙNG ẢNH cho Tailg -> Hiện chữ để phân biệt
+                    header.style.backgroundImage = "none";
+                    header.style.backgroundColor = "#27ae60"; // Thêm màu nền xanh để header không bị trắng
+                    headerTitle.classList.remove('d-none');
+                    headerDesc.classList.remove('d-none');
+                    headerTitle.innerText = "XE ĐẠP ĐIỆN TAILG";
+                    headerDesc.innerText = "Các dòng xe TAILG chính hãng, bền bỉ";
+                }
+                // Thêm các hãng khác...
+                else if (brandFilter == "nijia") {
+                    header.style.backgroundImage = "url('assets/img/BANNER_NIJIA.jpg')";
+                }
+                else if (brandFilter == "yadea") {
+                    header.style.backgroundImage = "url('assets/img/BANNER_YADEA.jpg')";
+                }
+            } else {
+                // TRANG CHỦ: Hiển thị ảnh nền mặc định
+                header.style.backgroundImage = "url('assets/img/BANNER_HOME2.jpg')";
+                headerTitle.classList.add('d-none');
+                headerDesc.classList.add('d-none');
+            }
+
+            // --- LOGIC LỌC SẢN PHẨM (Giữ nguyên để chuyển trang đúng brand) ---
+            let displayProducts = brandFilter ? products.filter(p => p.brand === brandFilter) : products;
+
+            productList.innerHTML = '';
+            if (displayProducts.length === 0) {
+                productList.innerHTML = '<div class="col-12 text-center py-5"><h3>Chưa có sản phẩm cho hãng này</h3></div>';
+            } else {
+                displayProducts.forEach(p => {
+                    productList.innerHTML += `
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 product-card shadow-sm border-0">
+                <img src="${p.img}" class="card-img-top" style="border-radius: 15px 15px 0 0; height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">${p.name}</h5>
+                    <p class="text-danger fw-bold mb-3">${p.price.toLocaleString()} VNĐ</p>
+                    
+                    <div class="d-flex flex-column gap-2">
+                        <a href="product-detail.html?id=${p.id}" class="btn btn-outline-dark">
+                            <i class="bi bi-eye pe-1"></i> Xem chi tiết
+                        </a>
+                        <button class="btn btn-primary" onclick="addToCart()">
+                            <i class="bi bi-cart-plus pe-1"></i> Thêm vào giỏ
+                        </button>
                     </div>
-                `;
-            });
+                </div>
+            </div>
+        </div>`;
+                });
+            }
         }
 
         function addToCart() {
