@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Bảo Dưỡng</title>
+    <style>
+        .container-small {
+            max-width: 800px;
+            /* Bạn có thể chỉnh con số này (800px, 1000px...) */
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .footer {
+            background-color: #1a2521;
+            /* Màu xanh đen như trong ảnh */
+            color: #ffffff;
+            padding: 50px 0;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .footer-col h3 {
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 20px;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #2ecc71;
+            /* Màu xanh lá khi hover */
+            padding-left: 5px;
+        }
+
+        .highlight {
+            color: #f1c40f;
+            font-weight: bold;
+        }
+
+        .payment-methods img {
+            height: 30px;
+            margin-right: 10px;
+            filter: grayscale(100%);
+            transition: 0.3s;
+        }
+
+        .payment-methods img:hover {
+            filter: grayscale(0%);
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        /* Responsive cho điện thoại */
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <div id="nav-placeholder"></div>
+
+    <script>
+        fetch('navbar.html')
+            .then(response => {
+                if (!response.ok) throw new Error("Không tìm thấy file navbar.html");
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('nav-placeholder').innerHTML = data;
+
+                // TỰ ĐỘNG LÀM SÁNG MENU HIỆN TẠI (ACTIVE LINK)
+                const currentPath = window.location.pathname.split("/").pop() || 'index.html';
+                const links = document.querySelectorAll('.nav-link');
+                links.forEach(link => {
+                    if (link.getAttribute('href') === currentPath) {
+                        link.classList.add('active');
+                    }
+                });
+            })
+            .catch(error => console.error('Lỗi nhúng Navbar:', error));
+    </script>
+    <div class="container container-small my-4">
+        <div class="row justify-content-center">
+            <h3 class="fw-bold">BẢO DƯỠNG XE ĐIỆN</h3>
+            <p class="fw-bold fst-italic">Cẩm nang bảo dưỡng và khắc phục lỗi xe máy điện</p>
+            <h4 class="fw-bold text-success">1. Nhận diện lỗi kỹ thuật xe máy điện</h4>
+            <ul class="list-group p-4">
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark"><strong>Xe hết ắc quy:</strong> Kiểm
+                        tra kết
+                        nối và sạc pin đúng
+                        cách.</a></li>
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark"><strong>Vặn ga lúc chạy lúc
+                            không:</strong> Kiểm tra tay ga, mạch điện và kiếm tra ắc quy.</a></li>
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark"><strong>Khi nào cần thay ắc
+                            quy?</strong> Khi quãng
+                        đường giảm rõ rệ hoặc sạc không vào điện.</a></li>
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark"><strong>Xe yếu, chạy chậm:</strong>
+                        Kiểm tra lốp, động cơ, ắc quy.</a></li>
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark"><strong>Xe bị giật khi tăng
+                            ga:</strong> Kiểm tra bộ điều khiển và mạch điện.</a></li>
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark"><strong>Mất điện đột ngột:</strong>
+                        Kiểm tra cầu chì, đầu nối và pin.</a></li>
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark"><strong>Cách sạc pin đúng
+                            cách:</strong> Tránh sạc qua đêm, sạc khi pin chặm 20-30%.</a></li>
+
+            </ul>
+            <h4 class="fw-bold text-success mb-4">2. Bảo dưỡng xe máy điện đúng cách</h4>
+            <strong class="mb-4">Lợi ích khi bảo dưỡng</strong>
+            <p>Các chuyên gia khuyến nghị nên bảo dưỡng xe điện sau mỗi 1.000 km hoặc khoảng 6 – 8 tháng sử dụng.</p>
+            <p>Việc bảo dưỡng định kỳ bao gồm kiểm tra, chăm sóc và thay thế các bộ phận cần thiết theo hướng dẫn của
+                nhà sản xuất. Điều này mang lại nhiều lợi ích quan trọng:</p>
+            <ul class="list-group p-4">
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark">Kéo dài tuổi thọ xe, giúp xe bền bỉ
+                        hơn theo thời gian.</a></li>
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark">Cải thiện hiệu suất vận hành,
+                        đảm bảo xe hoạt động trơn tru.</a></li>
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark">Đảm bảo an toàn, hạn chế hỏng hóc đột
+                        ngột.</a></li>
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark">Tiết kiệm chi phí sửa chữa, phát hiện
+                        sớm lỗi nhỏ để tránh hư hỏng lớn.</a></li>
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark">Giữ giá trị xe khi chuyển nhượng,
+                        giúp bán lại với giá tốt hơn.</a></li>
+            </ul>
+            <p class="fst-italic">Bảo dưỡng định kỳ xe máy điện đóng vai trò quan trọng, giúp “chiến mã” của bạn luôn
+                vận
+                hành ổn định và an toàn trên mọi cung đường.</p>
+            <strong>Khi nào cần bảo dưỡng?</strong>
+            <ul class="list-group p-4">
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark"><strong>Sau 500 km:</strong> Kiểm tra
+                        dầu phanh, săm
+                        lốp.</a></li>
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark"><strong>Sau 2000 km:</strong> Kiểm
+                        tra động cơ, ắc
+                        quy.</a></li>
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark"><strong>Sau 5000 km:</strong> Thay
+                        dầu, bổ sung dung
+                        dịch bôi trơn.</a></li>
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark"><strong>Sau 10.000 km:</strong> Kiểm
+                        tra toàn bộ hệ
+                        thống.</a></li>
+                <li class="mb-2"><a href="" class="text-decoration-none text-dark"><strong>Khi xe có dấu hiệu bất
+                            thường:</strong> Rung,
+                        lắc, tiếng ồn, hao pin nhanh.</a></li>
+            </ul>
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 text-center">
+                        <figure class="figure">
+                            <img src="assets/img/CUUHO.jpg" class="figure-img img-fluid rounded shadow"
+                                alt="Bảo dưỡng xe" style="max-width: 100%;">
+                            <figcaption
+                                class="figure-caption text-center mt-3 p-3 bg-light border-start border-4 border-success">
+                                Bảo dưỡng xe máy điện định kỳ – cứu hộ xe điện – E-Bike Shop
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <strong class="mb-3">Các hạng mục bảo dưỡng</strong>
+            <ol>
+                <li class="mb-2"><strong>Kiểm tra tổng quát:</strong> Động cơ, truyền động, phanh, hệ thống điện.
+                </li>
+                <li class="mb-2"><strong>Thay dầu phanh, dầu máy:</strong> Giúp bôi trơn và tăng tuổi thọ.</li>
+                <li class="mb-2"><strong>Kiểm tra lốp xe:</strong> Bảo đảm độ bám và an toàn.</li>
+                <p class="mt-3 mb-3">Lốp xe ảnh hưởng trực tiếp đến an toàn khi di chuyển. Bạn nên kiểm tra và bảo dưỡng
+                    sau mỗi 6 tháng.
+                    Nếu
+                    gặp các dấu hiệu sau, cần thay lốp ngay:</p>
+                <ul class="list-group p-4">
+                    <li class="mb-2"><a href="" class="text-decoration-none text-dark">Mòn vân, gai lốp, giảm bám
+                            đường.</a></li>
+                    <li class="mb-2"><a href="" class="text-decoration-none text-dark">Bị thủng nhiều lần.</a></li>
+                    <li class="mb-2"><a href="" class="text-decoration-none text-dark">Cao su nứt, lốp phồng hoặc
+                            méo.</a></li>
+                </ul>
+                <li class="mb-2"><strong>Kiểm tra ắc quy: </strong>Phát hiện hỏng hóc sớm.</li>
+                <li class="mb-2"><strong>Bôi trơn và thay thế phụ tùng khi cần.</strong></li>
+            </ol>
+            <p>Khi bảo dưỡng <span style="color: green;">xe máy điện</span>, đừng quên kiểm tra các bộ phận như phanh,
+                tay ga, khung và yên xe. Việc kiểm
+                tra định kỳ giúp ngăn ngừa hỏng hóc đột ngột, đảm bảo an toàn khi sử dụng.</p>
+            <p>Bảo dưỡng xe định kỳ giúp duy trì hiệu suất, an toàn và tiết kiệm chi phí, đảm bảo xe luôn hoạt động tốt
+                nhất.</p>
+            <h4 class="fw-bold text-success mb-4">3. Quy trình bảo dưỡng xe máy điện chuẩn</h4>
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 text-center">
+                        <figure class="figure">
+                            <img src="assets/img/quy-trinh-bao-duong.webp" class="figure-img img-fluid rounded shadow"
+                                alt="Bảo dưỡng xe" style="max-width: 100%;">
+                            <figcaption
+                                class="figure-caption text-center mt-3 p-3 bg-light border-start border-4 border-success">
+                                Quy trình bảo dưỡng xe đạp điện - E-Bike Shop
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <ol>
+                <li class="mb-2"><strong>Chuẩn bị:</strong> Dụng cụ sửa chữa, phụ tùng thay thế (nếu cần) và khu vực làm
+                    việc sạch
+                    sẽ.</li>
+                <li class="mb-2"><strong>Kiểm tra tổng quát:</strong> Đánh giá tình trạng xe, bao gồm động cơ, hệ truyền
+                    động, phanh
+                    và hệ thống điện.
+                </li>
+                <li class="mb-2"><strong>Kiểm tra & thay dầu máy:</strong> Đảm bảo mức dầu phù hợp, thay mới theo khuyến
+                    nghị của nhà
+                    sản xuất.</li>
+                <li class="mb-2"><strong>Kiểm tra & thay dầu phanh:</strong> Điều chỉnh hoặc thay thế nếu cần để đảm bảo
+                    an toàn.
+                </li>
+                <li class="mb-2"><strong>Kiểm tra lốp:</strong> Kiểm tra độ mòn, áp suất lốp và thay thế nếu cần.</li>
+                <li class="mb-2"><strong>Kiểm tra phụ tùng khác:</strong> Đảm bảo đèn, còi và các bộ phận khác hoạt động
+                    tốt.</li>
+            </ol>
+            <h4 class="fw-bold text-success mb-4">4. Bảo dưỡng xe máy điện ở đâu tốt?</h4>
+            <p>Người dùng không nên tự ý thay thế bất kỳ bộ phận nào của xe máy điện. Thay vào đó, hãy đưa xe đến hệ
+                thống showroom Phố Xe Điện để được bảo dưỡng đúng cách.</p>
+            <p>Nếu bạn đang sử dụng xe máy điện được phân phối chính hãng từ E-Bike Shop, hãy đến ngay showroom xe điện
+                gần nhất để được kiểm tra và bảo dưỡng chuyên nghiệp. Chúng tôi cam kết đặt chất lượng lên hàng đầu và
+                mang đến nhiều ưu đãi, đảm bảo xe luôn vận hành tốt nhất.</p>
+
+        </div>
+
+    </div>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class=" card h-100 p-4 text-center service-card">
+                    <h5>Hỗ trợ Khách Hàng</h5>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" placeholder="Họ và tên..">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <input type="tel" class="form-control" placeholder="Số điện thoại..">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <textarea class="form-control" rows="3" name="" id=""
+                                placeholder="Nội dung liên hệ"></textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <button class="bg-success text-white fw-bold rounded" type="submit">GỬI
+                                TIN
+                                NHẮN</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>VỀ E-Bike Shop</h3>
+                <p>Phân phối, kinh doanh sỉ & lẻ xe điện 2-3 bánh của các hãng nổi tiếng: Yadea, Osakar,
+                    Nijia... bảo hành lên đến 36 tháng.</p>
+                <p><strong>Thời gian mở cửa:</strong> 8:00 - 21:00 (Cả tuần)</p>
+                <p><strong>Hotline:</strong> <span class="highlight">1800.2039</span></p>
+            </div>
+
+            <div class="footer-col">
+                <h3>CHÍNH SÁCH BÁN HÀNG</h3>
+                <ul>
+                    <li><a href="#">Chính sách trả góp</a></li>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Chính sách đổi trả và hoàn tiền</a></li>
+                    <li><a href="#">Chính sách cứu hộ tận nơi</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>ĐIỀU KHOẢN & BẢO MẬT</h3>
+                <ul>
+                    <li><a href="#">Chính sách bảo mật thông tin</a></li>
+                    <li><a href="#">Điều khoản và điều kiện mua bán</a></li>
+                </ul>
+                <h3 class="mt-20">CỔNG THANH TOÁN</h3>
+                <div class="payment-methods">
+                    <img src="assets/img/VISA.jpg" alt="Visa">
+                    <img src="assets/img/MTC.webp" alt="MasterCard">
+                    <img src="assets/img/COD2.png" alt="COD">
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>ĐƠN VỊ CHỦ QUẢN</h3>
+                <p><strong>CÔNG TY TNHH XE ĐIỆN XE MÁY VINH PHÁT</strong></p>
+                <p>Địa chỉ: Số 192/2 Phạm Văn Đồng, P. Hạnh THông Tây, Quận Gò Vấp, TP. HCM</p>
+                <p>STK: 0363885042 - Ngân hàng MB</p>
+                <div class="gov-seal">
+                    <img src="assets/img/BoCongThuong-Government-VN-Logo.webp" alt="Đã thông báo bộ công thương"
+                        width="150">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
