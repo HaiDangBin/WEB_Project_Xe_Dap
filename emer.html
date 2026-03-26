@@ -167,23 +167,17 @@
 
     <script>
         fetch('navbar.html')
-            .then(response => {
-                if (!response.ok) throw new Error("Không tìm thấy file navbar.html");
-                return response.text();
-            })
+            .then(response => response.text())
             .then(data => {
                 document.getElementById('nav-placeholder').innerHTML = data;
 
-                // TỰ ĐỘNG LÀM SÁNG MENU HIỆN TẠI (ACTIVE LINK)
-                const currentPath = window.location.pathname.split("/").pop() || 'index.html';
-                const links = document.querySelectorAll('.nav-link');
-                links.forEach(link => {
-                    if (link.getAttribute('href') === currentPath) {
-                        link.classList.add('active');
-                    }
+                // MẸO: Sau khi nạp Navbar xong, ta khởi tạo lại Dropdown của Bootstrap
+                var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+                var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+                    return new bootstrap.Dropdown(dropdownToggleEl)
                 });
             })
-            .catch(error => console.error('Lỗi nhúng Navbar:', error));
+            .catch(error => console.error('Lỗi:', error));
     </script>
 
     <header class="hero-service mb-5">
