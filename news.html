@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>TIN TỨC</title>
+    <style>
+        .note {
+            font-size: 10px;
+        }
+
+        .custom-small-container {
+            max-width: 900px;
+            /* Bạn có thể chỉnh con số này (800px, 1000px...) */
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .new-link a {
+            color: green;
+            border: 2px solid green;
+            padding: 5px;
+            text-decoration: none;
+
+        }
+
+        .footer {
+            background-color: #1a2521;
+            /* Màu xanh đen như trong ảnh */
+            color: #ffffff;
+            padding: 50px 0;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .footer-col h3 {
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 20px;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #2ecc71;
+            /* Màu xanh lá khi hover */
+            padding-left: 5px;
+        }
+
+        .highlight {
+            color: #f1c40f;
+            font-weight: bold;
+        }
+
+        .payment-methods img {
+            height: 30px;
+            margin-right: 10px;
+            filter: grayscale(100%);
+            transition: 0.3s;
+        }
+
+        .payment-methods img:hover {
+            filter: grayscale(0%);
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        /* Responsive cho điện thoại */
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+
+<body class="bg-light">
+    <div id="nav-placeholder"></div>
+
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').innerHTML = data;
+
+                // MẸO: Sau khi nạp Navbar xong, ta khởi tạo lại Dropdown của Bootstrap
+                var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+                var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+                    return new bootstrap.Dropdown(dropdownToggleEl)
+                });
+            })
+            .catch(error => console.error('Lỗi:', error));
+    </script>
+    <div class="container custom-small-container my-4 bg-white">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <p class=" fw-bold text-success">Tin tức</p>
+                <h4 class="fw-bold">Giá xe đạp điện học sinh hiện nay bao nhiêu? Lưu ý khi mua</h4>
+                <div class="note">
+                    <p>ĐĂNG VÀO <span style="color: green; font-weight: bold;">26/03/2026</span> BỞI <span
+                            style="color: green; font-weight: bold;">NGUYỄN ĐĂNG</span></p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img class="img-fluid rounded shadow" src="assets/img/TINTUC_GIAXE.jpg" alt="">
+                    </div>
+                    <div class="col-md-6">
+                        <p>Trong những năm gần đây, hình ảnh những chiếc xe đạp điện lướt đi êm ái trên các cung đường
+                            đô thị đã không còn xa lạ. Không chỉ đơn thuần là một phương tiện di chuyển, xe đạp điện
+                            đang dần khẳng định vị thế là biểu tượng của lối sống xanh, hiện đại và đầy năng động của
+                            giới trẻ. Thị trường xe điện năm 2026 chứng kiến một bước ngoặt lớn về mặt thẩm mỹ. Các dòng
+                            xe dành cho học sinh nay đã thoát khỏi những khuôn mẫu thô kệch để khoác lên mình
+                            diện mạo tối giản, mang hướng tương lai..</p>
+                        <div class="new-link"><a href="http://">TIẾP TỤC ĐỌC <i class="bi bi-arrow-right"></i></a></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container custom-small-container my-4 bg-white">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <p class=" fw-bold text-success">Tin tức</p>
+                <h4 class="fw-bold">Top 5 xe tay ga 50cc chạy xăng đáng mua nhất hiện nay</h4>
+                <div class="note">
+                    <p>ĐĂNG VÀO <span style="color: green; font-weight: bold;">01/04/2026</span> BỞI <span
+                            style="color: green; font-weight: bold;">NGUYỄN HINH</span></p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img class="img-fluid rounded shadow" src="assets/img/TINTUC_GIAXETAYGA.jpg" alt="">
+                    </div>
+                    <div class="col-md-6">
+                        <p>Không cần bằng lái, thiết kế sành điệu như các dòng xe phân khối lớn và khả năng tiết kiệm
+                            nhiên liệu vượt trội – xe tay ga 50cc đang trở thành tâm điểm mua sắm đầu năm 2026. Nếu bạn
+                            đang tìm kiếm một phương tiện di chuyển linh hoạt cho con em đi học hay đơn giản là dạo phố,
+                            đừng bỏ lỡ danh sách 5 cái tên "làm mưa làm gió" dưới đây. Mặc dù xe điện đang phát triển
+                            mạnh, nhưng xe ga 50cc chạy xăng vẫn giữ vững vị thế nhờ sự tiện lợi: đổ xăng là đi..</p>
+                        <div class="new-link"><a href="http://">TIẾP TỤC ĐỌC <i class="bi bi-arrow-right"></i></a></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>VỀ E-Bike Shop</h3>
+                <p>Phân phối, kinh doanh sỉ & lẻ xe điện 2-3 bánh của các hãng nổi tiếng: Yadea, Osakar,
+                    Nijia... bảo hành lên đến 36 tháng.</p>
+                <p><strong>Thời gian mở cửa:</strong> 8:00 - 21:00 (Cả tuần)</p>
+                <p><strong>Hotline:</strong> <span class="highlight">1800.2039</span></p>
+            </div>
+
+            <div class="footer-col">
+                <h3>CHÍNH SÁCH BÁN HÀNG</h3>
+                <ul>
+                    <li><a href="#">Chính sách trả góp</a></li>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Chính sách đổi trả và hoàn tiền</a></li>
+                    <li><a href="#">Chính sách cứu hộ tận nơi</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>ĐIỀU KHOẢN & BẢO MẬT</h3>
+                <ul>
+                    <li><a href="#">Chính sách bảo mật thông tin</a></li>
+                    <li><a href="#">Điều khoản và điều kiện mua bán</a></li>
+                </ul>
+                <h3 class="mt-20">CỔNG THANH TOÁN</h3>
+                <div class="payment-methods">
+                    <img src="assets/img/VISA.jpg" alt="Visa">
+                    <img src="assets/img/MTC.webp" alt="MasterCard">
+                    <img src="assets/img/COD2.png" alt="COD">
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>ĐƠN VỊ CHỦ QUẢN</h3>
+                <p><strong>CÔNG TY TNHH XE ĐIỆN XE MÁY VINH PHÁT</strong></p>
+                <p>Địa chỉ: Số 192/2 Phạm Văn Đồng, P. Hạnh THông Tây, Quận Gò Vấp, TP. HCM</p>
+                <p>STK: 0363885042 - Ngân hàng MB</p>
+                <div class="gov-seal">
+                    <img src="assets/img/BoCongThuong-Government-VN-Logo.webp" alt="Đã thông báo bộ công thương"
+                        width="150">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
