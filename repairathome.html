@@ -52,41 +52,305 @@
             color: white;
             padding: 10px;
         }
+
+        .figure-caption {
+            font-size: 0.95rem;
+            color: #444;
+            font-style: italic;
+            line-height: 1.6;
+            /* Hiệu ứng giống ảnh mẫu */
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .figure img {
+            transition: transform 0.3s ease;
+        }
+
+        .figure:hover img {
+            transform: scale(1.02);
+            /* Hiệu ứng phóng to nhẹ khi di chuột vào */
+        }
+
+        .footer {
+            background-color: #1a2521;
+            /* Màu xanh đen như trong ảnh */
+            color: #ffffff;
+            padding: 50px 0;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .footer-col h3 {
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 20px;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #2ecc71;
+            /* Màu xanh lá khi hover */
+            padding-left: 5px;
+        }
+
+        .highlight {
+            color: #f1c40f;
+            font-weight: bold;
+        }
+
+        .payment-methods img {
+            height: 30px;
+            margin-right: 10px;
+            filter: grayscale(100%);
+            transition: 0.3s;
+        }
+
+        .payment-methods img:hover {
+            filter: grayscale(0%);
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        /* Responsive cho điện thoại */
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <div class="container my-5">
+    <div id="nav-placeholder"></div>
+
+    <script>
+        fetch('navbar.html')
+            .then(response => {
+                if (!response.ok) throw new Error("Không tìm thấy file navbar.html");
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('nav-placeholder').innerHTML = data;
+
+                // TỰ ĐỘNG LÀM SÁNG MENU HIỆN TẠI (ACTIVE LINK)
+                const currentPath = window.location.pathname.split("/").pop() || 'index.html';
+                const links = document.querySelectorAll('.nav-link');
+                links.forEach(link => {
+                    if (link.getAttribute('href') === currentPath) {
+                        link.classList.add('active');
+                    }
+                });
+            })
+            .catch(error => console.error('Lỗi nhúng Navbar:', error));
+    </script>
+    <div class="container my-5 bg-light">
+
         <div class="row">
             <div class="col-md-9 main-content">
-                <h2 class="fw-bold mb-3">Dịch vụ sửa chữa xe điện tại nhà nhanh chóng, uy tín – Phoxedien.com</h2>
+                <h2 class="fw-bold mb-3">Dịch vụ sửa chữa xe điện tại nhà nhanh chóng, uy tín – EBikeShop.com</h2>
                 <div class="divider mb-4"></div>
 
                 <div class="product-image text-center">
                     <img src="assets/img/TAILGJY33.jpg" class="img-fluid" alt="Xe điện" style="width: 50%;">
                 </div>
+                <p>Xe điện hiện nay được sử dụng khá phổ biến và dễ dàng bắt gặp khi tham gia giao thông vì sự tiện ích
+                    mà sản phẩm mang lại cho người dùng. Bên cạnh những ưu điểm vượt trội khi sử dụng thì xe điện đôi
+                    lúc cũng có những vấn đề cần phải được sửa chữa . Một số vấn đề có thể gây khó khăn cho người dùng
+                    và buộc phải sửa chữa xe điện tại nhà. Vậy đâu là lý do dẫn đến tình trạng này và dịch vụ sửa chữa
+                    xe điện tại nhà nhanh chóng, uy tín – EBikeShop.com sẽ giúp giải quyết như thế nào? Cùng theo dõi
+                    bài viết dưới đây nhé.</p>
+                <h4 class="fw-bold mb-3 text-success">Tại sao khách hàng cần sửa chữa xe điện ngay tại nhà?</h4><br>
+                <p>Những năm gần đây, xe điện được xem như là một phương tiện giao thông mới nổi được khá nhiều người
+                    dùng ưa chuộng và sử dụng. Xe điện mang đến nhiều tiện ích cho người như như tiết kiệm chi phí bảo
+                    trì, bảo dưỡng; mức chi trả cho tiền điện thấp hơn so với xe xăng; quãng đường di chuyển và tốc độ
+                    tương đối ổn định và phù hợp; hạn chế ô nhiễm không khí, ô nhiễm tiếng ồn… góp phần bảo vệ môi
+                    trường và cải thiện cuộc sống tốt hơn.</p>
+                <p>Lợi ích là thế nhưng trong một vài tình huống xe điện bị gây hư, không hoạt động hay hao mòn dẫn đến
+                    kém an toàn khi sử dụng thì người dùng cần phải mang phương tiện đi sửa chữa để khắc phục sự cố và
+                    tăng mức an toàn cho người dùng.</p>
+                <p>Xe điện nếu hư hỏng liên quan đến hệ thống động cơ điện thì chắc hẳn sẽ rất khó khăn cho người dùng
+                    có thể đưa xe đến nơi sữa chữa hay trung tâm bảo hành nếu như khoảng cách địa lý quá xa, gây bất
+                    lợi. Giải pháp tối ưu là sử dụng dịch vụ sửa chữa xe điện ngay tại nhà để được hỗ trợ tốt nhất mà
+                    không quá mất thời gian cũng như công sức.</p>
+                <h4 class="fw-bold mb-3 text-success">Các lý do khiến xe điện dễ bị hư hỏng và khó khăn khi đi sửa chữa
+                </h4><br>
+                <p>Một số lý do chính khiến cho xe điện dễ bị hư hỏng và gây nên những khó khăn, bất lợi cho người dùng
+                    khi sửa chữa:</p>
+                <p><strong>Bình ắc quy bị hư hỏng</strong></p>
+                <p>Bình ắc quy là nơi cung cấp nguồn điện để giúp cho hệ thống động cơ xe hoạt động. Sau một thời gian
+                    dài sử dụng, bình ắc quy có thể vì một lý do nào đó mà hoạt động kém hiệu quả và hư hỏng luôn thiết
+                    bị, xe không thể di chuyển được hoặc di chuyển kém ổn định.</p>
+                <p>Bình ắc quy hư có thể là do người dùng thường xuyên sử dụng phương tiện trong môi trường ẩm ướt, nước
+                    mưa thấm lâu ngày và không được sử lý tốt đã gây nên tình trạng chập mạch ắc quy, dẫn đến hư hỏng.
+                </p>
+                <p>Một trong những nguyên nhân khác là do tuổi thọ ắc quy suy giảm sau quá trình sử dụng lâu dài hoặc do
+                    sử dụng sạc điện cho xe không đúng cách. Chung quy có thể khiến cho ắc quy bị chai pin, không thể
+                    cung cấp nguồn điện tốt cho động cơ hoạt động.</p>
+                <p><strong>Tay ga không hoạt động</strong></p>
+                <p>Tay ga cũng có thể là nguyên nhân khiến cho xe điện dễ gặp phải những hư hỏng không mong muốn. Tay ga
+                    bị hỏng khiến cho việc vận hành xe trở nên khó khăn hoặc không hoạt động, không thể đưa xe đến trung
+                    tâm bảo hành hoặc nơi sửa chữa.</p>
+                <div class="container my-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 text-center">
+                            <figure class="figure">
+                                <img src="assets/img/tay_ga_hong.jpg" class="figure-img img-fluid rounded shadow"
+                                    alt="Tay ga xe điện bị hỏng" style="max-width: 80%;">
+                                <figcaption
+                                    class="figure-caption text-center mt-3 p-3 bg-light border-start border-4 border-success">
+                                    Tay ga xe điện bị hư hỏng có thể do chập mạch điện, bị thấm nước hay hao mòn theo
+                                    thời gian sử dụng.
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <p>Việc tay ga hư hỏng cũng có thể là do sử dụng lâu ngày bị lờn, bị chập mạch hay thậm chí bị vào nước
+                    gây nên.</p>
+                <p><strong>Động cơ không hoạt động</strong></p>
+                <p>Nếu xe trong tình trạng lên nguồn, đề ổn định, tay ga vẫn hoạt động tốt mà xe vẫn không chạy thì đó
+                    có thể là do động cơ xe bị hư hỏng. Động cơ là nơi tạo ra momen xoắn, chuyển hóa động lực giúp
+                    phương tiện di chuyển. Vì một lý do nào đó mà động cơ hư hỏng thì việc di chuyển xe đi sửa chữa là
+                    bất khả thi.</p>
+                <div class="container my-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 text-center">
+                            <figure class="figure">
+                                <img src="assets/img/engine_break.jpg" class="figure-img img-fluid rounded shadow"
+                                    alt="Động cơ xe điện bị hỏng" style="max-width: 80%;">
+                                <figcaption
+                                    class="figure-caption text-center mt-3 p-3 bg-light border-start border-4 border-success">
+                                    Sự hư hỏng đến từ động cơ cũng sẽ là nguyên nhân khiến cho xe cần phải được sửa chữa
+                                    tại nhà.
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <p>Vì những lý do trên mà nếu xe điện gặp phải những hư hỏng gây nên sự khó khăn cho việc sửa chữa thì
+                    tốt nhất người dùng nên nhờ đến dịch vụ sửa chữa xe điện tại nhà. Đội ngũ nhân viên có kinh nghiệm
+                    và chuyên môn sẽ giúp khắc phục hậu quả, không ảnh hưởng quá nhiều đến thời gian, tiền bạc và công
+                    sức của người sử dụng.</p>
+                <h4 class="fw-bold mb-3 text-success">Vì sao nên chọn Phoxedien.com là đơn vị sửa chữa xe điện uy tín
+                    tại nhà?</h4>
+                <p>E-Bike Shop hỗ trợ cứu hộ xe điện tận nơi</p>
+                <p>Lựa chọn một địa chỉ để sửa xe điện tại nhà cần tìm hiểu kỹ nhiều thông tin để tin chắc rằng đó là
+                    lựa chọn hợp lý và có sự uy tín cao.</p>
+                <p><strong>EBikeShop.com</strong> được biết đến bên cạnh nhà phân phối và bán lẻ các sản phẩm xe điện,
+                    thì nơi đây còn là địa chỉ cung cấp dịch vụ sửa chữa xe điện tận nhà được nhiều khách hàng biết đến
+                    và tin dùng bởi:</p>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Đội ngũ nhân viên có
+                        chuyên môn và nhiều năm kinh nghiệm trong sửa chữa, bảo trì xe điện. Luôn được đào tạo và nâng
+                        cấp về kiến thức để hỗ trợ khách hàng tốt nhất.</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Sản phẩm linh, phụ kiện
+                        nơi đây đảm bảo hàng chính hãng với chất lượng tốt nhất.</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Giá cả được thông báo đến
+                        khách hàng một cách rõ ràng và minh bạch.</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Cam kết bảo hành từ 6 đến
+                        12 tháng và hỗ trợ khách hàng tối đa trong suốt quá trình sử dụng dịch vụ tại đây.</li>
+                </ul>
+
 
             </div>
 
             <div class="col-md-3">
-                <div class="promo-banner text-center d-flex flex-column justify-content-between">
+                <!-- <div class="promo-banner text-center d-flex flex-column justify-content-between">
                     <div class="promo-header">
                         <h3 class="text-uppercase fw-bold">Đặt Online</h3>
                         <p class="mb-0">GIẢM NGAY</p>
                         <h2 class="display-4 fw-black">500K</h2>
+
                     </div>
 
                     <div class="promo-images">
-                        <img src="group-bikes.png" class="img-fluid" alt="Dòng xe điện">
+                        <img src="assets/img/osakar_x8.jpg" class="img-fluid" alt="Dòng xe điện">
                     </div>
 
                     <div class="promo-footer">
                         <a href="#" class="btn btn-warning fw-bold w-100 text-uppercase">Đăng ký ngay</a>
                     </div>
-                </div>
+                </div> -->
+                <img class="img-fluid" src="assets/img/PHOXEDIEN_BANNER_Blog-scaled.jpg" alt="">
+                <img class="img-fluid" src="assets/img/bang-khen-kazuki-phoxedien.webp" alt="">
             </div>
         </div>
     </div>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>VỀ E-Bike Shop</h3>
+                <p>Phân phối, kinh doanh sỉ & lẻ xe điện 2-3 bánh của các hãng nổi tiếng: Yadea, Osakar,
+                    Nijia... bảo hành lên đến 36 tháng.</p>
+                <p><strong>Thời gian mở cửa:</strong> 8:00 - 21:00 (Cả tuần)</p>
+                <p><strong>Hotline:</strong> <span class="highlight">1800.2039</span></p>
+            </div>
+
+            <div class="footer-col">
+                <h3>CHÍNH SÁCH BÁN HÀNG</h3>
+                <ul>
+                    <li><a href="#">Chính sách trả góp</a></li>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Chính sách đổi trả và hoàn tiền</a></li>
+                    <li><a href="#">Chính sách cứu hộ tận nơi</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>ĐIỀU KHOẢN & BẢO MẬT</h3>
+                <ul>
+                    <li><a href="#">Chính sách bảo mật thông tin</a></li>
+                    <li><a href="#">Điều khoản và điều kiện mua bán</a></li>
+                </ul>
+                <h3 class="mt-20">CỔNG THANH TOÁN</h3>
+                <div class="payment-methods">
+                    <img src="assets/img/VISA.jpg" alt="Visa">
+                    <img src="assets/img/MTC.webp" alt="MasterCard">
+                    <img src="assets/img/COD2.png" alt="COD">
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>ĐƠN VỊ CHỦ QUẢN</h3>
+                <p><strong>CÔNG TY TNHH XE ĐIỆN XE MÁY VINH PHÁT</strong></p>
+                <p>Địa chỉ: Số 192/2 Phạm Văn Đồng, P. Hạnh THông Tây, Quận Gò Vấp, TP. HCM</p>
+                <p>STK: 0363885042 - Ngân hàng MB</p>
+                <div class="gov-seal">
+                    <img src="assets/img/BoCongThuong-Government-VN-Logo.webp" alt="Đã thông báo bộ công thương"
+                        width="150">
+                </div>
+            </div>
+        </div>
+    </footer>
 
 </body>
 
