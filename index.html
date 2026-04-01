@@ -260,6 +260,29 @@
             font-size: 18px;
         }
 
+        #search-results {
+            top: 100%;
+            /* Nằm ngay dưới ô Search */
+            left: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 0 0 8px 8px;
+        }
+
+        #search-results .list-group-item {
+            font-size: 14px;
+            padding: 10px 15px;
+            color: #333;
+            border: none;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        #search-results .list-group-item:hover {
+            background-color: #f8f9fa;
+            color: #2e7d32;
+            /* Màu xanh của shop bạn */
+        }
+
         .footer {
             background-color: #1a2521;
             /* Màu xanh đen như trong ảnh */
@@ -446,6 +469,9 @@
                         <div class="search-box-inner">
                             <input type="text" placeholder="Tìm kiếm xe điện" id="main-search">
                             <i class="bi bi-search inner-icon"></i>
+                            <div id="search-results" class="list-group position-absolute w-100 shadow-sm d-none"
+                                style="z-index: 1000; max-height: 300px; overflow-y: auto;">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -488,7 +514,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             const brandFilter = urlParams.get('brand');
 
-            // --- LOGIC XỬ LÝ HEADER (Giữ nguyên của bạn) ---
+            // --- LOGIC XỬ LÝ HEADER ---
             if (brandFilter) {
                 headerTitle.classList.add('d-none');
                 headerDesc.classList.add('d-none');
@@ -516,33 +542,40 @@
                 headerDesc.classList.add('d-none');
             }
 
-            // --- LOGIC LỌC SẢN PHẨM ---
+            // --- LOGIC LỌC VÀ TRỘN NGẪU NHIÊN SẢN PHẨM ---
+            // 1. Lọc sản phẩm theo hãng
             let displayProducts = brandFilter ? products.filter(p => p.brand === brandFilter) : products;
 
+            // 2. Trộn ngẫu nhiên danh sách đã lọc
+            // Sử dụng Spread operator [...] để tạo bản sao, tránh làm hỏng thứ tự mảng gốc trong data.js
+            const shuffledProducts = [...displayProducts].sort(() => Math.random() - 0.5);
+
             productList.innerHTML = '';
-            if (displayProducts.length === 0) {
+
+            if (shuffledProducts.length === 0) {
                 productList.innerHTML = '<div class="col-12 text-center py-5"><h3>Chưa có sản phẩm cho hãng này</h3></div>';
             } else {
-                displayProducts.forEach(p => {
+                // 3. Render dựa trên mảng shuffledProducts đã trộn
+                shuffledProducts.forEach(p => {
                     productList.innerHTML += `
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100 product-card shadow-sm border-0">
-                            <img src="${p.img}" class="card-img-top" style="border-radius: 15px 15px 0 0; height: 200px; object-fit: cover;">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">${p.name}</h5>
-                                <p class="text-danger fw-bold mb-3">${p.price.toLocaleString()} VNĐ</p>
-                                
-                                <div class="d-flex flex-column gap-2">
-                                    <a href="product-detail.html?id=${p.id}" class="btn btn-outline-dark">
-                                        <i class="bi bi-eye pe-1"></i> Xem chi tiết
-                                    </a>
-                                    <button class="btn btn-success" onclick="addToCart(${p.id})">
-                                        <i class="bi bi-cart-plus pe-1"></i> Thêm vào giỏ
-                                    </button>
-                                </div>
-                            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 product-card shadow-sm border-0">
+                    <img src="${p.img}" class="card-img-top" style="border-radius: 15px 15px 0 0; height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">${p.name}</h5>
+                        <p class="text-danger fw-bold mb-3">${p.price.toLocaleString()} VNĐ</p>
+                        
+                        <div class="d-flex flex-column gap-2">
+                            <a href="product-detail.html?id=${p.id}" class="btn btn-outline-dark">
+                                <i class="bi bi-eye pe-1"></i> Xem chi tiết
+                            </a>
+                            <button class="btn btn-success" onclick="addToCart(${p.id})">
+                                <i class="bi bi-cart-plus pe-1"></i> Thêm vào giỏ
+                            </button>
                         </div>
-                    </div>`;
+                    </div>
+                </div>
+            </div>`;
                 });
             }
         }

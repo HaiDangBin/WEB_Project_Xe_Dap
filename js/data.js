@@ -1,3 +1,4 @@
+
 const products = [
     { 
         id: 1, 
@@ -240,3 +241,54 @@ const products = [
         desc: "Thiết kế xe đạp truyền thống kết hợp động cơ điện hỗ trợ lực đạp nhẹ nhàng." 
     },
 ];
+
+const searchInput = document.getElementById('main-search');
+const resultsBox = document.getElementById('search-results');
+
+// 2. Lắng nghe sự kiện gõ phím
+searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase().trim();
+    
+    if (query.length > 0) {
+        // Lọc sản phẩm có tên chứa từ khóa tìm kiếm
+        const filtered = products.filter(item => 
+            item.name.toLowerCase().includes(query)
+        );
+        
+        displayResults(filtered);
+    } else {
+        resultsBox.classList.add('d-none'); // Ẩn nếu ô nhập trống
+    }
+});
+
+// 3. Hàm hiển thị kết quả ra giao diện
+function displayResults(list) {
+    if (list.length === 0) {
+        resultsBox.innerHTML = '<div class="list-group-item text-muted">Không tìm thấy xe nào...</div>';
+    } else {
+        const html = list.map(item => `
+            <a href="${item.link}" class="list-group-item list-group-item-action d-flex align-items-center">
+                <i class="bi bi-bicycle me-2 text-success"></i>
+                <span>${item.name}</span>
+            </a>
+        `).join('');
+        resultsBox.innerHTML = html;
+    }
+    resultsBox.classList.remove('d-none');
+}
+function displayResults(list) {
+    const html = list.map(item => `
+        <a href="product-detail.html?id=${item.id}" class="list-group-item list-group-item-action">
+            <span>${item.name}</span>
+        </a>
+    `).join('');
+    resultsBox.innerHTML = html;
+    resultsBox.classList.remove('d-none');
+}
+
+// 4. Đóng kết quả khi bấm ra ngoài
+document.addEventListener('click', function(e) {
+    if (!searchInput.contains(e.target) && !resultsBox.contains(e.target)) {
+        resultsBox.classList.add('d-none');
+    }
+});

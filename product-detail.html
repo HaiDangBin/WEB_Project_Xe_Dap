@@ -22,6 +22,7 @@
                 var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
                 var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
                     return new bootstrap.Dropdown(dropdownToggleEl)
+                    updateCartCount();
                 });
             })
             .catch(error => console.error('Lỗi:', error));
@@ -37,6 +38,7 @@
         const id = parseInt(params.get('id'));
         const product = products.find(p => p.id === id);
         const content = document.getElementById('detail-content');
+        const brandLink = product.brand ? product.brand.toLowerCase() : "all";
 
         if (product) {
             content.innerHTML = `
@@ -49,7 +51,13 @@
                 </div>
 
                 <div class="col-md-5">
-                    <a href="index.html">Trang chủ</a><span>/</span><a href="product-detail.html">${product.name}</a>
+                    <a href="index.html">Trang chủ</a>
+                    <span class="mx-2 text-muted">/</span>
+                    <a href="index.html?brand=${brandLink}">
+                        ${product.brand}
+                    </a>
+                    <span class="mx-2 text-muted">/</span>
+                    <span class="text-dark">${product.name}</span>
                     <h4 class="fw-bold h3">${product.name}</h4>
                     <h5 class="text-danger my-3 fw-bold">Giá: ${product.price.toLocaleString()} VNĐ</h5>
 
@@ -137,7 +145,7 @@
         }
         function changeQty(amount) {
             const qtyInput = document.getElementById('product-qty');
-            let currentQty = parseInt(qtyInput.value);
+            let currentQty = parseInt(qtyInput.value) || 1;
             if (currentQty + amount >= 1) {
                 qtyInput.value = currentQty + amount;
             }
