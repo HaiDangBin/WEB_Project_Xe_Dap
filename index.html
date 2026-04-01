@@ -112,7 +112,9 @@
 
         .card-img-top {
             height: 200px;
-            object-fit: cover;
+            /* --- SỬA LỖI MẤT ĐẦU XE Ở ĐÂY NÈ --- */
+            object-fit: contain; 
+            /* ---------------------------------- */
         }
 
         .product-card:hover {
@@ -388,9 +390,8 @@
                                                     TAILG</a></li>
                                             <li><a href="index.html?brand=nijia" class="dropdown-item px-0">XE ĐẠP ĐIỆN
                                                     NIJIA</a></li>
-                                            <li><a href="" class="dropdown-item px-0">XE ĐẠP ĐIỆN PEGA-HKBIKE</a></li>
-                                            <li><a href="" class="dropdown-item px-0">XE ĐẠP ĐIỆN DK BIKE</a></li>
-                                            <li><a href="index.html?brand=yadea" class="dropdown-item px-0">XE ĐẠP ĐIỆN
+                                            <li><a href="index.html?brand=pega" class="dropdown-item px-0">XE ĐẠP ĐIỆN PEGA-HKBIKE</a></li>
+                                            <li><a href="index.html?brand=vinfast" class="dropdown-item px-0">XE MÁY ĐIỆN VINFAST</a></li>                                            <li><a href="index.html?brand=yadea" class="dropdown-item px-0">XE ĐẠP ĐIỆN
                                                     YADEA</a></li>
                                             <li><a href="index.html?brand=hitasa" class="dropdown-item px-0">XE ĐẠP ĐIỆN
                                                     HITASA</a></li>
@@ -437,7 +438,7 @@
 
                         </div>
                     </li>
-                    <li class="nav-item mx-3"><a href="#" class="nav-link text-white fw-bold">KHUYẾN MÃI</a></li>
+                    <li class="nav-item mx-3"><a href="voucher.html" class="nav-link text-white fw-bold">KHUYẾN MÃI</a></li>
                     <li class="nav-item dropdown mx-3"><a href="#" class="nav-link dropdown-toggle text-white fw-bold"
                             role="button" data-bs-toggle="dropdown">DỊCH VỤ</a>
                         <ul class="dropdown-menu">
@@ -529,34 +530,27 @@
                     header.style.backgroundImage = "url('assets/img/BANNER_OSAKAR2.webp')";
 
                 }
-                else if (brandFilter === 'tailg') {
-                    header.style.backgroundImage = "none";
-                    header.style.backgroundColor = "#27ae60";
-                    headerTitle.classList.remove('d-none');
-                    headerDesc.classList.remove('d-none');
-                    headerTitle.innerText = "XE ĐẠP ĐIỆN TAILG";
-                    headerDesc.innerText = "Các dòng xe TAILG chính hãng, bền bỉ";
-                }
+                
                 else if (brandFilter == "nijia") {
-                    header.style.backgroundImage = "url('assets/img/BANNER_NIJIA.jpg')";
+                    header.style.backgroundImage = "url('assets/img/BANNER_NIJIA.png')";
                 }
                 else if (brandFilter == "yadea") {
                     header.style.backgroundImage = "url('assets/img/BANNER_YADEA.jpg')";
                 }
-                else if (brandFilter == "babanh") {
+                 else if (brandFilter == "babanh") {
                     header.style.backgroundImage = "none";
                     header.style.backgroundColor = "#27ae60";
                     headerTitle.classList.remove('d-none');
                     headerDesc.classList.remove('d-none');
-                    headerTitle.innerText = "XE ĐẠP ĐIỆN 3 BÁNH";
-                    headerDesc.innerText = "Các dòng xe 3 Bánh chính hãng, bền bỉ, giá rẻ, cho người già, người khuyết tật";
+                    headerTitle.innerText = "XE BA BÁNH ĐIỆN";
+                    headerDesc.innerText = "Các dòng xe điện ba bánh chính hãng, bền bỉ";
                 }
                 else if (brandFilter == "landien") {
                     header.style.backgroundImage = "none";
                     header.style.backgroundColor = "#27ae60";
                     headerTitle.classList.remove('d-none');
                     headerDesc.classList.remove('d-none');
-                    headerTitle.innerText = "XE LĂN ĐIÊN";
+                    headerTitle.innerText = "XE LĂN ĐIỆN";
                     headerDesc.innerText = "Các dòng xe lăn điện chính hãng, bền bỉ";
                 }
                 else if (brandFilter == "sacxedien") {
@@ -575,6 +569,15 @@
                 }
                 else if (brandFilter == "ado") {
                     header.style.backgroundImage = "url('assets/img/BANNER_ADO.png')";
+                }
+                 else if (brandFilter == "pega") {
+                    header.style.backgroundImage = "url('assets/img/pega-banner.jpg')";
+                }
+                 else if (brandFilter == "tailg") {
+                    header.style.backgroundImage = "url('assets/img/banner-tailg.jpg')";
+                }
+                else if (brandFilter == "vinfast") {
+                    header.style.backgroundImage = "url('assets/img/banner-vinfast.png')";
                 }
             } else {
                 header.style.backgroundImage = "url('assets/img/BANNER_HOME2.jpg')";
@@ -600,7 +603,7 @@
                     productList.innerHTML += `
             <div class="col-md-4 mb-4">
                 <div class="card h-100 product-card shadow-sm border-0">
-                    <img src="${p.img}" class="card-img-top" style="border-radius: 15px 15px 0 0; height: 200px; object-fit: cover;">
+                    <img src="${p.img}" class="card-img-top" style="border-radius: 15px 15px 0 0; height: 200px; object-fit: contain;">
                     <div class="card-body">
                         <h5 class="card-title fw-bold">${p.name}</h5>
                         <p class="text-danger fw-bold mb-3">${p.price.toLocaleString()} VNĐ</p>
