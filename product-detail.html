@@ -4,13 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Chi tiết sản phẩm</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body class="bg-light">
-    <nav class="navbar navbar-dark bg-dark mb-5">
-        <div class="container"><a class="navbar-brand" href="index.html">← Quay lại cửa hàng</a></div>
-    </nav>
+    <div id="nav-placeholder"></div>
+
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').innerHTML = data;
+
+                // MẸO: Sau khi nạp Navbar xong, ta khởi tạo lại Dropdown của Bootstrap
+                var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+                var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+                    return new bootstrap.Dropdown(dropdownToggleEl)
+                });
+            })
+            .catch(error => console.error('Lỗi:', error));
+    </script>
 
     <div class="container bg-white p-5 shadow-sm rounded">
         <div class="row" id="detail-content"></div>
@@ -25,21 +40,94 @@
 
         if (product) {
             content.innerHTML = `
-                <div class="col-md-6">
-                    <img src="${product.img}" class="img-fluid rounded shadow">
+                <div class="col-md-4 mb-4">
+                    <img src="${product.img}" class="img-fluid rounded shadow-sm border p-2 mb-3">
+                    <img src="assets/img/badge_nhaphanphoi.webp" class="img-fluid rounded shadow-sm" onerror="this.style.display='none'">
                 </div>
-                <div class="col-md-6">
-                    <h1 class="display-5 fw-bold">${product.name}</h1>
-                    <h2 class="text-danger my-4">${product.price.toLocaleString()} VNĐ</h2>
-                    <table class="table mt-4">
-                        <tr><td>Loại pin:</td><td><strong>${product.battery}</strong></td></tr>
-                        <tr><td>Quãng đường:</td><td><strong>${product.range}</strong></td></tr>
-                        <tr><td>Bảo hành:</td><td>24 tháng</td></tr>
+
+                <div class="col-md-5">
+                    <h4 class="fw-bold h3">${product.name}</h4>
+                    <h5 class="text-danger my-3 fw-bold">Giá: ${product.price.toLocaleString()} VNĐ</h5>
+
+                    <table class="table table-sm mt-3">
+                        <tr><td class="text-muted">Loại pin:</td><td><strong>${product.battery}</strong></td></tr>
+                        <tr><td class="text-muted">Quãng đường:</td><td><strong>${product.range}</strong></td></tr>
+                        <tr><td class="text-muted">Bảo hành:</td><td>24 tháng</td></tr>
                     </table>
-                    <p class="text-muted mt-4">${product.desc}</p>
-                    <button class="btn btn-primary btn-lg w-100 mt-4">MUA NGAY</button>
+
+                    <div class="card border-success my-4 shadow-sm">
+                        <div class="card-header bg-success text-white fw-bold py-1 small">Quà Tặng Kèm</div>
+                        <div class="card-body p-2">
+                            <ul class="list-unstyled small mb-0">
+                                <li>✅ Bảo dưỡng định kỳ trọn đời miễn phí.</li>
+                                <li>✅ Tặng nón bảo hiểm chính hãng.</li>
+                                <li>✅ Dịch vụ cứu hộ tận nơi (<a href="dich-vu.html" class="text-success text-decoration-none fw-bold">xem chi tiết</a>).</li>
+                                <li>✅ Miễn phí giao xe nội thành – giao nhanh 2h</li>
+                                <li>✅ [Best Deal]: Phiếu quà tặng trị giá 200K thay Acquy</li>
+                                <li>✅ Tặng áo mưa cao cấp 250.000đ</li>
+                                <li>✅ Trả góp 0% bằng thẻ tín dụng Visa, Master Card, JCB</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="purchase-section">
+                        <div class="d-flex gap-2 mb-2">
+                            <div class="input-group" style="width: 120px;">
+                                <button class="btn btn-outline-secondary border-end-0" type="button">-</button>
+                                <input type="text" class="form-control text-center fw-bold border-start-0 border-end-0" value="1">
+                                <button class="btn btn-outline-secondary border-start-0" type="button">+</button>
+                            </div>
+                            <button class="btn flex-grow-1 fw-bold text-white" style="background-color: #E77F64;">
+                                THÊM VÀO GIỎ HÀNG
+                            </button>
+                        </div>
+
+                        <button class="btn w-100 py-2 fw-bold text-white mb-2 shadow-sm" style="background-color: #7AC74F; font-size: 1.1rem;">
+                            MUA NGAY
+                        </button>
+
+                        <div class="row g-2 mb-2">
+                            <div class="col-6">
+                                <button class="btn w-100 py-1 text-white" style="background-color: #4a90e2;">
+                                    <span class="d-block fw-bold small">TRẢ GÓP TỪ 0%</span>
+                                    <span style="font-size: 10px;">ACS, FEcredit</span>
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn w-100 py-1 text-white" style="background-color: #c0392b;">
+                                    <span class="d-block fw-bold small">TRẢ GÓP QUA THẺ</span>
+                                    <span style="font-size: 10px;">Visa, Master, JCB</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button class="btn w-100 py-1 shadow-sm" style="background-color: #f1c40f; color: #333;">
+                            <span class="d-block fw-bold small">TRẢ GÓP ONLINE</span>
+                            <span style="font-size: 10px;">Có kết quả trong 10 phút</span>
+                        </button>
+                    </div>
+
+                    <p class="text-muted small mt-4">${product.desc || 'Thông tin chi tiết đang được cập nhật...'}</p>
+                </div>
+
+                <div class="col-md-3 border-start d-flex flex-column align-items-center text-center">
+                    <p class="fw-bold mb-1">HOTLINE ĐẶT HÀNG</p>
+                    <h3 class="text-success fw-bold mb-4">1800.2039</h3>
+                    
+                    <img src="assets/img/tragopbanner.jpg" class="img-fluid rounded shadow-sm mb-4" onerror="this.style.display='none'">
+
+                    <div class="text-start ps-3 small w-100">
+                        <p class="mb-3"><i class="bi bi-truck me-2"></i>Miễn phí giao xe nội thành</p>
+                        <p class="mb-3"><i class="bi bi-percent"></i> Làm hồ sơ trả góp và xét duyệt online 100%</p>
+                        <p class="mb-3"><i class="bi bi-credit-card"></i> Trả góp lãi suất 0% qua thẻ tín dụng Visa, Master, JCB</p>
+                        <p class="mb-3"><i class="bi bi-arrow-repeat me-2"></i>Đổi sang mẫu khác miễn phí trong 3 ngày (*)</p>
+                    </div>
                 </div>
             `;
+
+
+
+
         } else {
             content.innerHTML = "<h2>Sản phẩm không tồn tại!</h2>";
         }
