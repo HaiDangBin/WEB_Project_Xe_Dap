@@ -171,38 +171,45 @@
             </div>
 
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class=" card h-100 p-4 text-center service-card">
-                    <h5>Hỗ trợ Khách Hàng</h5>
-                    <div class="row mt-4">
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" placeholder="Họ và tên..">
+        <form action="/action_page.php" class="was-validated">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class=" card h-100 p-4  service-card">
+                        <h5 class="text-center fw-bold">Hỗ trợ Khách Hàng</h5>
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" placeholder="Họ và tên.." required>
+                                <div class="valid-feedback">Hợp lệ.</div>
+                                <div class="invalid-feedback">Hãy điền thông tin.</div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <input type="tel" class="form-control" placeholder="Số điện thoại.." required>
+                                <div class="valid-feedback">Hợp lệ.</div>
+                                <div class="invalid-feedback">Hãy điền số điện thoại.</div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <textarea class="form-control" rows="3" name="" id="" placeholder="Nội dung liên hệ"
+                                    required></textarea>
+                                <div class="valid-feedback">Hợp lệ.</div>
+                                <div class="invalid-feedback">Hãy điền lý do cần hỗ trợ.</div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12 text-center">
+                                <button class="bg-success text-white fw-bold rounded" type="submit">GỬI
+                                    TIN
+                                    NHẮN</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <input type="tel" class="form-control" placeholder="Số điện thoại..">
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <textarea class="form-control" rows="3" name="" id=""
-                                placeholder="Nội dung liên hệ"></textarea>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <button class="bg-success text-white fw-bold rounded" type="submit">GỬI
-                                TIN
-                                NHẮN</button>
-                        </div>
-                    </div>
+
                 </div>
-
             </div>
-
-        </div>
+        </form>
     </div>
     <footer class="footer">
         <div class="footer-container">
