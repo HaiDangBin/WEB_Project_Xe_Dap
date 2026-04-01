@@ -12,6 +12,42 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <style>
+        @media (max-width: 768px) {
+            .search-dropdown {
+                width: 90vw !important;
+                /* Rộng gần hết màn hình điện thoại */
+                right: -50px !important;
+                /* Căn giữa lại */
+                padding: 15px !important;
+            }
+
+            .search-dropdown::before {
+                right: 60px !important;
+                /* Căn lại mũi tên trỏ lên */
+            }
+
+            /* Đảm bảo menu không quá dài trên mobile */
+            .navbar-collapse {
+                max-height: 80vh;
+                overflow-y: auto;
+                padding-bottom: 20px;
+            }
+
+            /* Căn chỉnh lại Mega Menu trên Mobile */
+            .dropdown-menu.w-100 {
+                position: static !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 10px 20px !important;
+            }
+
+            /* Header cho Mobile */
+            header {
+                width: 95% !important;
+                min-height: 200px !important;
+            }
+        }
+
         :root {
             --primary-color: #27ae60;
             /* Xanh lá thương hiệu */
@@ -20,7 +56,7 @@
             --accent-color: #f39c12;
             /* Màu cam nhấn cho giá/giỏ hàng */
             --light-bg: #f8f9fa;
-            --blue-dark: #B3E975;
+            --blue-dark: #1ca018;
         }
 
         header {
@@ -305,9 +341,15 @@
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bolder" href="index.html">☘️ E-BIKE SHOP</a>
-            <div class="collapse navbar-collapse">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item mx-3"><a href="#" class="nav-link text-white fw-bold">SHOP</a></li>
+                    <li class="nav-item mx-lg-3"><a href="#" class="nav-link text-white fw-bold">SHOP</a></li>
                     <li class="nav-item dropdown position-static mx-3"><a href="#"
                             class="nav-link dropdown-toggle text-white fw-bold" role="button" data-bs-toggle="dropdown"
                             id="megaMenu" aria-expanded="false">XE ĐIỆN</a>
@@ -407,7 +449,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="nav-link btn btn-primary bg-white text-dark ms-2" href="#">Giỏ hàng (<span
+                <a class="nav-link btn btn-primary bg-white text-dark ms-2" href="cart.html">Giỏ hàng (<span
                         id="cart-count">0</span>)</a>
             </div>
         </div>
@@ -425,7 +467,17 @@
     <script src="js/data.js"></script>
     <script>
         const productList = document.getElementById('product-list');
-        let cartCount = 0;
+
+        // 1. Hàm cập nhật số lượng hiển thị trên biểu tượng giỏ hàng (Badge)
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            // Tính tổng số lượng của tất cả các sản phẩm trong giỏ
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartBadge = document.getElementById('cart-count');
+            if (cartBadge) {
+                cartBadge.innerText = totalItems;
+            }
+        }
 
         function renderProducts() {
             const productList = document.getElementById('product-list');
@@ -436,26 +488,22 @@
             const urlParams = new URLSearchParams(window.location.search);
             const brandFilter = urlParams.get('brand');
 
-            // --- LOGIC XỬ LÝ HEADER (HÌNH ẢNH & CHỮ) ---
+            // --- LOGIC XỬ LÝ HEADER (Giữ nguyên của bạn) ---
             if (brandFilter) {
-                // Mặc định ẩn chữ khi có brand (để chuẩn bị cho các hãng có ảnh)
                 headerTitle.classList.add('d-none');
                 headerDesc.classList.add('d-none');
 
                 if (brandFilter === 'osakar') {
-                    // Hiển thị ảnh cho Osakar
                     header.style.backgroundImage = "url('assets/img/BANNER_OSAKAR2.webp')";
                 }
                 else if (brandFilter === 'tailg') {
-                    // KHÔNG DÙNG ẢNH cho Tailg -> Hiện chữ để phân biệt
                     header.style.backgroundImage = "none";
-                    header.style.backgroundColor = "#27ae60"; // Thêm màu nền xanh để header không bị trắng
+                    header.style.backgroundColor = "#27ae60";
                     headerTitle.classList.remove('d-none');
                     headerDesc.classList.remove('d-none');
                     headerTitle.innerText = "XE ĐẠP ĐIỆN TAILG";
                     headerDesc.innerText = "Các dòng xe TAILG chính hãng, bền bỉ";
                 }
-                // Thêm các hãng khác...
                 else if (brandFilter == "nijia") {
                     header.style.backgroundImage = "url('assets/img/BANNER_NIJIA.jpg')";
                 }
@@ -463,13 +511,12 @@
                     header.style.backgroundImage = "url('assets/img/BANNER_YADEA.jpg')";
                 }
             } else {
-                // TRANG CHỦ: Hiển thị ảnh nền mặc định
                 header.style.backgroundImage = "url('assets/img/BANNER_HOME2.jpg')";
                 headerTitle.classList.add('d-none');
                 headerDesc.classList.add('d-none');
             }
 
-            // --- LOGIC LỌC SẢN PHẨM (Giữ nguyên để chuyển trang đúng brand) ---
+            // --- LOGIC LỌC SẢN PHẨM ---
             let displayProducts = brandFilter ? products.filter(p => p.brand === brandFilter) : products;
 
             productList.innerHTML = '';
@@ -478,33 +525,65 @@
             } else {
                 displayProducts.forEach(p => {
                     productList.innerHTML += `
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 product-card shadow-sm border-0">
-                <img src="${p.img}" class="card-img-top" style="border-radius: 15px 15px 0 0; height: 200px; object-fit: cover;">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">${p.name}</h5>
-                    <p class="text-danger fw-bold mb-3">${p.price.toLocaleString()} VNĐ</p>
-                    
-                    <div class="d-flex flex-column gap-2">
-                        <a href="product-detail.html?id=${p.id}" class="btn btn-outline-dark">
-                            <i class="bi bi-eye pe-1"></i> Xem chi tiết
-                        </a>
-                        <button class="btn btn-primary" onclick="addToCart()">
-                            <i class="bi bi-cart-plus pe-1"></i> Thêm vào giỏ
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>`;
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 product-card shadow-sm border-0">
+                            <img src="${p.img}" class="card-img-top" style="border-radius: 15px 15px 0 0; height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">${p.name}</h5>
+                                <p class="text-danger fw-bold mb-3">${p.price.toLocaleString()} VNĐ</p>
+                                
+                                <div class="d-flex flex-column gap-2">
+                                    <a href="product-detail.html?id=${p.id}" class="btn btn-outline-dark">
+                                        <i class="bi bi-eye pe-1"></i> Xem chi tiết
+                                    </a>
+                                    <button class="btn btn-success" onclick="addToCart(${p.id})">
+                                        <i class="bi bi-cart-plus pe-1"></i> Thêm vào giỏ
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
                 });
             }
         }
 
-        function addToCart() {
-            cartCount++;
-            document.getElementById('cart-count').innerText = cartCount;
+        // 2. Hàm thêm vào giỏ hàng (Xử lý dữ liệu thực tế)
+        function addToCart(productId) {
+            // Tìm sản phẩm trong mảng dữ liệu
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            // Lấy giỏ hàng từ localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Kiểm tra xem sản phẩm đã có trong giỏ chưa
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1; // Nếu có rồi thì tăng số lượng
+            } else {
+                // Nếu chưa có, thêm mới đối tượng sản phẩm
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    img: product.img,
+                    quantity: 1
+                });
+            }
+
+            // Lưu lại vào localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Hiển thị thông báo
+            alert(`Đã thêm "${product.name}" vào giỏ hàng!`);
+
+            // Cập nhật số lượng hiển thị trên biểu tượng giỏ hàng
+            updateCartBadge();
         }
 
+        // Chạy các hàm khi trang web tải xong
+        updateCartBadge();
         renderProducts();
     </script>
     <footer class="footer">

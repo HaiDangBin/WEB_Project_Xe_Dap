@@ -41,11 +41,15 @@
         if (product) {
             content.innerHTML = `
                 <div class="col-md-4 mb-4">
-                    <img src="${product.img}" class="img-fluid rounded shadow-sm border p-2 mb-3">
+                    <div class="d-flex justify-content-center align-items-center border rounded bg-white shadow-sm mb-3" 
+                    style="height: 350px; overflow: hidden;">
+                    <img src="${product.img}" class="img-fluid p-2" style="max-height: 100%;">
+                </div>
                     <img src="assets/img/badge_nhaphanphoi.webp" class="img-fluid rounded shadow-sm" onerror="this.style.display='none'">
                 </div>
 
                 <div class="col-md-5">
+                    <a href="index.html">Trang chủ</a><span>/</span><a href="product-detail.html">${product.name}</a>
                     <h4 class="fw-bold h3">${product.name}</h4>
                     <h5 class="text-danger my-3 fw-bold">Giá: ${product.price.toLocaleString()} VNĐ</h5>
 
@@ -61,10 +65,9 @@
                             <ul class="list-unstyled small mb-0">
                                 <li>✅ Bảo dưỡng định kỳ trọn đời miễn phí.</li>
                                 <li>✅ Tặng nón bảo hiểm chính hãng.</li>
-                                <li>✅ Dịch vụ cứu hộ tận nơi (<a href="dich-vu.html" class="text-success text-decoration-none fw-bold">xem chi tiết</a>).</li>
+                                <li>✅ Dịch vụ cứu hộ tận nơi (<a href="emer.html" class="text-success text-decoration-none fw-bold">xem chi tiết</a>).</li>
                                 <li>✅ Miễn phí giao xe nội thành – giao nhanh 2h</li>
                                 <li>✅ [Best Deal]: Phiếu quà tặng trị giá 200K thay Acquy</li>
-                                <li>✅ Tặng áo mưa cao cấp 250.000đ</li>
                                 <li>✅ Trả góp 0% bằng thẻ tín dụng Visa, Master Card, JCB</li>
                             </ul>
                         </div>
@@ -73,16 +76,17 @@
                     <div class="purchase-section">
                         <div class="d-flex gap-2 mb-2">
                             <div class="input-group" style="width: 120px;">
-                                <button class="btn btn-outline-secondary border-end-0" type="button">-</button>
-                                <input type="text" class="form-control text-center fw-bold border-start-0 border-end-0" value="1">
-                                <button class="btn btn-outline-secondary border-start-0" type="button">+</button>
+                                <button class="btn btn-outline-secondary" type="button" onclick="changeQty(-1)">-</button>
+                                <input type="text" id="product-qty" class="form-control text-center fw-bold" value="1">
+                                <button class="btn btn-outline-secondary" type="button" onclick="changeQty(1)">+</button>
                             </div>
-                            <button class="btn flex-grow-1 fw-bold text-white" style="background-color: #E77F64;">
-                                THÊM VÀO GIỎ HÀNG
-                            </button>
+                                <button class="btn flex-grow-1 fw-bold text-white" 
+                                    style="background-color: #e58b81;" 
+                                    onclick="addToCart(${product.id})">THÊM VÀO GIỎ HÀNG
+                                </button>
                         </div>
 
-                        <button class="btn w-100 py-2 fw-bold text-white mb-2 shadow-sm" style="background-color: #7AC74F; font-size: 1.1rem;">
+                        <button class="btn w-100 py-1 fw-bold text-white mb-2 shadow-sm" style="background-color: #7AC74F; font-size: 1.1rem;">
                             MUA NGAY
                         </button>
 
@@ -114,7 +118,7 @@
                     <p class="fw-bold mb-1">HOTLINE ĐẶT HÀNG</p>
                     <h3 class="text-success fw-bold mb-4">1800.2039</h3>
                     
-                    <img src="assets/img/tragopbanner.jpg" class="img-fluid rounded shadow-sm mb-4" onerror="this.style.display='none'">
+                    <img src="assets/img/banner_tragop.jpg" class="img-fluid rounded shadow-sm mb-4" onerror="this.style.display='none'">
 
                     <div class="text-start ps-3 small w-100">
                         <p class="mb-3"><i class="bi bi-truck me-2"></i>Miễn phí giao xe nội thành</p>
@@ -131,6 +135,61 @@
         } else {
             content.innerHTML = "<h2>Sản phẩm không tồn tại!</h2>";
         }
+        function changeQty(amount) {
+            const qtyInput = document.getElementById('product-qty');
+            let currentQty = parseInt(qtyInput.value);
+            if (currentQty + amount >= 1) {
+                qtyInput.value = currentQty + amount;
+            }
+        }
+
+        // 2. Hàm thêm vào giỏ hàng
+        function addToCart(productId) {
+            // Lấy số lượng từ input
+            const quantity = parseInt(document.getElementById('product-qty').value);
+
+            // Lấy giỏ hàng từ localStorage (nếu chưa có thì tạo mảng rỗng)
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Kiểm tra sản phẩm đã có trong giỏ chưa
+            const existingProductIndex = cart.findIndex(item => item.id === productId);
+
+            if (existingProductIndex > -1) {
+                // Nếu có rồi thì tăng số lượng
+                cart[existingProductIndex].quantity += quantity;
+            } else {
+                // Nếu chưa có thì lấy thông tin từ biến 'product' hiện tại và thêm mới
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    img: product.img,
+                    quantity: quantity
+                });
+            }
+
+            // Lưu lại vào localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Hiển thị thông báo (Toast hoặc Alert)
+            alert(`Đã thêm ${quantity} sản phẩm "${product.name}" vào giỏ hàng!`);
+
+            // Cập nhật số lượng trên icon giỏ hàng ở Navbar (nếu có)
+            updateCartCount();
+        }
+
+        // 3. Hàm cập nhật số hiển thị trên icon giỏ hàng (Navbar)
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartBadge = document.getElementById('cart-count'); // ID của số trên Navbar
+            if (cartBadge) {
+                cartBadge.innerText = totalItems;
+            }
+        }
+
+        // Chạy hàm cập nhật khi vừa load trang
+        updateCartCount();
     </script>
 </body>
 

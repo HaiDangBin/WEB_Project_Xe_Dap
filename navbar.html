@@ -1,4 +1,40 @@
 <style>
+    @media (max-width: 768px) {
+        .search-dropdown {
+            width: 90vw !important;
+            /* Rộng gần hết màn hình điện thoại */
+            right: -50px !important;
+            /* Căn giữa lại */
+            padding: 15px !important;
+        }
+
+        .search-dropdown::before {
+            right: 60px !important;
+            /* Căn lại mũi tên trỏ lên */
+        }
+
+        /* Đảm bảo menu không quá dài trên mobile */
+        .navbar-collapse {
+            max-height: 80vh;
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+
+        /* Căn chỉnh lại Mega Menu trên Mobile */
+        .dropdown-menu.w-100 {
+            position: static !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 10px 20px !important;
+        }
+
+        /* Header cho Mobile */
+        header {
+            width: 95% !important;
+            min-height: 200px !important;
+        }
+    }
+
     .navbar .dropdown-menu {
         border-radius: 0;
         margin-top: 0;
@@ -147,9 +183,15 @@
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
         <a class="navbar-brand fw-bolder" href="index.html">☘️ E-BIKE SHOP</a>
-        <div class="collapse navbar-collapse">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item mx-3"><a href="#" class="nav-link text-white fw-bold">SHOP</a></li>
+                <li class="nav-item mx-lg-3"><a href="#" class="nav-link text-white fw-bold">SHOP</a></li>
                 <li class="nav-item dropdown position-static mx-3"><a href="#"
                         class="nav-link dropdown-toggle text-white fw-bold" role="button" data-bs-toggle="dropdown"
                         id="megaMenu" aria-expanded="false">XE ĐIỆN</a>
@@ -249,7 +291,7 @@
                     </div>
                 </div>
             </div>
-            <a class="nav-link btn btn-primary bg-white text-dark ms-2" href="#">Giỏ hàng (<span
+            <a class="nav-link btn btn-primary bg-white text-dark ms-2" href="cart.html">Giỏ hàng (<span
                     id="cart-count">0</span>)</a>
         </div>
     </div>
