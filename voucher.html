@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khuyến Mãi - E-Bike Shop</title>
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <style>
         :root {
             --primary-color: #27ae60;
@@ -37,6 +37,7 @@
             overflow: hidden;
             line-height: 0;
         }
+
         .promo-banner-container img {
             width: 100%;
             height: auto;
@@ -52,6 +53,7 @@
             max-width: 400px;
             margin: 30px 0;
         }
+
         .toc-title {
             font-weight: bold;
             color: var(--primary-color);
@@ -61,16 +63,34 @@
             display: flex;
             justify-content: space-between;
         }
-        .toc-box ul { list-style: none; padding: 0; margin: 0; }
-        .toc-box ul li { margin-bottom: 8px; }
-        .toc-box ul li a { text-decoration: none; color: #0066cc; font-size: 14px; }
-        .toc-box ul li a:hover { text-decoration: underline; color: var(--primary-color); }
+
+        .toc-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-box ul li {
+            margin-bottom: 8px;
+        }
+
+        .toc-box ul li a {
+            text-decoration: none;
+            color: #0066cc;
+            font-size: 14px;
+        }
+
+        .toc-box ul li a:hover {
+            text-decoration: underline;
+            color: var(--primary-color);
+        }
 
         /* --- CÁC PHẦN TIÊU ĐỀ --- */
         .section-header {
             text-align: center;
             margin: 50px 0 30px;
         }
+
         .section-header h2 {
             font-weight: bold;
             color: #333;
@@ -81,11 +101,30 @@
         }
 
         /* --- KHUNG CHƯƠNG TRÌNH KHUYẾN MÃI --- */
-        .promo-images-container { margin-bottom: 40px; }
-        .promo-images-container .row { --bs-gutter-x: 0; }
-        .promo-images-container .col-md-6 { padding: 0; overflow: hidden; }
-        .promo-images-container img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
-        .promo-images-container img:hover { transform: scale(1.05); }
+        .promo-images-container {
+            margin-bottom: 40px;
+        }
+
+        .promo-images-container .row {
+            --bs-gutter-x: 0;
+        }
+
+        .promo-images-container .col-md-6 {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .promo-images-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .promo-images-container img:hover {
+            transform: scale(1.05);
+        }
 
         /* --- CSS CHO CARD SẢN PHẨM --- */
         .product-item {
@@ -98,33 +137,110 @@
             height: 100%;
             text-align: left;
         }
-        .product-item:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.1); transform: translateY(-5px); }
-        
+
+        .product-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
         .badge-discount {
-            position: absolute; top: 10px; left: 10px; background: #4caf50; color: white;
-            width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; font-size: 12px; font-weight: bold; z-index: 5;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #4caf50;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 5;
         }
-        
+
         .product-img-wrapper {
-            position: relative; overflow: hidden; margin-bottom: 15px;
-            min-height: 200px; display: flex; align-items: center; justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .main-product-img { width: 100%; max-height: 200px; object-fit: contain; transition: 0.3s; }
-        
+
+        .main-product-img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            transition: 0.3s;
+        }
+
         .color-options {
-            position: absolute; bottom: -65px; left: 0; width: 100%;
-            background: rgba(255,255,255,0.95); display: flex; justify-content: center; align-items: center;
-            gap: 5px; padding: 10px 0; transition: 0.4s ease; border-top: 1px solid #eee; z-index: 10;
+            position: absolute;
+            bottom: -65px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 0;
+            transition: 0.4s ease;
+            border-top: 1px solid #eee;
+            z-index: 10;
         }
-        .product-item.has-colors:hover .color-options { bottom: 0; }
-        .color-dot { width: 30px; height: 30px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; cursor: pointer; }
-        .color-dot img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .product-brand { font-size: 11px; text-transform: uppercase; color: var(--primary-color); font-weight: bold; margin-bottom: 5px; }
-        .p-name { font-weight: bold; font-size: 14px; color: #333; margin: 0 0 5px; min-height: 42px; }
-        .p-old-price { color: #888; text-decoration: line-through; font-size: 12px; margin-bottom: 0; }
-        .p-new-price { color: var(--primary-color); font-weight: bold; font-size: 16px; margin-bottom: 0; }
+
+        .product-item.has-colors:hover .color-options {
+            bottom: 0;
+        }
+
+        .color-dot {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .color-dot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-brand {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .p-name {
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+            margin: 0 0 5px;
+            min-height: 42px;
+        }
+
+        .p-old-price {
+            color: #888;
+            text-decoration: line-through;
+            font-size: 12px;
+            margin-bottom: 0;
+        }
+
+        .p-new-price {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 0;
+        }
 
         /* =========================================
            CSS CHO PHẦN DỊCH VỤ - FORM ĐẶT LỊCH
@@ -133,14 +249,14 @@
             background: #fff;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
             margin: 60px 0;
             border: 1px solid #efefef;
         }
-        
+
         /* Hiệu ứng màng đen mờ đè lên ảnh xe của bạn */
         .service-bg {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('./assets/img/osakar_x8.jpg') center/cover no-repeat;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./assets/img/osakar_x8.jpg') center/cover no-repeat;
             padding: 50px 40px;
             color: white;
             display: flex;
@@ -148,7 +264,7 @@
             justify-content: center;
             height: 100%;
         }
-        
+
         .service-link {
             text-decoration: none;
             color: inherit;
@@ -158,67 +274,85 @@
             transition: all 0.3s ease;
             cursor: pointer;
         }
-        .service-link:last-child { margin-bottom: 0; }
-        
+
+        .service-link:last-child {
+            margin-bottom: 0;
+        }
+
         .service-icon-box {
-            width: 55px; height: 55px;
+            width: 55px;
+            height: 55px;
             border: 2px solid var(--primary-color);
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px; color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #fff;
             flex-shrink: 0;
             transition: all 0.3s ease;
         }
+
         .service-link:hover .service-icon-box {
             background-color: var(--primary-color);
             box-shadow: 0 0 15px var(--primary-color);
             border-color: #fff;
             transform: scale(1.1);
         }
-        .service-link:hover h4 { color: var(--secondary-color) !important; }
-        
-        .service-form { padding: 50px 60px; }
+
+        .service-link:hover h4 {
+            color: var(--secondary-color) !important;
+        }
+
+        .service-form {
+            padding: 50px 60px;
+        }
+
         .service-form h3 {
-            font-weight: bold; 
-            text-transform: uppercase; 
+            font-weight: bold;
+            text-transform: uppercase;
             margin-bottom: 30px;
             color: #333;
             border-bottom: 3px solid #333;
             display: inline-block;
             padding-bottom: 5px;
         }
+
         .service-form .form-control {
-            border-radius: 30px; 
+            border-radius: 30px;
             background-color: #fcfcfc;
             border: 1px solid #e0e0e0;
             padding: 12px 20px;
             margin-bottom: 15px;
             font-size: 14px;
         }
+
         .service-form .form-control:focus {
             box-shadow: none;
             border-color: var(--primary-color);
             background-color: #fff;
         }
+
         .service-form .btn-submit {
             background-color: var(--primary-color);
-            color: white; 
+            color: white;
             border: none;
-            padding: 12px 30px; 
+            padding: 12px 30px;
             border-radius: 30px;
-            font-weight: bold; 
+            font-weight: bold;
             text-transform: uppercase;
             transition: 0.3s;
             font-size: 14px;
         }
-        .service-form .btn-submit:hover { 
-            background-color: var(--dark-green); 
+
+        .service-form .btn-submit:hover {
+            background-color: var(--dark-green);
             box-shadow: 0 4px 10px rgba(39, 174, 96, 0.4);
         }
 
         /* KHUNG THÔNG BÁO THÀNH CÔNG */
         .booking-success-message {
-            display: none; 
+            display: none;
             margin-top: 25px;
             padding: 15px 20px;
             border: 1px solid var(--primary-color);
@@ -229,9 +363,17 @@
             box-shadow: 0 4px 15px rgba(39, 174, 96, 0.1);
             animation: fadeIn 0.5s ease-in-out;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* --- CSS CHO FOOTER --- */
@@ -243,6 +385,7 @@
             line-height: 1.6;
             margin-top: 50px;
         }
+
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -251,23 +394,63 @@
             gap: 30px;
             padding: 0 20px;
         }
+
         .footer-col h3 {
             color: #ffffff;
             font-size: 16px;
             margin-bottom: 20px;
             text-transform: uppercase;
         }
-        .footer-col ul { list-style: none; padding: 0; }
-        .footer-col ul li { margin-bottom: 10px; }
-        .footer-col ul li a { color: #bdc3c7; text-decoration: none; transition: 0.3s; }
-        .footer-col ul li a:hover { color: #2ecc71; padding-left: 5px; }
-        .highlight { color: #f1c40f; font-weight: bold; }
-        .payment-methods img { height: 30px; margin-right: 10px; filter: grayscale(100%); transition: 0.3s; }
-        .payment-methods img:hover { filter: grayscale(0%); }
-        .mt-20 { margin-top: 20px; }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #2ecc71;
+            padding-left: 5px;
+        }
+
+        .highlight {
+            color: #f1c40f;
+            font-weight: bold;
+        }
+
+        .payment-methods img {
+            height: 30px;
+            margin-right: 10px;
+            filter: grayscale(100%);
+            transition: 0.3s;
+        }
+
+        .payment-methods img:hover {
+            filter: grayscale(0%);
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
         @media (max-width: 768px) {
-            .footer-container { grid-template-columns: 1fr; text-align: center; }
-            .service-form { padding: 30px 20px; }
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .service-form {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
@@ -275,6 +458,27 @@
 <body>
 
     <div id="nav-placeholder"></div>
+
+    <script>
+        fetch('navbar.html')
+            .then(response => {
+                if (!response.ok) throw new Error("Không tìm thấy file navbar.html");
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('nav-placeholder').innerHTML = data;
+
+                // TỰ ĐỘNG LÀM SÁNG MENU HIỆN TẠI (ACTIVE LINK)
+                const currentPath = window.location.pathname.split("/").pop() || 'index.html';
+                const links = document.querySelectorAll('.nav-link');
+                links.forEach(link => {
+                    if (link.getAttribute('href') === currentPath) {
+                        link.classList.add('active');
+                    }
+                });
+            })
+            .catch(error => console.error('Lỗi nhúng Navbar:', error));
+    </script>
 
     <main class="main-content">
         <section class="promo-banner-container">
@@ -332,8 +536,10 @@
                                     <i class="bi bi-layers"></i>
                                 </div>
                                 <div>
-                                    <h4 class="fw-bold mb-1 text-white" style="font-size: 18px; transition: 0.3s;">CỨU HỘ XE</h4>
-                                    <p class="mb-0 text-light" style="font-size: 13px;">Dịch vụ tiện ích cho khách hàng của E-BikeShop</p>
+                                    <h4 class="fw-bold mb-1 text-white" style="font-size: 18px; transition: 0.3s;">CỨU
+                                        HỘ XE</h4>
+                                    <p class="mb-0 text-light" style="font-size: 13px;">Dịch vụ tiện ích cho khách hàng
+                                        của E-BikeShop</p>
                                 </div>
                             </a>
 
@@ -342,13 +548,15 @@
                                     <i class="bi bi-gear"></i>
                                 </div>
                                 <div>
-                                    <h4 class="fw-bold mb-1 text-white" style="font-size: 18px; transition: 0.3s;">SỬA CHỮA XE TẬN NHÀ</h4>
-                                    <p class="mb-0 text-light" style="font-size: 13px;">Dịch vụ sửa chữa xe điện tại nhà nhanh chóng, uy tín 5 SAO</p>
+                                    <h4 class="fw-bold mb-1 text-white" style="font-size: 18px; transition: 0.3s;">SỬA
+                                        CHỮA XE TẬN NHÀ</h4>
+                                    <p class="mb-0 text-light" style="font-size: 13px;">Dịch vụ sửa chữa xe điện tại nhà
+                                        nhanh chóng, uy tín 5 SAO</p>
                                 </div>
                             </a>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <div class="service-form">
                             <h3>DỊCH VỤ</h3>
@@ -360,9 +568,10 @@
                                 <input type="text" class="form-control" placeholder="Mua xe tại cửa hàng nào...">
                                 <input type="text" class="form-control" placeholder="Bảo hành hay sửa chữa...">
                                 <input type="text" class="form-control" placeholder="Địa chỉ nhà...">
-                                
-                                <button type="button" id="btn-submit-booking" class="btn-submit mt-3">ĐẶT LỊCH NGAY</button>
-                                
+
+                                <button type="button" id="btn-submit-booking" class="btn-submit mt-3">ĐẶT LỊCH
+                                    NGAY</button>
+
                                 <div id="booking-success-msg" class="booking-success-message">
                                     Xin cảm ơn, form đã được gửi thành công.
                                 </div>
@@ -379,7 +588,8 @@
         <div class="footer-container">
             <div class="footer-col">
                 <h3>VỀ E-Bike Shop</h3>
-                <p>Phân phối, kinh doanh sỉ & lẻ xe điện 2-3 bánh của các hãng nổi tiếng: Yadea, Osakar, Nijia... bảo hành lên đến 36 tháng.</p>
+                <p>Phân phối, kinh doanh sỉ & lẻ xe điện 2-3 bánh của các hãng nổi tiếng: Yadea, Osakar, Nijia... bảo
+                    hành lên đến 36 tháng.</p>
                 <p><strong>Thời gian mở cửa:</strong> 8:00 - 21:00 (Cả tuần)</p>
                 <p><strong>Hotline:</strong> <span class="highlight">1800.2039</span></p>
             </div>
@@ -432,27 +642,27 @@
                     dropdownElementList.map(function (dropdownToggleEl) { return new bootstrap.Dropdown(dropdownToggleEl); });
                 }
                 document.querySelectorAll('a[href*="voucher.html"]').forEach(link => {
-                    link.addEventListener('click', function(e) { window.location.href = 'voucher.html'; });
+                    link.addEventListener('click', function (e) { window.location.href = 'voucher.html'; });
                 });
                 const navLinks = document.querySelectorAll('.nav-link');
                 navLinks.forEach(link => {
                     if (link.getAttribute('href') === 'voucher.html' || link.innerText.includes("KHUYẾN MÃI")) {
                         link.classList.add('active');
-                        link.style.color = '#f1c40f'; 
+                        link.style.color = '#f1c40f';
                     }
                 });
             });
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Xử lý nút Đặt lịch (Hiện thông báo thành công)
             const btnBooking = document.getElementById('btn-submit-booking');
             const bookingSuccessMsg = document.getElementById('booking-success-msg');
             const bookingForm = document.getElementById('booking-form');
 
             if (btnBooking && bookingSuccessMsg) {
-                btnBooking.addEventListener('click', function() {
+                btnBooking.addEventListener('click', function () {
                     bookingSuccessMsg.style.display = 'block';
-                    if(bookingForm) bookingForm.reset();
+                    if (bookingForm) bookingForm.reset();
                 });
             }
 
@@ -465,21 +675,21 @@
             const bestPriceContainer = document.getElementById('specific-products-container');
             const bestPriceIds = [1, 3, 7, 8];
             const bestPriceDiscounts = { 1: 29, 3: 14, 7: 11, 8: 21 };
-            
+
             const bestPriceProducts = products.filter(p => bestPriceIds.includes(p.id));
             let bestPriceHtml = '';
 
             bestPriceProducts.forEach(p => {
                 const rate = bestPriceDiscounts[p.id] || 10;
                 const oldPrice = p.price.toLocaleString('vi-VN') + 'đ';
-                const newPrice = Math.round(p.price * (1 - rate/100)).toLocaleString('vi-VN') + 'đ';
+                const newPrice = Math.round(p.price * (1 - rate / 100)).toLocaleString('vi-VN') + 'đ';
                 let colorOptionsHtml = '';
-                
+
                 if (p.id === 7) {
                     const winColors = ['assets/img/osakar_win.jpg', 'assets/img/osakar-win-maucam.jpg', 'assets/img/osakar-win-mauvangden.jpg', 'assets/img/osakar-win-mauvangxanh.jpg'];
                     const dotsHtml = winColors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
                     colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
-                } else if (p.id === 8) { 
+                } else if (p.id === 8) {
                     const tailgColors = ['assets/img/TAILGGR55.jpg', 'assets/img/tailg55_mauxanh.png', 'assets/img/tailg55_mautim.png', 'assets/img/tailg55_mauhong.png', 'assets/img/tailg55_mauden.jpg'];
                     const dotsHtml = tailgColors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
                     colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
@@ -505,7 +715,7 @@
 
             // --- PHẦN 2: HÀNG MỚI VỀ (CẬP NHẬT MÀU CHO YADEA VC ICANDY) ---
             const newArrivalContainer = document.getElementById('new-arrival-products-container');
-            const newArrivalIds = [4, 5, 6, 9, 12, 18, 36, 37, 2, 11, 21, 24]; 
+            const newArrivalIds = [4, 5, 6, 9, 12, 18, 36, 37, 2, 11, 21, 24];
             const newArrivalDiscounts = { 4: 15, 5: 10, 6: 12, 9: 20, 12: 18, 18: 10, 36: 25, 37: 15, 2: 22, 11: 14, 21: 12, 24: 19 };
 
             const newArrivalProducts = products.filter(p => newArrivalIds.includes(p.id));
@@ -514,10 +724,10 @@
             newArrivalProducts.forEach(p => {
                 const rate = newArrivalDiscounts[p.id] || 12;
                 const oldPrice = p.price.toLocaleString('vi-VN') + 'đ';
-                const newPrice = Math.round(p.price * (1 - rate/100)).toLocaleString('vi-VN') + 'đ';
-                
+                const newPrice = Math.round(p.price * (1 - rate / 100)).toLocaleString('vi-VN') + 'đ';
+
                 let colorOptionsHtml = '';
-                
+
                 // 1. Màu cho Osakar X8 (ID 24)
                 if (p.id === 24) {
                     const x8Colors = [
@@ -532,13 +742,13 @@
                     `).join('');
                     colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
                 }
-                
+
                 // 2. Màu cho Osakar Mandi (ID 4) 
                 else if (p.id === 4) {
                     const mandiColors = [
-                        'assets/img/osakar-mandi-mautrang.jpg', 
-                        'assets/img/osakar-mandi-mauxam.jpg', 
-                        'assets/img/product-MANDI-1.png'  
+                        'assets/img/osakar-mandi-mautrang.jpg',
+                        'assets/img/osakar-mandi-mauxam.jpg',
+                        'assets/img/product-MANDI-1.png'
                     ];
                     const dotsHtml = mandiColors.map(color => `
                         <div class="color-dot" data-target="main-img-${p.id}" data-src="${color}">
@@ -551,10 +761,10 @@
                 // 3. Màu cho Yadea I8 (ID 21)
                 else if (p.id === 21) {
                     const i8Colors = [
-                        'assets/img/YADEAI8.jpg', 
-                        'assets/img/yadae-i8-mauhong.jpg', 
-                        'assets/img/yadae-i8-mautrangxanh.jpg', 
-                        'assets/img/yadae-i8-mauxanh.jpg'  
+                        'assets/img/YADEAI8.jpg',
+                        'assets/img/yadae-i8-mauhong.jpg',
+                        'assets/img/yadae-i8-mautrangxanh.jpg',
+                        'assets/img/yadae-i8-mauxanh.jpg'
                     ];
                     const dotsHtml = i8Colors.map(color => `
                         <div class="color-dot" data-target="main-img-${p.id}" data-src="${color}">
@@ -563,13 +773,13 @@
                     `).join('');
                     colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
                 }
-                
+
                 // 4. MỚI: Màu cho Yadea VC Icandy (ID 18) - 2 màu phụ
                 else if (p.id === 18) {
                     const icandyColors = [
                         'assets/img/YADEAVC.jpg', // Màu gốc
-                        'assets/img/Yadea VC Icandy-mau1.jpg', 
-                        'assets/img/Yadea VC Icandy-mau2.jpg'  
+                        'assets/img/Yadea VC Icandy-mau1.jpg',
+                        'assets/img/Yadea VC Icandy-mau2.jpg'
                     ];
                     const dotsHtml = icandyColors.map(color => `
                         <div class="color-dot" data-target="main-img-${p.id}" data-src="${color}">
@@ -598,7 +808,7 @@
 
             // Kích hoạt hover chấm màu đổi ảnh cho TẤT CẢ sản phẩm 
             document.querySelectorAll('.color-dot').forEach(dot => {
-                dot.addEventListener('mouseenter', function() {
+                dot.addEventListener('mouseenter', function () {
                     const targetId = this.getAttribute('data-target');
                     const newSrc = this.getAttribute('data-src');
                     const mainImg = document.getElementById(targetId);
