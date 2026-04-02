@@ -221,10 +221,10 @@
                                 <div class="col-md-3">
                                     <h6 class="fw-bold text-uppercase">XE ĐẠP ĐIỆN GẤP</h6>
                                     <ul class="list-unstyled">
-                                        <li><a href="index.html?brand=ado" class="dropdown-item px-0">XE ĐIỆN TRỢ LỰC
-                                                ADO</a></li>
-                                        <li><a href="index.html?brand=fiido" class="dropdown-item px-0">XE ĐẠP ĐIỆN GẤP
-                                                FIIDO</a></li>
+                                        <li><a href="index.html?brand=ado" class="dropdown-item px-0">XE ĐIỆN TRỢ
+                                                LỰC ADO</a></li>
+                                        <li><a href="index.html?brand=fiido" class="dropdown-item px-0">XE ĐẠP ĐIỆN
+                                                GẤP FIIDO</a></li>
                                     </ul>
                                 </div>
 
@@ -243,18 +243,14 @@
                                     <ul class="list-unstyled">
                                         <li><a href="index.html?brand=sacxedien" class="dropdown-item px-0">SẠC XE
                                                 ĐIỆN</a></li>
-
                                     </ul>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
                 </li>
-                <li class="nav-item mx-3"><a href="voucher.html" class="nav-link text-white fw-bold">KHUYẾN MÃI</a></li>
+                <li class="nav-item mx-3"><a href="voucher.html" class="nav-link text-white fw-bold">KHUYẾN MÃI</a>
+                </li>
                 <li class="nav-item dropdown mx-3"><a href="#" class="nav-link dropdown-toggle text-white fw-bold"
                         role="button" data-bs-toggle="dropdown">DỊCH VỤ</a>
                     <ul class="dropdown-menu">
@@ -292,6 +288,9 @@
                     <div class="search-box-inner">
                         <input type="text" placeholder="Tìm kiếm xe điện" id="main-search">
                         <i class="bi bi-search inner-icon"></i>
+                        <div id="search-results" class="list-group position-absolute w-100 shadow-sm d-none"
+                            style="z-index: 1000; max-height: 300px; overflow-y: auto;">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -300,3 +299,53 @@
         </div>
     </div>
 </nav>
+<script src="js/data.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('main-search');
+        const searchResults = document.getElementById('search-results');
+
+        if (searchInput) {
+            searchInput.addEventListener('input', function () {
+                const query = this.value.toLowerCase().trim();
+
+                if (query.length < 1) {
+                    searchResults.classList.add('d-none');
+                    return;
+                }
+
+                // Lọc sản phẩm (Giả sử biến 'products' đã có sẵn từ data.js)
+                const filtered = products.filter(p =>
+                    p.name.toLowerCase().includes(query) ||
+                    p.brand.toLowerCase().includes(query)
+                ).slice(0, 5); // Chỉ hiện 5 kết quả đầu tiên
+
+                renderSearchResults(filtered);
+            });
+        }
+
+        function renderSearchResults(results) {
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="p-3 text-muted text-center">Không tìm thấy sản phẩm</div>';
+            } else {
+                searchResults.innerHTML = results.map(p => `
+                <a href="product-detail.html?id=${p.id}" class="search-result-item">
+                    <img src="${p.img}" alt="${p.name}">
+                    <div class="item-info">
+                        <span class="item-name">${p.name}</span>
+                        <span class="item-price">${p.price.toLocaleString()} VNĐ</span>
+                    </div>
+                </a>
+            `).join('');
+            }
+            searchResults.classList.remove('d-none');
+        }
+
+        // Đóng kết quả khi bấm ra ngoài
+        document.addEventListener('click', function (e) {
+            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.classList.add('d-none');
+            }
+        });
+    });
+</script>

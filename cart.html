@@ -9,6 +9,52 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
+        /* js/navbar.js or your styles.css */
+        #search-results {
+            /* Đảm bảo khung luôn nằm trên các thành phần khác */
+            z-index: 1000;
+
+            /* ---------------------------------------------------- */
+            /* --- SỬA CHÍNH Ở ĐÂY ĐỂ DỊCH KHUNG XUỐNG DƯỚI --- */
+            /* ---------------------------------------------------- */
+
+            /* 1. Nếu cha của nó (.search-dropdown) đã có position: absolute */
+            position: absolute;
+            top: 50px;
+            /* Đẩy xuống 50px tính từ đỉnh của ô nhập liệu */
+            left: 0;
+            width: 100%;
+            /* Rộng bằng ô nhập liệu */
+
+            /* 2. (Thêm) Nếu bạn muốn đẩy xa hơn một chút */
+            margin-top: 10px;
+            /* Thêm khoảng trống 10px phía trên khung kết quả */
+
+            /* ---------------------------------------------------- */
+
+            /* Các thuộc tính trang trí khác của bạn */
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            /* Thêm bóng cho chuyên nghiệp */
+        }
+
+        /* Kiểu cho từng mục trong danh sách (giữ nguyên hoặc tối ưu) */
+        .list-group-item.search-result-item {
+            padding: 12px 15px;
+            /* Tăng khoảng cách để dễ bấm */
+            border-bottom: 1px solid #f8f9fa;
+            transition: background 0.2s ease;
+        }
+
+        .list-group-item.search-result-item:hover {
+            background-color: #f1f8f4;
+            /* Màu xanh nhạt khi hover */
+        }
+
         .cart-img {
             width: 80px;
             height: 80px;
@@ -306,6 +352,11 @@
             </div>
         </div>
     </footer>
+    <div id="nav-placeholder"></div>
+
+    <script src="js/data.js"></script>
+
+    <script src="js/navbar.js"></script>
 </body>
 
 </html>
