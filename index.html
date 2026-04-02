@@ -15,25 +15,20 @@
         @media (max-width: 768px) {
             .search-dropdown {
                 width: 90vw !important;
-                /* Rộng gần hết màn hình điện thoại */
                 right: -50px !important;
-                /* Căn giữa lại */
                 padding: 15px !important;
             }
 
             .search-dropdown::before {
                 right: 60px !important;
-                /* Căn lại mũi tên trỏ lên */
             }
 
-            /* Đảm bảo menu không quá dài trên mobile */
             .navbar-collapse {
                 max-height: 80vh;
                 overflow-y: auto;
                 padding-bottom: 20px;
             }
 
-            /* Căn chỉnh lại Mega Menu trên Mobile */
             .dropdown-menu.w-100 {
                 position: static !important;
                 border: none !important;
@@ -41,7 +36,6 @@
                 padding: 10px 20px !important;
             }
 
-            /* Header cho Mobile */
             header {
                 width: 95% !important;
                 min-height: 200px !important;
@@ -50,22 +44,17 @@
 
         :root {
             --primary-color: #27ae60;
-            /* Xanh lá thương hiệu */
             --dark-green: #1a5935;
-            /* Màu nhấn đậm */
             --accent-color: #f39c12;
-            /* Màu cam nhấn cho giá/giỏ hàng */
             --light-bg: #f8f9fa;
             --blue-dark: #1ca018;
         }
 
         header {
-
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             transition: background-image 0.5s ease-in-out;
-            /* Hiệu ứng chuyển ảnh mượt */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -73,16 +62,10 @@
             width: 81%;
             margin: 0 auto;
             border-radius: 20px;
-
         }
 
         .navbar {
             margin-bottom: 10px;
-        }
-
-        /* Lớp để ẩn chữ khi cần (đã làm ở bước trước) */
-        .d-none {
-            display: none !important;
         }
 
         .d-none {
@@ -94,7 +77,6 @@
             background-position: center;
             background-repeat: no-repeat;
             transition: background-image 0.5s ease-in-out;
-            /* Hiệu ứng chuyển ảnh mượt */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -104,17 +86,9 @@
             border-radius: 20px;
         }
 
-        /* Thêm lớp shadow để chữ dễ đọc hơn trên nền ảnh */
         .header-banner h1,
         .header-banner p {
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .card-img-top {
-            height: 200px;
-            /* --- SỬA LỖI MẤT ĐẦU XE Ở ĐÂY NÈ --- */
-            object-fit: contain;
-            /* ---------------------------------- */
         }
 
         .product-card:hover {
@@ -122,6 +96,66 @@
             transition: 0.3s;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
+
+        /* --- CSS GIẢM GIÁ --- */
+        .badge-discount {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #e74c3c;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 5;
+        }
+        .price-container {
+            min-height: 45px;
+        }
+        .old-price {
+            color: #888;
+            text-decoration: line-through;
+            font-size: 13px;
+            margin-bottom: 0;
+        }
+        .new-price {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        /* --- CSS CHO CHỌN MÀU SẮC --- */
+        .product-img-wrapper {
+            position: relative; 
+            overflow: hidden;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            border-radius: 15px 15px 0 0;
+            background-color: #fff;
+        }
+        .main-product-img { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: contain; 
+            transition: 0.3s; 
+            padding: 10px;
+        }
+        
+        .color-options {
+            position: absolute; bottom: -65px; left: 0; width: 100%;
+            background: rgba(255,255,255,0.95); display: flex; justify-content: center; align-items: center;
+            gap: 5px; padding: 10px 0; transition: 0.4s ease; border-top: 1px solid #eee; z-index: 10;
+        }
+        .product-card:hover .color-options { bottom: 0; }
+        .color-dot { width: 30px; height: 30px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; cursor: pointer; }
+        .color-dot img { width: 100%; height: 100%; object-fit: cover; }
 
         .navbar .dropdown-menu {
             border-radius: 0;
@@ -134,13 +168,11 @@
             padding-top: 5px;
             padding-bottom: 5px;
             white-space: normal;
-            /* Để tên xe dài không bị tràn dòng */
         }
 
         .dropdown-item:hover {
             background-color: transparent;
             color: #27ae60;
-            /* Màu xanh lá khi hover */
             font-weight: bold;
         }
 
@@ -162,27 +194,15 @@
             background-color: var(--blue-dark);
         }
 
-        #detail-content img {
-            transition: transform 0.3s ease;
-        }
-
-        #detail-content img:hover {
-            transform: scale(1.02);
-            /* Hiệu ứng phóng to nhẹ khi di chuột */
-        }
-
         .navbar-brand:hover {
             color: #27ae60 !important;
-            /* Đổi màu khi quay lại shop */
         }
 
         .search-wrapper {
             position: relative;
             display: inline-block;
-            /* Vùng đệm giúp chuột di chuyển xuống không bị mất hover */
         }
 
-        /* Nút kính lúp màu xanh lá */
         .search-trigger {
             background-color: white;
             color: black;
@@ -192,23 +212,16 @@
             cursor: pointer;
         }
 
-        /* Khung Dropdown bao ngoài */
         .search-dropdown {
             position: absolute;
             top: 100%;
             right: -20px;
-            /* Căn chỉnh vị trí */
             width: 450px;
-            /* Độ rộng lớn như trong ảnh */
             background: white;
             border: 2px solid #0a0a0a;
-            /* Viền xanh lá */
             border-radius: 20px;
-            /* Bo góc cực lớn */
             padding: 25px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-
-            /* Hiệu ứng ẩn/hiện mượt mà */
             opacity: 0;
             visibility: hidden;
             transform: translateY(10px);
@@ -216,28 +229,22 @@
             z-index: 1000;
         }
 
-        /* TẠO MŨI TÊN TRỎ LÊN */
         .search-dropdown::before {
             content: "";
             position: absolute;
             top: -12px;
-            /* Đẩy lên trên viền */
             right: 32px;
-            /* Căn đúng tâm nút kính lúp */
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
             border-bottom: 12px solid #0d0e0d;
-            /* Màu trùng với viền */
         }
 
-        /* Hiệu ứng khi Hover */
         .search-wrapper:hover .search-dropdown {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
 
-        /* Ô nhập liệu màu xám bên trong */
         .search-box-inner {
             position: relative;
             display: flex;
@@ -248,7 +255,6 @@
             width: 100%;
             padding: 12px 20px;
             background-color: #f5f5f5;
-            /* Nền xám nhạt */
             border: 1px solid #e0e0e0;
             border-radius: 12px;
             outline: none;
@@ -264,7 +270,6 @@
 
         #search-results {
             top: 100%;
-            /* Nằm ngay dưới ô Search */
             left: 0;
             background: white;
             border: 1px solid #ddd;
@@ -282,12 +287,10 @@
         #search-results .list-group-item:hover {
             background-color: #f8f9fa;
             color: #2e7d32;
-            /* Màu xanh của shop bạn */
         }
 
         .footer {
             background-color: #1a2521;
-            /* Màu xanh đen như trong ảnh */
             color: #ffffff;
             padding: 50px 0;
             font-family: 'Arial', sans-serif;
@@ -328,7 +331,6 @@
 
         .footer-col ul li a:hover {
             color: #2ecc71;
-            /* Màu xanh lá khi hover */
             padding-left: 5px;
         }
 
@@ -352,7 +354,6 @@
             margin-top: 20px;
         }
 
-        /* Responsive cho điện thoại */
         @media (max-width: 768px) {
             .footer-container {
                 grid-template-columns: 1fr;
@@ -365,7 +366,7 @@
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bolder" href="index.html">☘️ E-BIKE SHOP</a>
+            <a class="navbar-brand fw-bolder" href="logo.html">☘️ E-BIKE SHOP</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
                 aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -374,7 +375,7 @@
 
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item mx-lg-3"><a href="#" class="nav-link text-white fw-bold">SHOP</a></li>
+                    <li class="nav-item mx-lg-3"><a href="index.html" class="nav-link text-white fw-bold">SHOP</a></li>
                     <li class="nav-item dropdown position-static mx-3"><a href="#"
                             class="nav-link dropdown-toggle text-white fw-bold" role="button" data-bs-toggle="dropdown"
                             id="megaMenu" aria-expanded="false">XE ĐIỆN</a>
@@ -496,10 +497,8 @@
     <script>
         const productList = document.getElementById('product-list');
 
-        // 1. Hàm cập nhật số lượng hiển thị trên biểu tượng giỏ hàng (Badge)
         function updateCartBadge() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            // Tính tổng số lượng của tất cả các sản phẩm trong giỏ
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             const cartBadge = document.getElementById('cart-count');
             if (cartBadge) {
@@ -516,22 +515,13 @@
             const urlParams = new URLSearchParams(window.location.search);
             const brandFilter = urlParams.get('brand');
 
-            // --- LOGIC XỬ LÝ HEADER ---
             if (brandFilter) {
                 headerTitle.classList.add('d-none');
                 headerDesc.classList.add('d-none');
 
-                if (brandFilter === 'osakar') {
-                    header.style.backgroundImage = "url('assets/img/BANNER_OSAKAR2.webp')";
-
-                }
-
-                else if (brandFilter == "nijia") {
-                    header.style.backgroundImage = "url('assets/img/BANNER_NIJIA.png')";
-                }
-                else if (brandFilter == "yadea") {
-                    header.style.backgroundImage = "url('assets/img/BANNER_YADEA.jpg')";
-                }
+                if (brandFilter === 'osakar') header.style.backgroundImage = "url('assets/img/BANNER_OSAKAR2.webp')";
+                else if (brandFilter == "nijia") header.style.backgroundImage = "url('assets/img/BANNER_NIJIA.png')";
+                else if (brandFilter == "yadea") header.style.backgroundImage = "url('assets/img/BANNER_YADEA.jpg')";
                 else if (brandFilter == "babanh") {
                     header.style.backgroundImage = "none";
                     header.style.backgroundColor = "#27ae60";
@@ -556,36 +546,19 @@
                     headerTitle.innerText = "SẠC XE ĐIỆN CHÍNH HÃNG";
                     headerDesc.innerText = "Các loại sạc xe điện chính hãng, bền bỉ";
                 }
-                else if (brandFilter == "hitasa") {
-                    header.style.backgroundImage = "url('assets/img/BANNER_HITASA.jpg')";
-                }
-                else if (brandFilter == "fiido") {
-                    header.style.backgroundImage = "url('assets/img/BANNER_FIIDO.jpg')";
-                }
-                else if (brandFilter == "ado") {
-                    header.style.backgroundImage = "url('assets/img/BANNER_ADO.png')";
-                }
-                else if (brandFilter == "pega") {
-                    header.style.backgroundImage = "url('assets/img/pega-banner.jpg')";
-                }
-                else if (brandFilter == "tailg") {
-                    header.style.backgroundImage = "url('assets/img/banner-tailg.jpg')";
-                }
-                else if (brandFilter == "vinfast") {
-                    header.style.backgroundImage = "url('assets/img/banner-vinfast.png')";
-                }
+                else if (brandFilter == "hitasa") header.style.backgroundImage = "url('assets/img/BANNER_HITASA.jpg')";
+                else if (brandFilter == "fiido") header.style.backgroundImage = "url('assets/img/BANNER_FIIDO.jpg')";
+                else if (brandFilter == "ado") header.style.backgroundImage = "url('assets/img/BANNER_ADO.png')";
+                else if (brandFilter == "pega") header.style.backgroundImage = "url('assets/img/pega-banner.jpg')";
+                else if (brandFilter == "tailg") header.style.backgroundImage = "url('assets/img/banner-tailg.jpg')";
+                else if (brandFilter == "vinfast") header.style.backgroundImage = "url('assets/img/banner-vinfast.png')";
             } else {
                 header.style.backgroundImage = "url('assets/img/BANNER_HOME2.jpg')";
                 headerTitle.classList.add('d-none');
                 headerDesc.classList.add('d-none');
             }
 
-            // --- LOGIC LỌC VÀ TRỘN NGẪU NHIÊN SẢN PHẨM ---
-            // 1. Lọc sản phẩm theo hãng
             let displayProducts = brandFilter ? products.filter(p => p.brand === brandFilter) : products;
-
-            // 2. Trộn ngẫu nhiên danh sách đã lọc
-            // Sử dụng Spread operator [...] để tạo bản sao, tránh làm hỏng thứ tự mảng gốc trong data.js
             const shuffledProducts = [...displayProducts].sort(() => Math.random() - 0.5);
 
             productList.innerHTML = '';
@@ -593,67 +566,124 @@
             if (shuffledProducts.length === 0) {
                 productList.innerHTML = '<div class="col-12 text-center py-5"><h3>Chưa có sản phẩm cho hãng này</h3></div>';
             } else {
-                // 3. Render dựa trên mảng shuffledProducts đã trộn
                 shuffledProducts.forEach(p => {
+                    const rate = p.discount || 0;
+                    
+                    const finalPrice = rate > 0 ? Math.round(p.price * (1 - rate / 100)) : p.price;
+                    const formattedOriginal = p.price.toLocaleString('vi-VN') + 'đ';
+                    const formattedFinal = finalPrice.toLocaleString('vi-VN') + 'đ';
+
+                    const badgeHtml = rate > 0 ? `<div class="badge-discount">-${rate}%</div>` : '';
+                    
+                    const priceHtml = rate > 0 
+                        ? `<p class="old-price">Giá gốc: ${formattedOriginal}</p><p class="new-price">${formattedFinal}</p>`
+                        : `<p class="old-price" style="visibility: hidden;">Giá gốc</p><p class="new-price">${formattedOriginal}</p>`;
+
+                    // Xử lý đổi màu xe
+                    let colorOptionsHtml = '';
+                    if (p.id === 7) {
+                        const winColors = ['assets/img/osakar_win.jpg', 'assets/img/osakar-win-maucam.jpg', 'assets/img/osakar-win-mauvangden.jpg', 'assets/img/osakar-win-mauvangxanh.jpg'];
+                        const dotsHtml = winColors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
+                        colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
+                    } else if (p.id === 8) { 
+                        const tailgColors = ['assets/img/TAILGGR55.jpg', 'assets/img/tailg55_mauxanh.png', 'assets/img/tailg55_mautim.png', 'assets/img/tailg55_mauhong.png', 'assets/img/tailg55_mauden.jpg'];
+                        const dotsHtml = tailgColors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
+                        colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
+                    } else if (p.id === 24) {
+                        const x8Colors = ['assets/img/osakar_x8.jpg', 'assets/img/osakar-x8-mauden.jpg', 'assets/img/osakar-x8-mautrang.webp'];
+                        const dotsHtml = x8Colors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
+                        colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
+                    } else if (p.id === 4) {
+                        const mandiColors = ['assets/img/osakar_mandi.jpg', 'assets/img/osakar-mandi-mautrang.jpg', 'assets/img/osakar-mandi-mauxam.jpg'];
+                        const dotsHtml = mandiColors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
+                        colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
+                    } else if (p.id === 21) {
+                        const i8Colors = ['assets/img/YADEAI8.jpg', 'assets/img/yadae-i8-mauhong.jpg', 'assets/img/yadae-i8-mautrangxanh.jpg', 'assets/img/yadae-i8-mauxanh.jpg'];
+                        const dotsHtml = i8Colors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
+                        colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
+                    } else if (p.id === 18) {
+                        const icandyColors = ['assets/img/YADEAVC.jpg', 'assets/img/Yadea VC Icandy-mau1.jpg', 'assets/img/Yadea VC Icandy-mau2.jpg'];
+                        const dotsHtml = icandyColors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
+                        colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
+                    }
+
                     productList.innerHTML += `
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 product-card shadow-sm border-0">
-                    <img src="${p.img}" class="card-img-top" style="border-radius: 15px 15px 0 0; height: 200px; object-fit: contain;">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">${p.name}</h5>
-                        <p class="text-danger fw-bold mb-3">${p.price.toLocaleString()} VNĐ</p>
-                        
-                        <div class="d-flex flex-column gap-2">
-                            <a href="product-detail.html?id=${p.id}" class="btn btn-outline-dark">
-                                <i class="bi bi-eye pe-1"></i> Xem chi tiết
-                            </a>
-                            <button class="btn btn-success" onclick="addToCart(${p.id})">
-                                <i class="bi bi-cart-plus pe-1"></i> Thêm vào giỏ
-                            </button>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 product-card shadow-sm border-0 position-relative">
+                            ${badgeHtml}
+                            <div class="product-img-wrapper">
+                                <img src="${p.img}" class="main-product-img" id="main-img-${p.id}" alt="${p.name}">
+                                ${colorOptionsHtml}
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title fw-bold">${p.name}</h5>
+                                <div class="price-container mb-3">
+                                    ${priceHtml}
+                                </div>
+                                
+                                <div class="d-flex flex-column gap-2 mt-auto">
+                                    <a href="product-detail.html?id=${p.id}" class="btn btn-outline-dark">
+                                        <i class="bi bi-eye pe-1"></i> Xem chi tiết
+                                    </a>
+                                    <button class="btn btn-success" onclick="addToCart(${p.id})">
+                                        <i class="bi bi-cart-plus pe-1"></i> Thêm vào giỏ
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>`;
+                    </div>`;
+                });
+
+                // Kích hoạt tính năng đổi màu khi click hoặc rê chuột vào chấm bi
+                document.querySelectorAll('.color-dot').forEach(dot => {
+                    ['mouseenter', 'click'].forEach(evt => {
+                        dot.addEventListener(evt, function() {
+                            const targetId = this.getAttribute('data-target');
+                            const newSrc = this.getAttribute('data-src');
+                            const mainImg = document.getElementById(targetId);
+                            if (mainImg) mainImg.setAttribute('src', newSrc);
+                        });
+                    });
                 });
             }
         }
 
-        // 2. Hàm thêm vào giỏ hàng (Xử lý dữ liệu thực tế)
+        // Cập nhật hàm thêm giỏ hàng để lưu màu sắc đang chọn
         function addToCart(productId) {
-            // Tìm sản phẩm trong mảng dữ liệu
             const product = products.find(p => p.id === productId);
             if (!product) return;
 
-            // Lấy giỏ hàng từ localStorage
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-            // Kiểm tra xem sản phẩm đã có trong giỏ chưa
-            const existingItem = cart.find(item => item.id === productId);
+            // BƯỚC QUAN TRỌNG: Lấy đường dẫn ảnh ĐANG HIỂN THỊ trên màn hình của cái xe đó
+            const currentImgElement = document.getElementById(`main-img-${productId}`);
+            const currentImgSrc = currentImgElement ? currentImgElement.getAttribute('src') : product.img;
 
-            if (existingItem) {
-                existingItem.quantity += 1; // Nếu có rồi thì tăng số lượng
+            // Kiểm tra xem trong giỏ đã có xe này VỚI ĐÚNG MÀU NÀY chưa
+            const existingItemIndex = cart.findIndex(item => item.id === productId && item.img === currentImgSrc);
+
+            const rate = product.discount || 0;
+            const finalPrice = rate > 0 ? Math.round(product.price * (1 - rate / 100)) : product.price;
+
+            if (existingItemIndex > -1) {
+                // Nếu có đúng màu đó rồi thì tăng số lượng
+                cart[existingItemIndex].quantity += 1;
             } else {
-                // Nếu chưa có, thêm mới đối tượng sản phẩm
+                // Nếu chưa có màu này thì thêm dòng mới vào giỏ
                 cart.push({
                     id: product.id,
                     name: product.name,
-                    price: product.price,
-                    img: product.img,
+                    price: finalPrice, 
+                    img: currentImgSrc, // Đẩy đúng cái ảnh màu đang xem vào giỏ
                     quantity: 1
                 });
             }
 
-            // Lưu lại vào localStorage
             localStorage.setItem('cart', JSON.stringify(cart));
-
-            // Hiển thị thông báo
             alert(`Đã thêm "${product.name}" vào giỏ hàng!`);
-
-            // Cập nhật số lượng hiển thị trên biểu tượng giỏ hàng
             updateCartBadge();
         }
 
-        // Chạy các hàm khi trang web tải xong
         updateCartBadge();
         renderProducts();
     </script>

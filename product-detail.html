@@ -13,118 +13,60 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
         }
-
         .product-card-sm .card-title {
             display: -webkit-box;
             -webkit-line-clamp: 2;
-            /* Giới hạn 2 dòng tên sản phẩm */
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-
-        .heading-row {
-            max-width: 100%;
-
-        }
-
-        .heading-col {
-            width: 100%;
-        }
-
+        .heading-row { max-width: 100%; }
+        .heading-col { width: 100%; }
         .heading-box {
             background-color: #ffffff;
-            /* Nền khối tiêu đề trắng */
             border: 1px solid #e0e0e0;
-            /* Viền xám nhạt */
             border-radius: 8px;
-            /* Bo góc khối */
             padding: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            /* Bóng mờ nhẹ */
-
         }
-
-        .heading-box h3 {
-            margin: 0;
-            font-size: 20px;
-            font-weight: bold;
-            color: #333;
+        .heading-box h3 { margin: 0; font-size: 20px; font-weight: bold; color: #333; }
+        
+        /* CSS cho chọn màu */
+        .color-dot-detail {
+            width: 45px; height: 45px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.2s;
         }
+        .color-dot-detail.active {
+            border-color: #27ae60;
+            box-shadow: 0 0 8px rgba(39, 174, 96, 0.5);
+            transform: scale(1.1);
+        }
+        .color-dot-detail img { width: 100%; height: 100%; object-fit: cover; }
 
         .footer {
             background-color: #1a2521;
-            /* Màu xanh đen như trong ảnh */
             color: #ffffff;
             padding: 50px 0;
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
         }
-
         .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            padding: 0 20px;
+            max-width: 1200px; margin: 0 auto; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; padding: 0 20px;
         }
-
-        .footer-col h3 {
-            color: #ffffff;
-            font-size: 16px;
-            margin-bottom: 20px;
-            position: relative;
-            text-transform: uppercase;
-        }
-
-        .footer-col ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-col ul li a {
-            color: #bdc3c7;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .footer-col ul li a:hover {
-            color: #2ecc71;
-            /* Màu xanh lá khi hover */
-            padding-left: 5px;
-        }
-
-        .highlight {
-            color: #f1c40f;
-            font-weight: bold;
-        }
-
-        .payment-methods img {
-            height: 30px;
-            margin-right: 10px;
-            filter: grayscale(100%);
-            transition: 0.3s;
-        }
-
-        .payment-methods img:hover {
-            filter: grayscale(0%);
-        }
-
-        .mt-20 {
-            margin-top: 20px;
-        }
-
-        /* Responsive cho điện thoại */
-        @media (max-width: 768px) {
-            .footer-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-        }
+        .footer-col h3 { color: #ffffff; font-size: 16px; margin-bottom: 20px; text-transform: uppercase; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #bdc3c7; text-decoration: none; transition: 0.3s; }
+        .footer-col ul li a:hover { color: #2ecc71; padding-left: 5px; }
+        .highlight { color: #f1c40f; font-weight: bold; }
+        .payment-methods img { height: 30px; margin-right: 10px; filter: grayscale(100%); transition: 0.3s; }
+        .payment-methods img:hover { filter: grayscale(0%); }
+        .mt-20 { margin-top: 20px; }
+        @media (max-width: 768px) { .footer-container { grid-template-columns: 1fr; text-align: center; } }
     </style>
 </head>
 
@@ -136,18 +78,16 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('nav-placeholder').innerHTML = data;
-
-                // MẸO: Sau khi nạp Navbar xong, ta khởi tạo lại Dropdown của Bootstrap
                 var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
                 var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
                     return new bootstrap.Dropdown(dropdownToggleEl)
-                    updateCartCount();
                 });
+                updateCartCount();
             })
             .catch(error => console.error('Lỗi:', error));
     </script>
 
-    <div class="container bg-white p-5 shadow-sm rounded">
+    <div class="container bg-white p-5 shadow-sm rounded mt-4">
         <div class="row" id="detail-content"></div>
     </div>
 
@@ -157,43 +97,89 @@
         const id = parseInt(params.get('id'));
         const product = products.find(p => p.id === id);
         const content = document.getElementById('detail-content');
-        const brandLink = product.brand ? product.brand.toLowerCase() : "all";
-        const otherProducts = products.filter(p => p.id !== product.id);
-
-        // 2. Sắp xếp các sản phẩm còn lại dựa trên độ chênh lệch giá (tăng dần)
-        const relatedProducts = otherProducts.sort((a, b) => {
-            const diffA = Math.abs(a.price - product.price);
-            const diffB = Math.abs(b.price - product.price);
-            return diffA - diffB;
-        }).slice(0, 5);
+        
+        let selectedColorImg = product ? product.img : '';
 
         if (product) {
+            const brandLink = product.brand ? product.brand.toLowerCase() : "all";
+            const otherProducts = products.filter(p => p.id !== product.id);
+
+            const relatedProducts = otherProducts.sort((a, b) => {
+                return Math.abs(a.price - product.price) - Math.abs(b.price - product.price);
+            }).slice(0, 5);
+
+            // --- XỬ LÝ GIÁ KHUYẾN MÃI ---
+            const rate = product.discount || 0;
+            const finalPrice = rate > 0 ? Math.round(product.price * (1 - rate / 100)) : product.price;
+            const formattedOriginal = product.price.toLocaleString('vi-VN') + ' VNĐ';
+            const formattedFinal = finalPrice.toLocaleString('vi-VN') + ' VNĐ';
+
+            let priceHtml = '';
+            if (rate > 0) {
+                priceHtml = `
+                    <h5 class="text-muted text-decoration-line-through mb-1" style="font-size: 1.1rem;">Giá gốc: ${formattedOriginal}</h5>
+                    <h4 class="text-danger fw-bold mb-3">Giá KM: ${formattedFinal} <span class="badge bg-danger ms-2">-${rate}%</span></h4>
+                `;
+            } else {
+                priceHtml = `<h4 class="text-danger fw-bold mb-3">Giá: ${formattedOriginal}</h4>`;
+            }
+
+            // --- XỬ LÝ LỰA CHỌN MÀU SẮC ---
+            let colorOptionsHtml = '';
+            let availableColors = [];
+            
+            if (product.id === 7) availableColors = ['assets/img/osakar_win.jpg', 'assets/img/osakar-win-maucam.jpg', 'assets/img/osakar-win-mauvangden.jpg', 'assets/img/osakar-win-mauvangxanh.jpg'];
+            else if (product.id === 8) availableColors = ['assets/img/TAILGGR55.jpg', 'assets/img/tailg55_mauxanh.png', 'assets/img/tailg55_mautim.png', 'assets/img/tailg55_mauhong.png', 'assets/img/tailg55_mauden.jpg'];
+            else if (product.id === 24) availableColors = ['assets/img/osakar_x8.jpg', 'assets/img/osakar-x8-mauden.jpg', 'assets/img/osakar-x8-mautrang.webp'];
+            else if (product.id === 4) availableColors = ['assets/img/osakar_mandi.jpg', 'assets/img/osakar-mandi-mautrang.jpg', 'assets/img/osakar-mandi-mauxam.jpg'];
+            else if (product.id === 21) availableColors = ['assets/img/YADEAI8.jpg', 'assets/img/yadae-i8-mauhong.jpg', 'assets/img/yadae-i8-mautrangxanh.jpg', 'assets/img/yadae-i8-mauxanh.jpg'];
+            else if (product.id === 18) availableColors = ['assets/img/YADEAVC.jpg', 'assets/img/Yadea VC Icandy-mau1.jpg', 'assets/img/Yadea VC Icandy-mau2.jpg'];
+
+            if (availableColors.length > 0) {
+                const dotsHtml = availableColors.map((color, index) => `
+                    <div class="color-dot-detail me-2 ${index === 0 ? 'active' : ''}" onclick="selectColor('${color}', this)">
+                        <img src="${color}">
+                    </div>
+                `).join('');
+                colorOptionsHtml = `
+                    <div class="mt-3 mb-4">
+                        <p class="fw-bold mb-2">Chọn màu sắc:</p>
+                        <div class="d-flex align-items-center">
+                            ${dotsHtml}
+                        </div>
+                    </div>
+                `;
+            }
+
             content.innerHTML = `
                 <div class="col-md-4 mb-4">
                     <div class="d-flex justify-content-center align-items-center border rounded bg-white shadow-sm mb-3" 
                     style="height: 350px; overflow: hidden;">
-                    <img src="${product.img}" class="img-fluid p-2" style="max-height: 100%;">
+                    <img src="${product.img}" id="main-detail-img" class="img-fluid p-2" style="max-height: 100%; object-fit: contain;">
                 </div>
-                    
                     <img src="assets/img/banner_giamgia.jpg" class="img-fluid rounded shadow-sm" onerror="this.style.display='none'">
                 </div>
 
                 <div class="col-md-5">
-                    <a href="index.html">Trang chủ</a>
+                    <a href="index.html" class="text-decoration-none text-success">Trang chủ</a>
                     <span class="mx-2 text-muted">/</span>
-                    <a href="index.html?brand=${brandLink}">
+                    <a href="index.html?brand=${brandLink}" class="text-decoration-none text-success text-uppercase">
                         ${product.brand}
                     </a>
                     <span class="mx-2 text-muted">/</span>
                     <span class="text-dark">${product.name}</span>
-                    <h4 class="fw-bold h3">${product.name}</h4>
-                    <h5 class="text-danger my-3 fw-bold">Giá: ${product.price.toLocaleString()} VNĐ</h5>
+                    
+                    <h4 class="fw-bold h3 mt-2">${product.name}</h4>
+                    
+                    ${priceHtml}
 
                     <table class="table table-sm mt-3">
-                        <tr><td class="text-muted">Loại pin:</td><td><strong>${product.battery}</strong></td></tr>
-                        <tr><td class="text-muted">Quãng đường:</td><td><strong>${product.range}</strong></td></tr>
+                        <tr><td class="text-muted">Loại pin:</td><td><strong>${product.battery || 'Đang cập nhật'}</strong></td></tr>
+                        <tr><td class="text-muted">Quãng đường:</td><td><strong>${product.range || 'Đang cập nhật'}</strong></td></tr>
                         <tr><td class="text-muted">Bảo hành:</td><td>24 tháng</td></tr>
                     </table>
+
+                    ${colorOptionsHtml}
 
                     <div class="card border-success my-4 shadow-sm">
                         <div class="card-header bg-success text-white fw-bold py-1 small">Quà Tặng Kèm</div>
@@ -203,7 +189,6 @@
                                 <li>✅ Tặng nón bảo hiểm chính hãng.</li>
                                 <li>✅ Dịch vụ cứu hộ tận nơi (<a href="emer.html" class="text-success text-decoration-none fw-bold">xem chi tiết</a>).</li>
                                 <li>✅ Miễn phí giao xe nội thành – giao nhanh 2h</li>
-                                <li>✅ [Best Deal]: Phiếu quà tặng trị giá 200K thay Acquy</li>
                                 <li>✅ Trả góp 0% bằng thẻ tín dụng Visa, Master Card, JCB</li>
                             </ul>
                         </div>
@@ -216,145 +201,118 @@
                                 <input type="text" id="product-qty" class="form-control text-center fw-bold" value="1">
                                 <button class="btn btn-outline-secondary" type="button" onclick="changeQty(1)">+</button>
                             </div>
-                                <button class="btn flex-grow-1 fw-bold text-white" 
-                                    style="background-color: #e58b81;" 
-                                    onclick="addToCart(${product.id})">THÊM VÀO GIỎ HÀNG
-                                </button>
+                            <button class="btn flex-grow-1 fw-bold text-white shadow-sm" 
+                                style="background-color: #e74c3c; transition: 0.3s;" 
+                                onmouseover="this.style.backgroundColor='#c0392b'" 
+                                onmouseout="this.style.backgroundColor='#e74c3c'"
+                                onclick="addToCart(${product.id}, 'add')">THÊM VÀO GIỎ HÀNG
+                            </button>
                         </div>
 
-                        <button class="btn w-100 py-1 fw-bold text-white mb-2 shadow-sm" style="background-color: #7AC74F; font-size: 1.1rem;">
+                        <button class="btn w-100 py-1 fw-bold text-white mb-2 shadow-sm" style="background-color: #7AC74F; font-size: 1.1rem;" onclick="addToCart(${product.id}, 'buy_now')">
                             MUA NGAY
                         </button>
 
                         <div class="row g-2 mb-2">
                             <div class="col-6">
-                                <button class="btn w-100 py-1 text-white" style="background-color: #4a90e2;">
+                                <button class="btn w-100 py-1 text-white shadow-sm" style="background-color: #4a90e2;" onclick="addToCart(${product.id}, 'installment')">
                                     <span class="d-block fw-bold small">TRẢ GÓP TỪ 0%</span>
                                     <span style="font-size: 10px;">ACS, FEcredit</span>
                                 </button>
                             </div>
                             <div class="col-6">
-                                <button class="btn w-100 py-1 text-white" style="background-color: #c0392b;">
+                                <button class="btn w-100 py-1 text-white shadow-sm" style="background-color: #c0392b;" onclick="addToCart(${product.id}, 'installment')">
                                     <span class="d-block fw-bold small">TRẢ GÓP QUA THẺ</span>
                                     <span style="font-size: 10px;">Visa, Master, JCB</span>
                                 </button>
                             </div>
                         </div>
 
-                        <button class="btn w-100 py-1 shadow-sm" style="background-color: #f1c40f; color: #333;">
+                        <button class="btn w-100 py-1 shadow-sm" style="background-color: #f1c40f; color: #333;" onclick="addToCart(${product.id}, 'installment')">
                             <span class="d-block fw-bold small">TRẢ GÓP ONLINE</span>
                             <span style="font-size: 10px;">Có kết quả trong 10 phút</span>
                         </button>
                     </div>
-                    </div> 
+                </div> 
+                
                 <div class="col-md-3 border-start d-flex flex-column align-items-center text-center">
                     <p class="fw-bold mb-1">HOTLINE ĐẶT HÀNG</p>
                     <h3 class="text-success fw-bold mb-4">1800.2039</h3>
-                    
                     <img src="assets/img/banner_tragop.jpg" class="img-fluid rounded shadow-sm mb-4" onerror="this.style.display='none'">
                     <img src="assets/img/badge_nhaphanphoi.webp" class="img-fluid rounded shadow-sm mb-4" onerror="this.style.display='none'">
                     
-
-                    <div class="text-start ps-3 small w-100">
+                    <div class="text-start ps-3 small w-100 mt-2">
                         <p class="mb-3"><i class="bi bi-truck me-2"></i>Miễn phí giao xe nội thành</p>
-                        <p class="mb-3"><i class="bi bi-percent"></i> Làm hồ sơ trả góp và xét duyệt online 100%</p>
-                        <p class="mb-3"><i class="bi bi-credit-card"></i> Trả góp lãi suất 0% qua thẻ tín dụng Visa, Master, JCB</p>
+                        <p class="mb-3"><i class="bi bi-percent me-2"></i> Làm hồ sơ trả góp và xét duyệt online 100%</p>
+                        <p class="mb-3"><i class="bi bi-credit-card me-2"></i> Trả góp lãi suất 0% qua thẻ tín dụng Visa, Master, JCB</p>
                         <p class="mb-3"><i class="bi bi-arrow-repeat me-2"></i>Đổi sang mẫu khác miễn phí trong 3 ngày (*)</p>
                     </div>
-                    
                 </div>
-                <div class="row mt-5 border-top pt-5">
-        <div class="col-md-8 pe-md-5">
-            <h4 class="fw-bold mb-4" style="border-left: 5px solid #7AC74F; padding-left: 15px;">
-                ĐẶC ĐIỂM NỔI BẬT
-            </h4>
-            <div class="description-content" style="line-height: 1.8; font-size: 1.05rem; text-align: justify;">
-                ${product.desc || 'Thông tin chi tiết về sản phẩm đang được cập nhật...'}
                 
-                <div class="my-4 text-center">
-                    <img src="${product.img}" class="img-fluid rounded shadow-sm w-75" alt="Ảnh chi tiết">
-                    <p class="fst-italic text-muted mt-2 small">Thiết kế hiện đại, tinh tế của ${product.name}</p>
-                </div>
+                <div class="row mt-5 border-top pt-5 w-100">
+                    <div class="col-md-8 pe-md-5">
+                        <h4 class="fw-bold mb-4" style="border-left: 5px solid #7AC74F; padding-left: 15px;">ĐẶC ĐIỂM NỔI BẬT</h4>
+                        <div class="description-content" style="line-height: 1.8; font-size: 1.05rem; text-align: justify;">
+                            ${product.desc || 'Thông tin chi tiết về sản phẩm đang được cập nhật...'}
+                        </div>
+                    </div>
 
-                
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm" style="background-color: #f8f9fa;">
-                <div class="card-body">
-                    <h5 class="fw-bold mb-3 text-uppercase" style="font-size: 0.9rem; letter-spacing: 1px;">
-                        Thông số kỹ thuật
-                    </h5>
-                    <table class="table table-sm mb-0" style="font-size: 0.9rem;">
-                        <tbody>
-                            ${Object.entries(product.specs || {}).map(([key, value]) => `
-                                <tr class="border-bottom">
-                                    <td class="py-2 text-muted" style="width: 40%;">${key}:</td>
-                                    <td class="py-2 fw-bold">${value}</td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                    <button class="btn btn-outline-success w-100 mt-3 btn-sm" data-bs-toggle="modal" data-bs-target="#specModal">
-                        Xem cấu hình chi tiết
-                    </button>
-                </div>
-            </div>
-
-            <div class="mt-4">
-                <div class="p-3 rounded text-white shadow-sm" style="background: linear-gradient(45deg, #2e7d32, #7AC74F);">
-                    <h6 class="fw-bold mb-1"><i class="bi bi-shield-check me-2"></i>Cam kết chính hãng</h6>
-                    <p class="small mb-0 opacity-75">Hoàn tiền 200% nếu phát hiện hàng giả, hàng nhái.</p>
-                </div>
-                <img src="assets/img/banner_giamgia.jpg" class="img-fluid rounded shadow-sm mb-4 mt-3" onerror="this.style.display='none'">
-            </div>
-        </div>
-    </div>
-    <div class="row>
-        <div class="heading-row">
-            <div class="heading-col">
-                <div class="heading-box">
-                    <h3>Hỏi đáp - Bình luận</h3>
-                </div>
-            </div>
-        </div>
-        </div>
-    <div class="row mt-5 border-top pt-5">
-        <div class="col-12 mb-4 d-flex justify-content-between align-items-center">
-            <h4 class="fw-bold text-uppercase" style="color: #2e7d32;">Sản phẩm tương tự</h4>
-            <a href="index.html" class="text-decoration-none text-success small">Xem tất cả <i class="bi bi-arrow-right"></i></a>
-        </div>
-        
-        <div class="row row-cols-2 row-cols-md-5 g-3">
-            ${relatedProducts.map(p => `
-                <div class="col">
-                    <div class="card h-100 border-2 shadow-sm product-card-sm" style="transition: transform 0.3s;">
-                        <a href="product-detail.html?id=${p.id}" class="text-decoration-none">
-                            <div class="position-relative overflow-hidden" style="height: 150px;">
-                                <img src="${p.img}" class="card-img-top w-100 h-100" style="object-fit: contain; padding: 10px;">
-                                ${Math.abs(p.price - product.price) === 0 ?
-                    '<span class="position-absolute top-0 start-0 badge bg-danger m-2" style="font-size: 10px;">Cùng giá</span>' : ''}
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm" style="background-color: #f8f9fa;">
+                            <div class="card-body">
+                                <h5 class="fw-bold mb-3 text-uppercase" style="font-size: 0.9rem; letter-spacing: 1px;">Thông số kỹ thuật</h5>
+                                <table class="table table-sm mb-0" style="font-size: 0.9rem;">
+                                    <tbody>
+                                        ${Object.entries(product.specs || {}).map(([key, value]) => `
+                                            <tr class="border-bottom">
+                                                <td class="py-2 text-muted" style="width: 40%;">${key}:</td>
+                                                <td class="py-2 fw-bold">${value}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="card-body p-2">
-                                <h6 class="card-title text-dark mb-1 text-truncate" style="font-size: 0.9rem;">${p.name}</h6>
-                                <p class="text-danger fw-bold mb-0" style="font-size: 0.85rem;">${p.price.toLocaleString()}đ</p>
-                            </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
-            `).join('')}
-        </div>
-    </div>
                 
+                <div class="row mt-5 border-top pt-5 w-100">
+                    <div class="col-12 mb-4 d-flex justify-content-between align-items-center">
+                        <h4 class="fw-bold text-uppercase" style="color: #2e7d32;">Sản phẩm tương tự</h4>
+                    </div>
+                    <div class="row row-cols-2 row-cols-md-5 g-3">
+                        ${relatedProducts.map(p => `
+                            <div class="col">
+                                <div class="card h-100 border-2 shadow-sm product-card-sm" style="transition: transform 0.3s;">
+                                    <a href="product-detail.html?id=${p.id}" class="text-decoration-none">
+                                        <div class="position-relative overflow-hidden" style="height: 150px;">
+                                            <img src="${p.img}" class="card-img-top w-100 h-100" style="object-fit: contain; padding: 10px;">
+                                        </div>
+                                        <div class="card-body p-2">
+                                            <h6 class="card-title text-dark mb-1 text-truncate" style="font-size: 0.9rem;">${p.name}</h6>
+                                            <p class="text-danger fw-bold mb-0" style="font-size: 0.85rem;">
+                                                ${(p.discount > 0 ? Math.round(p.price * (1 - p.discount/100)) : p.price).toLocaleString()}đ
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
             `;
-
-
-
-
         } else {
-            content.innerHTML = "<h2>Sản phẩm không tồn tại!</h2>";
+            content.innerHTML = "<h2 class='text-center py-5'>Sản phẩm không tồn tại!</h2>";
         }
+
+        // Hàm đổi màu khi click vào chấm màu
+        function selectColor(imgSrc, element) {
+            document.getElementById('main-detail-img').src = imgSrc;
+            selectedColorImg = imgSrc;
+            document.querySelectorAll('.color-dot-detail').forEach(dot => dot.classList.remove('active'));
+            element.classList.add('active');
+        }
+
         function changeQty(amount) {
             const qtyInput = document.getElementById('product-qty');
             let currentQty = parseInt(qtyInput.value) || 1;
@@ -363,54 +321,54 @@
             }
         }
 
-        // 2. Hàm thêm vào giỏ hàng
-        function addToCart(productId) {
-            // Lấy số lượng từ input
+        // Đã Update để xử lý 3 luồng: Add thường, Mua Ngay và Trả Góp
+        function addToCart(productId, actionType = 'add') {
             const quantity = parseInt(document.getElementById('product-qty').value);
-
-            // Lấy giỏ hàng từ localStorage (nếu chưa có thì tạo mảng rỗng)
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-            // Kiểm tra sản phẩm đã có trong giỏ chưa
-            const existingProductIndex = cart.findIndex(item => item.id === productId);
+            const existingProductIndex = cart.findIndex(item => item.id === productId && item.img === selectedColorImg);
 
             if (existingProductIndex > -1) {
-                // Nếu có rồi thì tăng số lượng
                 cart[existingProductIndex].quantity += quantity;
             } else {
-                // Nếu chưa có thì lấy thông tin từ biến 'product' hiện tại và thêm mới
+                const rate = product.discount || 0;
+                const finalPrice = rate > 0 ? Math.round(product.price * (1 - rate / 100)) : product.price;
+                
                 cart.push({
                     id: product.id,
                     name: product.name,
-                    price: product.price,
-                    img: product.img,
+                    price: finalPrice,
+                    img: selectedColorImg,
                     quantity: quantity
                 });
             }
 
-            // Lưu lại vào localStorage
             localStorage.setItem('cart', JSON.stringify(cart));
-
-            // Hiển thị thông báo (Toast hoặc Alert)
-            alert(`Đã thêm ${quantity} sản phẩm "${product.name}" vào giỏ hàng!`);
-
-            // Cập nhật số lượng trên icon giỏ hàng ở Navbar (nếu có)
             updateCartCount();
+
+            // Xử lý các luồng dựa theo nút bấm
+            if (actionType === 'add') {
+                alert(`Đã thêm ${quantity} xe "${product.name}" vào giỏ hàng!`);
+            } else if (actionType === 'buy_now') {
+                window.location.href = 'cart.html';
+            } else if (actionType === 'installment') {
+                alert("Hợp đồng trả góp sẽ được xử lý sau. Đang chuyển hướng đến giỏ hàng...");
+                window.location.href = 'cart.html';
+            }
         }
 
-        // 3. Hàm cập nhật số hiển thị trên icon giỏ hàng (Navbar)
         function updateCartCount() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const cartBadge = document.getElementById('cart-count'); // ID của số trên Navbar
+            const cartBadge = document.getElementById('cart-count'); 
             if (cartBadge) {
                 cartBadge.innerText = totalItems;
             }
         }
 
-        // Chạy hàm cập nhật khi vừa load trang
         updateCartCount();
     </script>
+    
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-col">
@@ -420,7 +378,6 @@
                 <p><strong>Thời gian mở cửa:</strong> 8:00 - 21:00 (Cả tuần)</p>
                 <p><strong>Hotline:</strong> <span class="highlight">1800.2039</span></p>
             </div>
-
             <div class="footer-col">
                 <h3>CHÍNH SÁCH BÁN HÀNG</h3>
                 <ul>
@@ -430,7 +387,6 @@
                     <li><a href="#">Chính sách cứu hộ tận nơi</a></li>
                 </ul>
             </div>
-
             <div class="footer-col">
                 <h3>ĐIỀU KHOẢN & BẢO MẬT</h3>
                 <ul>
@@ -444,19 +400,13 @@
                     <img src="assets/img/COD2.png" alt="COD">
                 </div>
             </div>
-
             <div class="footer-col">
                 <h3>ĐƠN VỊ CHỦ QUẢN</h3>
                 <p><strong>CÔNG TY TNHH XE ĐIỆN XE MÁY VINH PHÁT</strong></p>
                 <p>Địa chỉ: Số 192/2 Phạm Văn Đồng, P. Hạnh THông Tây, Quận Gò Vấp, TP. HCM</p>
                 <p>STK: 0363885042 - Ngân hàng MB</p>
-                <div class="gov-seal">
-                    <img src="assets/img/BoCongThuong-Government-VN-Logo.webp" alt="Đã thông báo bộ công thương"
-                        width="150">
-                </div>
             </div>
         </div>
     </footer>
 </body>
-
 </html>

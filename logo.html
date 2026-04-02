@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ - E-BIKE SHOP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* --- CSS DÙNG CHUNG --- */
+        :root {
+            --primary-color: #27ae60;
+            --dark-green: #1a5935;
+            --accent-color: #f39c12;
+            --light-bg: #f8f9fa;
+            --blue-dark: #1ca018;
+        }
+
+        .navbar { background-color: var(--blue-dark); margin-bottom: 0; }
+        .navbar-brand:hover { color: #27ae60 !important; }
+        .dropdown-menu { border-radius: 15px !important; border: 2px solid black; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
+        .dropdown-item { font-size: 14px; color: #666; padding: 5px 0; white-space: normal; }
+        .dropdown-item:hover { background-color: transparent; color: #27ae60; font-weight: bold; }
+        h6.fw-bold { font-size: 15px; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+
+        /* Khung Search */
+        .search-wrapper { position: relative; display: inline-block; }
+        .search-trigger { background-color: white; color: black; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; }
+        .search-dropdown {
+            position: absolute; top: 100%; right: -20px; width: 450px; background: white; border: 2px solid #0a0a0a;
+            border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); opacity: 0; visibility: hidden;
+            transform: translateY(10px); transition: all 0.3s ease; z-index: 1000;
+        }
+        .search-dropdown::before {
+            content: ""; position: absolute; top: -12px; right: 32px; border-left: 10px solid transparent;
+            border-right: 10px solid transparent; border-bottom: 12px solid #0d0e0d;
+        }
+        .search-wrapper:hover .search-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        .search-box-inner { position: relative; display: flex; align-items: center; }
+        .search-box-inner input { width: 100%; padding: 12px 20px; background-color: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 12px; outline: none; }
+        .inner-icon { position: absolute; right: 15px; color: #333; font-size: 18px; }
+        #search-results { top: 100%; left: 0; background: white; border: 1px solid #ddd; border-radius: 0 0 8px 8px; }
+        #search-results .list-group-item { font-size: 14px; padding: 10px 15px; color: #333; border: none; border-bottom: 1px solid #f0f0f0; }
+        #search-results .list-group-item:hover { background-color: #f8f9fa; color: #2e7d32; }
+
+        /* Card Sản Phẩm */
+        .product-card:hover { transform: translateY(-5px); transition: 0.3s; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
+        .badge-discount { position: absolute; top: 10px; left: 10px; background: #e74c3c; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; z-index: 5; }
+        .price-container { min-height: 45px; }
+        .old-price { color: #888; text-decoration: line-through; font-size: 13px; margin-bottom: 0; }
+        .new-price { color: #e74c3c; font-weight: bold; font-size: 16px; margin-bottom: 0; }
+        .product-img-wrapper { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 15px 15px 0 0; background-color: #fff; }
+        .main-product-img { width: 100%; height: 200px; object-fit: contain; transition: 0.3s; padding: 10px; }
+        .color-options { position: absolute; bottom: -65px; left: 0; width: 100%; background: rgba(255,255,255,0.95); display: flex; justify-content: center; align-items: center; gap: 5px; padding: 10px 0; transition: 0.4s ease; border-top: 1px solid #eee; z-index: 10; }
+        .product-card:hover .color-options { bottom: 0; }
+        .color-dot { width: 30px; height: 30px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; cursor: pointer; }
+        .color-dot img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Footer */
+        .footer { background-color: #1a2521; color: #ffffff; padding: 50px 0; font-family: 'Arial', sans-serif; line-height: 1.6; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; padding: 0 20px; }
+        .footer-col h3 { color: #ffffff; font-size: 16px; margin-bottom: 20px; text-transform: uppercase; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #bdc3c7; text-decoration: none; transition: 0.3s; }
+        .footer-col ul li a:hover { color: #2ecc71; padding-left: 5px; }
+        .highlight { color: #f1c40f; font-weight: bold; }
+        .payment-methods img { height: 30px; margin-right: 10px; filter: grayscale(100%); transition: 0.3s; }
+        .payment-methods img:hover { filter: grayscale(0%); }
+        .mt-20 { margin-top: 20px; }
+
+        @media (max-width: 768px) {
+            .search-dropdown { width: 90vw !important; right: -50px !important; padding: 15px !important; }
+            .search-dropdown::before { right: 60px !important; }
+            .navbar-collapse { max-height: 80vh; overflow-y: auto; padding-bottom: 20px; }
+            .dropdown-menu.w-100 { position: static !important; border: none !important; box-shadow: none !important; padding: 10px 20px !important; }
+            .footer-container { grid-template-columns: 1fr; text-align: center; }
+        }
+
+        /* --- CSS CHO TIN TỨC --- */
+        .news-card {
+            border: none;
+            transition: 0.3s;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .news-card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .news-img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .news-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .about-hero {
+            background: linear-gradient(rgba(26, 89, 53, 0.8), rgba(39, 174, 96, 0.8)), url('assets/img/BANNER_HOME2.jpg') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        .about-content { padding: 60px 0; background-color: white; }
+        .section-title {
+            color: var(--dark-green);
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .review-card { transition: 0.3s; border-radius: 15px !important; border-top: 5px solid var(--primary-color) !important; background-color: #fff; }
+        .review-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important; }
+    </style>
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bolder" href="logo.html">☘️ E-BIKE SHOP</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item mx-lg-3"><a href="index.html" class="nav-link text-white fw-bold">SHOP</a></li>
+                    <li class="nav-item dropdown position-static mx-3"><a href="#"
+                            class="nav-link dropdown-toggle text-white fw-bold" role="button" data-bs-toggle="dropdown"
+                            id="megaMenu" aria-expanded="false">XE ĐIỆN</a>
+                        <div class="dropdown-menu w-100 shadow border-0 p-4" aria-labelledby="megaMenu">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-2-5 col-md-3">
+                                        <h6 class="fw-bold text-uppercase">XE ĐẠP ĐIỆN</h6>
+                                        <ul class="list-unstyled">
+                                            <li><a href="index.html?brand=osakar" class="dropdown-item px-0">XE ĐẠP ĐIỆN OSAKAR</a></li>
+                                            <li><a href="index.html?brand=tailg" class="dropdown-item px-0">XE ĐẠP ĐIỆN TAILG</a></li>
+                                            <li><a href="index.html?brand=nijia" class="dropdown-item px-0">XE ĐẠP ĐIỆN NIJIA</a></li>
+                                            <li><a href="index.html?brand=pega" class="dropdown-item px-0">XE ĐẠP ĐIỆN PEGA-HKBIKE</a></li>
+                                            <li><a href="index.html?brand=vinfast" class="dropdown-item px-0">XE MÁY ĐIỆN VINFAST</a></li>
+                                            <li><a href="index.html?brand=yadea" class="dropdown-item px-0">XE ĐẠP ĐIỆN YADEA</a></li>
+                                            <li><a href="index.html?brand=hitasa" class="dropdown-item px-0">XE ĐẠP ĐIỆN HITASA</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6 class="fw-bold text-uppercase">XE ĐẠP ĐIỆN GẤP</h6>
+                                        <ul class="list-unstyled">
+                                            <li><a href="index.html?brand=ado" class="dropdown-item px-0">XE ĐIỆN TRỢ LỰC ADO</a></li>
+                                            <li><a href="index.html?brand=fiido" class="dropdown-item px-0">XE ĐẠP ĐIỆN GẤP FIIDO</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6 class="fw-bold text-uppercase">XE ĐIỆN 3 BÁNH</h6>
+                                        <ul class="list-unstyled">
+                                            <li><a href="index.html?brand=landien" class="dropdown-item px-0">XE LĂN ĐIỆN</a></li>
+                                            <li><a href="index.html?brand=babanh" class="dropdown-item px-0">XE BA BÁNH ĐIỆN</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6 class="fw-bold text-uppercase">PHỤ TÙNG,LINH KIỆN</h6>
+                                        <ul class="list-unstyled">
+                                            <li><a href="index.html?brand=sacxedien" class="dropdown-item px-0">SẠC XE ĐIỆN</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item mx-3"><a href="voucher.html" class="nav-link text-white fw-bold">KHUYẾN MÃI</a></li>
+                    <li class="nav-item dropdown mx-3"><a href="#" class="nav-link dropdown-toggle text-white fw-bold"
+                            role="button" data-bs-toggle="dropdown">DỊCH VỤ</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="emer.html" class="dropdown-item">CỨU HỘ XE ĐIỆN</a></li>
+                            <li><a href="repairathome.html" class="dropdown-item">DỊCH VỤ SỬA XE ĐIỆN TẠI NHÀ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-3"><a href="#" class="nav-link dropdown-toggle text-white fw-bold"
+                            role="button" data-bs-toggle="dropdown">VỀ CHÚNG TÔI</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="intro.html" class="dropdown-item">GIỚI THIỆU</a></li>
+                            <li><a href="contact.html" class="dropdown-item">LIÊN HỆ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-3"><a href="#" class="nav-link dropdown-toggle text-white fw-bold"
+                            role="button" data-bs-toggle="dropdown">BLOG</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html" class="dropdown-item">TIN TỨC</a></li>
+                            <li><a href="maintenance.html" class="dropdown-item">BẢO DƯỠNG XE ĐIỆN</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-nav ms-auto align-items-center">
+                <div class="search-wrapper">
+                    <button class="search-trigger"><i class="bi bi-search"></i></button>
+                    <div class="search-dropdown">
+                        <div class="search-box-inner">
+                            <input type="text" placeholder="Tìm kiếm xe điện" id="main-search">
+                            <i class="bi bi-search inner-icon"></i>
+                            <div id="search-results" class="list-group position-absolute w-100 shadow-sm d-none"
+                                style="z-index: 1000; max-height: 300px; overflow-y: auto;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="nav-link btn btn-primary bg-white text-dark ms-2" href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="about-hero shadow-sm">
+            <div class="container">
+                <h1 class="display-3 fw-bold mb-3">CHÀO MỪNG ĐẾN VỚI E-BIKE SHOP</h1>
+                <p class="lead fs-4">Hệ thống phân phối xe điện - xe máy điện chính hãng hàng đầu Việt Nam</p>
+                <a href="index.html" class="btn btn-warning btn-lg mt-3 fw-bold text-dark rounded-pill px-4 shadow">Khám Phá Cửa Hàng Ngay</a>
+            </div>
+        </section>
+
+        <section class="about-content container pb-5">
+            
+            <div class="row mb-5">
+                <div class="col-12">
+                    <a href="index.html">
+                        <img src="./assets/img/banner-ebikeshop.jpg" 
+                             alt="Trả góp dễ dàng" 
+                             class="img-fluid rounded shadow promo-banner-large w-100">
+                    </a>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12 mb-4">
+                    <h3 class="section-title">XE ĐIỆN NỔI BẬT</h3>
+                </div>
+                <div class="row g-4" id="featured-ebikes"></div>
+                <div class="col-12 text-center mt-4">
+                    <a href="index.html" class="btn btn-outline-success px-4 rounded-pill fw-bold">Xem thêm sản phẩm <i class="bi bi-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+
+            <div class="row mt-5 pt-4">
+                <div class="col-12 mb-4">
+                    <h3 class="section-title">XE ĐẠP ĐIỆN GẤP HOT</h3>
+                </div>
+                <div class="row g-4" id="featured-folding-bikes"></div>
+                <div class="col-12 text-center mt-4">
+                    <a href="index.html?brand=fiido" class="btn btn-outline-success px-4 rounded-pill fw-bold">Xem thêm sản phẩm <i class="bi bi-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+
+            <div class="row mt-5 pt-5 border-top">
+                <div class="col-12 d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="section-title">TIN TỨC XE ĐIỆN NỔI BẬT</h3>
+                    <a href="news.html" class="text-success text-decoration-none fw-bold">Tất cả bài viết <i class="bi bi-chevron-double-right"></i></a>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 news-card shadow-sm position-relative">
+                            <span class="news-badge">Tin mới</span>
+                            <img src="assets/img/banner-vinfast.png" class="card-img-top news-img" alt="Tin tức VinFast">
+                            <div class="card-body">
+                                <p class="text-muted small mb-2"><i class="bi bi-calendar3 me-1"></i> 02/04/2026</p>
+                                <h5 class="card-title fw-bold">VinFast bùng nổ doanh số với dòng xe điện thế hệ mới tại thị trường Việt Nam</h5>
+                                <p class="card-text text-muted small">Các mẫu xe điện VinFast đang chiếm lĩnh thị phần nhờ chính sách thuê pin linh hoạt và trạm sạc phủ khắp 63 tỉnh thành...</p>
+                                <a href="news.html" class="text-success fw-bold text-decoration-none">Đọc tiếp <i class="bi bi-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card h-100 news-card shadow-sm position-relative">
+                            <span class="news-badge">Xu hướng</span>
+                            <img src="assets/img/BANNER_YADEA.jpg" class="card-img-top news-img" alt="Tin tức Yadea">
+                            <div class="card-body">
+                                <p class="text-muted small mb-2"><i class="bi bi-calendar3 me-1"></i> 01/04/2026</p>
+                                <h5 class="card-title fw-bold">Yadea ra mắt công nghệ pin Graphene độc quyền, tăng tuổi thọ gấp 3 lần</h5>
+                                <p class="card-text text-muted small">Công nghệ pin mới của hãng xe điện hàng đầu thế giới Yadea đã có mặt tại E-Bike Shop, mang lại trải nghiệm bền bỉ chưa từng có...</p>
+                                <a href="news.html" class="text-success fw-bold text-decoration-none">Đọc tiếp <i class="bi bi-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card h-100 news-card shadow-sm position-relative">
+                            <span class="news-badge">Mẹo hay</span>
+                            <img src="assets/img/BANNER_HOME2.jpg" class="card-img-top news-img" alt="Bảo dưỡng xe">
+                            <div class="card-body">
+                                <p class="text-muted small mb-2"><i class="bi bi-calendar3 me-1"></i> 28/03/2026</p>
+                                <h5 class="card-title fw-bold">Hướng dẫn cách sạc pin xe đạp điện đúng cách giúp pin bền lâu như mới</h5>
+                                <p class="card-text text-muted small">Nhiều người dùng vẫn mắc sai lầm khi sạc pin xe điện. Đọc ngay bí kíp từ các chuyên gia kỹ thuật của E-Bike Shop để bảo vệ xe tốt nhất...</p>
+                                <a href="news.html" class="text-success fw-bold text-decoration-none">Đọc tiếp <i class="bi bi-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5 pt-5 border-top">
+                <div class="col-12 text-center mb-4">
+                    <h3 class="fw-bold d-inline-block border-0 border-bottom border-success border-3 pb-2" style="color: var(--dark-green); text-transform: uppercase;">Khách hàng nói gì về chúng tôi</h3>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm p-4 review-card">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="https://ui-avatars.com/api/?name=Quang+Tuan&background=27ae60&color=fff" class="rounded-circle me-3" style="width: 60px;">
+                                <div><h6 class="fw-bold mb-0">Anh Quang Tuấn</h6><div class="text-warning small"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div></div>
+                            </div>
+                            <p class="fst-italic text-muted mb-0">"Dịch vụ cứu hộ tận nơi của shop rất nhanh. Xe mình bị thủng lốp gọi 15 phút là có thợ tới xử lý ngay. 10 điểm!"</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm p-4 review-card">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="https://ui-avatars.com/api/?name=Ngoc+Mai&background=f39c12&color=fff" class="rounded-circle me-3" style="width: 60px;">
+                                <div><h6 class="fw-bold mb-0">Chị Ngọc Mai</h6><div class="text-warning small"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div></div>
+                            </div>
+                            <p class="fst-italic text-muted mb-0">"Mua xe trả góp thủ tục nhanh gọn bất ngờ. Nhân viên tư vấn rất kỹ về các hãng xe, giúp mình chọn được chiếc ưng ý."</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm p-4 review-card">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="https://ui-avatars.com/api/?name=Chu+Hoang&background=1a5935&color=fff" class="rounded-circle me-3" style="width: 60px;">
+                                <div><h6 class="fw-bold mb-0">Chú Hoàng</h6><div class="text-warning small"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div></div>
+                            </div>
+                            <p class="fst-italic text-muted mb-0">"Mẫu mã đa dạng, giá cả cạnh tranh. Chú mua chiếc xe 3 bánh cho bà nhà đi chợ, xe rất chắc chắn và an toàn."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>VỀ E-Bike Shop</h3>
+                <p>Phân phối, kinh doanh sỉ & lẻ xe điện 2-3 bánh của các hãng nổi tiếng: Yadea, Osakar, Nijia... bảo hành lên đến 36 tháng.</p>
+                <p><strong>Hotline:</strong> <span class="highlight">1800.2039</span></p>
+            </div>
+            <div class="footer-col">
+                <h3>CHÍNH SÁCH BÁN HÀNG</h3>
+                <ul>
+                    <li><a href="#">Chính sách trả góp</a></li>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>ĐIỀU KHOẢN & BẢO MẬT</h3>
+                <ul>
+                    <li><a href="#">Chính sách bảo mật thông tin</a></li>
+                </ul>
+                <h3 class="mt-20">CỔNG THANH TOÁN</h3>
+                <div class="payment-methods">
+                    <img src="assets/img/VISA.jpg" alt="Visa">
+                    <img src="assets/img/MTC.webp" alt="MasterCard">
+                    <img src="assets/img/COD2.png" alt="COD">
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>ĐƠN VỊ CHỦ QUẢN</h3>
+                <p><strong>CÔNG TY TNHH XE ĐIỆN XE MÁY VINH PHÁT</strong></p>
+                <p>Địa chỉ: Số 192/2 Phạm Văn Đồng, P. Hạnh Thông Tây, Quận Gò Vấp, TP. HCM</p>
+                <div class="gov-seal">
+                    <img src="assets/img/BoCongThuong-Government-VN-Logo.webp" alt="Bộ công thương" width="150">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script>
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartBadge = document.getElementById('cart-count');
+            if (cartBadge) cartBadge.innerText = totalItems;
+        }
+        
+        function generateProductCard(p) {
+            const rate = p.discount || 0;
+            const priceNum = Number(p.price) || 0; 
+            const finalPrice = rate > 0 ? Math.round(priceNum * (1 - rate / 100)) : priceNum;
+            const formattedOriginal = priceNum.toLocaleString('vi-VN') + 'đ';
+            const formattedFinal = finalPrice.toLocaleString('vi-VN') + 'đ';
+            const badgeHtml = rate > 0 ? `<div class="badge-discount">-${rate}%</div>` : '';
+            const priceHtml = rate > 0 
+                ? `<p class="old-price">Giá gốc: ${formattedOriginal}</p><p class="new-price">${formattedFinal}</p>`
+                : `<p class="old-price" style="visibility: hidden;">Giá gốc</p><p class="new-price">${formattedOriginal}</p>`;
+
+            return `
+            <div class="col-md-4">
+                <div class="card h-100 product-card shadow-sm border-0 position-relative">
+                    ${badgeHtml}
+                    <div class="product-img-wrapper">
+                        <img src="${p.img}" class="main-product-img" id="main-img-${p.id}" alt="${p.name}">
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">${p.name}</h5>
+                        <div class="price-container mb-3">${priceHtml}</div>
+                        <div class="d-flex flex-column gap-2 mt-auto">
+                            <a href="product-detail.html?id=${p.id}" class="btn btn-outline-dark"><i class="bi bi-eye pe-1"></i> Xem chi tiết</a>
+                            <button class="btn btn-success" onclick="addToCart(${p.id})"><i class="bi bi-cart-plus pe-1"></i> Thêm vào giỏ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function renderFeaturedProducts() {
+            const ebikeContainer = document.getElementById('featured-ebikes');
+            const foldingContainer = document.getElementById('featured-folding-bikes');
+            if (!ebikeContainer || !foldingContainer) return;
+
+            const ebikeIds = [1, 201, 18];
+            const foldingIds = [36, 37, 35]; 
+
+            ebikeContainer.innerHTML = products.filter(p => ebikeIds.includes(p.id)).map(generateProductCard).join('');
+            foldingContainer.innerHTML = products.filter(p => foldingIds.includes(p.id)).map(generateProductCard).join('');
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id == productId);
+            if (!product) return;
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItemIndex = cart.findIndex(item => item.id == productId);
+            const rate = product.discount || 0;
+            const finalPrice = rate > 0 ? Math.round(product.price * (1 - rate / 100)) : product.price;
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push({ id: product.id, name: product.name, price: finalPrice, img: product.img, quantity: 1 });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`Đã thêm vào giỏ hàng!`);
+            updateCartBadge();
+        }
+
+        if (typeof products !== 'undefined') {
+            renderFeaturedProducts();
+            updateCartBadge();
+        }
+    </script>
+</body>
+</html>
