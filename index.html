@@ -13,33 +13,11 @@
         crossorigin="anonymous"></script>
     <style>
         @media (max-width: 768px) {
-            .search-dropdown {
-                width: 90vw !important;
-                right: -50px !important;
-                padding: 15px !important;
-            }
-
-            .search-dropdown::before {
-                right: 60px !important;
-            }
-
-            .navbar-collapse {
-                max-height: 80vh;
-                overflow-y: auto;
-                padding-bottom: 20px;
-            }
-
-            .dropdown-menu.w-100 {
-                position: static !important;
-                border: none !important;
-                box-shadow: none !important;
-                padding: 10px 20px !important;
-            }
-
-            header {
-                width: 95% !important;
-                min-height: 200px !important;
-            }
+            .search-dropdown { width: 90vw !important; right: -50px !important; padding: 15px !important; }
+            .search-dropdown::before { right: 60px !important; }
+            .navbar-collapse { max-height: 80vh; overflow-y: auto; padding-bottom: 20px; }
+            .dropdown-menu.w-100 { position: static !important; border: none !important; box-shadow: none !important; padding: 10px 20px !important; }
+            header { width: 95% !important; min-height: 200px !important; }
         }
 
         :root {
@@ -51,322 +29,83 @@
         }
 
         header {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            transition: background-image 0.5s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 320px;
-            width: 81%;
-            margin: 0 auto;
-            border-radius: 20px;
+            background-size: cover; background-position: center; background-repeat: no-repeat;
+            transition: background-image 0.5s ease-in-out; display: flex; flex-direction: column;
+            justify-content: center; min-height: 320px; width: 81%; margin: 0 auto; border-radius: 20px;
         }
 
-        .navbar {
-            margin-bottom: 10px;
-        }
+        .navbar { margin-bottom: 10px; }
+        .d-none { display: none !important; }
 
-        .d-none {
-            display: none !important;
-        }
+        .header-banner h1, .header-banner p { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
 
-        .header-banner {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            transition: background-image 0.5s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 320px;
-            width: 81%;
-            margin: 0 auto;
-            border-radius: 20px;
-        }
-
-        .header-banner h1,
-        .header-banner p {
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
+        .product-card:hover { transform: translateY(-5px); transition: 0.3s; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
 
         /* --- CSS GIẢM GIÁ --- */
-        .badge-discount {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #e74c3c;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-            z-index: 5;
-        }
-        .price-container {
-            min-height: 45px;
-        }
-        .old-price {
-            color: #888;
-            text-decoration: line-through;
-            font-size: 13px;
-            margin-bottom: 0;
-        }
-        .new-price {
-            color: #e74c3c;
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 0;
-        }
+        .badge-discount { position: absolute; top: 10px; left: 10px; background: #e74c3c; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; z-index: 5; }
+        .price-container { min-height: 45px; }
+        .old-price { color: #888; text-decoration: line-through; font-size: 13px; margin-bottom: 0; }
+        .new-price { color: #e74c3c; font-weight: bold; font-size: 16px; margin-bottom: 0; }
 
         /* --- CSS CHO CHỌN MÀU SẮC --- */
-        .product-img-wrapper {
-            position: relative; 
-            overflow: hidden;
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            border-radius: 15px 15px 0 0;
-            background-color: #fff;
-        }
-        .main-product-img { 
-            width: 100%; 
-            height: 200px; 
-            object-fit: contain; 
-            transition: 0.3s; 
-            padding: 10px;
-        }
-        
-        .color-options {
-            position: absolute; bottom: -65px; left: 0; width: 100%;
-            background: rgba(255,255,255,0.95); display: flex; justify-content: center; align-items: center;
-            gap: 5px; padding: 10px 0; transition: 0.4s ease; border-top: 1px solid #eee; z-index: 10;
-        }
+        .product-img-wrapper { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 15px 15px 0 0; background-color: #fff; }
+        .main-product-img { width: 100%; height: 200px; object-fit: contain; transition: 0.3s; padding: 10px; }
+        .color-options { position: absolute; bottom: -65px; left: 0; width: 100%; background: rgba(255,255,255,0.95); display: flex; justify-content: center; align-items: center; gap: 5px; padding: 10px 0; transition: 0.4s ease; border-top: 1px solid #eee; z-index: 10; }
         .product-card:hover .color-options { bottom: 0; }
         .color-dot { width: 30px; height: 30px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; cursor: pointer; }
         .color-dot img { width: 100%; height: 100%; object-fit: cover; }
 
-        .navbar .dropdown-menu {
-            border-radius: 0;
-            margin-top: 0;
-        }
+        .navbar .dropdown-menu { border-radius: 0; margin-top: 0; }
+        .dropdown-item { font-size: 14px; color: #666; padding-top: 5px; padding-bottom: 5px; white-space: normal; }
+        .dropdown-item:hover { background-color: transparent; color: #27ae60; font-weight: bold; }
+        h6.fw-bold { font-size: 15px; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        .dropdown-menu { border-radius: 15px !important; border: 2px solid black; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
+        .navbar { background-color: var(--blue-dark); }
+        .navbar-brand:hover { color: #27ae60 !important; }
 
-        .dropdown-item {
-            font-size: 14px;
-            color: #666;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            white-space: normal;
-        }
+        /* Khung Search */
+        .search-wrapper { position: relative; display: inline-block; }
+        .search-trigger { background-color: white; color: black; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; }
+        .search-dropdown { position: absolute; top: 100%; right: -20px; width: 450px; background: white; border: 2px solid #0a0a0a; border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; }
+        .search-dropdown::before { content: ""; position: absolute; top: -12px; right: 32px; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 12px solid #0d0e0d; }
+        .search-wrapper:hover .search-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        .search-box-inner { position: relative; display: flex; align-items: center; }
+        .search-box-inner input { width: 100%; padding: 12px 20px; background-color: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 12px; outline: none; font-size: 16px; }
+        .inner-icon { position: absolute; right: 15px; color: #333; font-size: 18px; }
+        #search-results { top: 100%; left: 0; background: white; border: 1px solid #ddd; border-radius: 0 0 8px 8px; }
+        #search-results .list-group-item { font-size: 14px; padding: 10px 15px; color: #333; border: none; border-bottom: 1px solid #f0f0f0; }
+        #search-results .list-group-item:hover { background-color: #f8f9fa; color: #2e7d32; }
 
-        .dropdown-item:hover {
-            background-color: transparent;
-            color: #27ae60;
-            font-weight: bold;
-        }
+        /* Footer */
+        .footer { background-color: #1a2521; color: #ffffff; padding: 50px 0; font-family: 'Arial', sans-serif; line-height: 1.6; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; padding: 0 20px; }
+        .footer-col h3 { color: #ffffff; font-size: 16px; margin-bottom: 20px; position: relative; text-transform: uppercase; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #bdc3c7; text-decoration: none; transition: 0.3s; }
+        .footer-col ul li a:hover { color: #2ecc71; padding-left: 5px; }
+        .highlight { color: #f1c40f; font-weight: bold; }
+        .payment-methods img { height: 30px; margin-right: 10px; filter: grayscale(100%); transition: 0.3s; }
+        .payment-methods img:hover { filter: grayscale(0%); }
+        .mt-20 { margin-top: 20px; }
+        @media (max-width: 768px) { .footer-container { grid-template-columns: 1fr; text-align: center; } }
 
-        h6.fw-bold {
-            font-size: 15px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 5px;
-        }
-
-        .dropdown-menu {
-            border-radius: 15px !important;
-            border: 2px solid black;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar {
-            background-color: var(--blue-dark);
-        }
-
-        .navbar-brand:hover {
-            color: #27ae60 !important;
-        }
-
-        .search-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
-        .search-trigger {
-            background-color: white;
-            color: black;
-            border: none;
-            padding: 10px 14px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .search-dropdown {
-            position: absolute;
-            top: 100%;
-            right: -20px;
-            width: 450px;
-            background: white;
-            border: 2px solid #0a0a0a;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .search-dropdown::before {
-            content: "";
-            position: absolute;
-            top: -12px;
-            right: 32px;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 12px solid #0d0e0d;
-        }
-
-        .search-wrapper:hover .search-dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .search-box-inner {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .search-box-inner input {
-            width: 100%;
-            padding: 12px 20px;
-            background-color: #f5f5f5;
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            outline: none;
-            font-size: 16px;
-        }
-
-        .inner-icon {
-            position: absolute;
-            right: 15px;
-            color: #333;
-            font-size: 18px;
-        }
-
-        #search-results {
-            top: 100%;
-            left: 0;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 0 0 8px 8px;
-        }
-
-        #search-results .list-group-item {
-            font-size: 14px;
-            padding: 10px 15px;
-            color: #333;
-            border: none;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        #search-results .list-group-item:hover {
-            background-color: #f8f9fa;
-            color: #2e7d32;
-        }
-
-        .footer {
-            background-color: #1a2521;
-            color: #ffffff;
-            padding: 50px 0;
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            padding: 0 20px;
-        }
-
-        .footer-col h3 {
-            color: #ffffff;
-            font-size: 16px;
-            margin-bottom: 20px;
-            position: relative;
-            text-transform: uppercase;
-        }
-
-        .footer-col ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-col ul li a {
-            color: #bdc3c7;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .footer-col ul li a:hover {
-            color: #2ecc71;
-            padding-left: 5px;
-        }
-
-        .highlight {
-            color: #f1c40f;
-            font-weight: bold;
-        }
-
-        .payment-methods img {
-            height: 30px;
-            margin-right: 10px;
-            filter: grayscale(100%);
-            transition: 0.3s;
-        }
-
-        .payment-methods img:hover {
-            filter: grayscale(0%);
-        }
-
-        .mt-20 {
-            margin-top: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .footer-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-        }
+        /* --- CSS CHO THANH KÉO KÉP (DUAL RANGE SLIDER) --- */
+        .range-slider-wrapper { position: relative; width: 100%; height: 40px; display: flex; align-items: center; }
+        .slider-track { width: 100%; height: 6px; background: #e9ecef; position: absolute; border-radius: 5px; }
+        .slider-range { height: 6px; background: var(--primary-color); position: absolute; border-radius: 5px; z-index: 1; }
+        .range-slider-wrapper input[type="range"] { position: absolute; width: 100%; -webkit-appearance: none; background: transparent; pointer-events: none; z-index: 2; margin: 0; outline: none; }
+        .range-slider-wrapper input[type="range"]::-webkit-slider-thumb { pointer-events: auto; -webkit-appearance: none; width: 22px; height: 22px; background: #fff; border: 3px solid var(--primary-color); border-radius: 50%; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.3); transition: transform 0.2s; }
+        .range-slider-wrapper input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+        .range-slider-wrapper input[type="range"]::-moz-range-thumb { pointer-events: auto; width: 22px; height: 22px; background: #fff; border: 3px solid var(--primary-color); border-radius: 50%; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.3); transition: transform 0.2s; }
+        .range-slider-wrapper input[type="range"]::-moz-range-thumb:hover { transform: scale(1.15); }
     </style>
 </head>
 
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bolder" href="#">☘️ E-BIKE SHOP</a>
+            <a class="navbar-brand fw-bolder" href="logo.html">☘️ E-BIKE SHOP</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
                 aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -385,62 +124,45 @@
                                     <div class="col-md-2-5 col-md-3">
                                         <h6 class="fw-bold text-uppercase">XE ĐẠP ĐIỆN</h6>
                                         <ul class="list-unstyled">
-                                            <li><a href="index.html?brand=osakar" class="dropdown-item px-0">XE ĐẠP ĐIỆN
-                                                    OSAKAR</a></li>
-                                            <li><a href="index.html?brand=tailg" class="dropdown-item px-0">XE ĐẠP ĐIỆN
-                                                    TAILG</a></li>
-                                            <li><a href="index.html?brand=nijia" class="dropdown-item px-0">XE ĐẠP ĐIỆN
-                                                    NIJIA</a></li>
-                                            <li><a href="index.html?brand=pega" class="dropdown-item px-0">XE ĐẠP ĐIỆN
-                                                    PEGA-HKBIKE</a></li>
-                                            <li><a href="index.html?brand=vinfast" class="dropdown-item px-0">XE MÁY
-                                                    ĐIỆN VINFAST</a></li>
-                                            <li><a href="index.html?brand=yadea" class="dropdown-item px-0">XE ĐẠP ĐIỆN
-                                                    YADEA</a></li>
-                                            <li><a href="index.html?brand=hitasa" class="dropdown-item px-0">XE ĐẠP ĐIỆN
-                                                    HITASA</a></li>
+                                            <li><a href="index.html?brand=osakar" class="dropdown-item px-0">XE ĐẠP ĐIỆN OSAKAR</a></li>
+                                            <li><a href="index.html?brand=tailg" class="dropdown-item px-0">XE ĐẠP ĐIỆN TAILG</a></li>
+                                            <li><a href="index.html?brand=nijia" class="dropdown-item px-0">XE ĐẠP ĐIỆN NIJIA</a></li>
+                                            <li><a href="index.html?brand=pega" class="dropdown-item px-0">XE ĐẠP ĐIỆN PEGA-HKBIKE</a></li>
+                                            <li><a href="index.html?brand=vinfast" class="dropdown-item px-0">XE MÁY ĐIỆN VINFAST</a></li>
+                                            <li><a href="index.html?brand=yadea" class="dropdown-item px-0">XE ĐẠP ĐIỆN YADEA</a></li>
+                                            <li><a href="index.html?brand=hitasa" class="dropdown-item px-0">XE ĐẠP ĐIỆN HITASA</a></li>
                                         </ul>
                                     </div>
-
                                     <div class="col-md-3">
                                         <h6 class="fw-bold text-uppercase">XE ĐẠP ĐIỆN GẤP</h6>
                                         <ul class="list-unstyled">
-                                            <li><a href="index.html?brand=ado" class="dropdown-item px-0">XE ĐIỆN TRỢ
-                                                    LỰC ADO</a></li>
-                                            <li><a href="index.html?brand=fiido" class="dropdown-item px-0">XE ĐẠP ĐIỆN
-                                                    GẤP FIIDO</a></li>
+                                            <li><a href="index.html?brand=ado" class="dropdown-item px-0">XE ĐIỆN TRỢ LỰC ADO</a></li>
+                                            <li><a href="index.html?brand=fiido" class="dropdown-item px-0">XE ĐẠP ĐIỆN GẤP FIIDO</a></li>
                                         </ul>
                                     </div>
-
                                     <div class="col-md-3">
                                         <h6 class="fw-bold text-uppercase">XE ĐIỆN 3 BÁNH</h6>
                                         <ul class="list-unstyled">
-                                            <li><a href="index.html?brand=landien" class="dropdown-item px-0">XE LĂN
-                                                    ĐIỆN</a></li>
-                                            <li><a href="index.html?brand=babanh" class="dropdown-item px-0">XE BA BÁNH
-                                                    ĐIỆN</a></li>
+                                            <li><a href="index.html?brand=landien" class="dropdown-item px-0">XE LĂN ĐIỆN</a></li>
+                                            <li><a href="index.html?brand=babanh" class="dropdown-item px-0">XE BA BÁNH ĐIỆN</a></li>
                                         </ul>
                                     </div>
-
                                     <div class="col-md-3">
                                         <h6 class="fw-bold text-uppercase">PHỤ TÙNG,LINH KIỆN</h6>
                                         <ul class="list-unstyled">
-                                            <li><a href="index.html?brand=sacxedien" class="dropdown-item px-0">SẠC XE
-                                                    ĐIỆN</a></li>
+                                            <li><a href="index.html?brand=sacxedien" class="dropdown-item px-0">SẠC XE ĐIỆN</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item mx-3"><a href="voucher.html" class="nav-link text-white fw-bold">KHUYẾN MÃI</a>
-                    </li>
+                    <li class="nav-item mx-3"><a href="voucher.html" class="nav-link text-white fw-bold">KHUYẾN MÃI</a></li>
                     <li class="nav-item dropdown mx-3"><a href="#" class="nav-link dropdown-toggle text-white fw-bold"
                             role="button" data-bs-toggle="dropdown">DỊCH VỤ</a>
                         <ul class="dropdown-menu">
                             <li><a href="emer.html" class="dropdown-item">CỨU HỘ XE ĐIỆN</a></li>
                             <li><a href="repairathome.html" class="dropdown-item">DỊCH VỤ SỬA XE ĐIỆN TẠI NHÀ</a></li>
-
                         </ul>
                     </li>
                     <li class="nav-item dropdown mx-3"><a href="#" class="nav-link dropdown-toggle text-white fw-bold"
@@ -448,7 +170,6 @@
                         <ul class="dropdown-menu">
                             <li><a href="intro.html" class="dropdown-item">GIỚI THIỆU</a></li>
                             <li><a href="contact.html" class="dropdown-item">LIÊN HỆ</a></li>
-
                         </ul>
                     </li>
                     <li class="nav-item dropdown mx-3"><a href="#" class="nav-link dropdown-toggle text-white fw-bold"
@@ -456,18 +177,13 @@
                         <ul class="dropdown-menu">
                             <li><a href="news.html" class="dropdown-item">TIN TỨC</a></li>
                             <li><a href="maintenance.html" class="dropdown-item">BẢO DƯỠNG XE ĐIỆN</a></li>
-
                         </ul>
                     </li>
                 </ul>
-
             </div>
             <div class="navbar-nav ms-auto align-items-center">
                 <div class="search-wrapper">
-                    <button class="search-trigger">
-                        <i class="bi bi-search"></i>
-                    </button>
-
+                    <button class="search-trigger"><i class="bi bi-search"></i></button>
                     <div class="search-dropdown">
                         <div class="search-box-inner">
                             <input type="text" placeholder="Tìm kiếm xe điện" id="main-search">
@@ -478,8 +194,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="nav-link btn btn-primary bg-white text-dark ms-2" href="cart.html">Giỏ hàng (<span
-                        id="cart-count">0</span>)</a>
+                <a class="nav-link btn btn-primary bg-white text-dark ms-2" href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a>
             </div>
         </div>
     </nav>
@@ -489,28 +204,89 @@
         <p class="lead text-muted">Bền bỉ - Tiết kiệm - Thân thiện môi trường</p>
     </header>
 
-    <div class="container">
+    <div class="container mb-4">
+        <div class="row align-items-center bg-white p-3 shadow-sm rounded border">
+            <div class="col-md-5 mb-3 mb-md-0">
+                <h4 class="fw-bold text-success mb-0 text-uppercase" id="shop-title" style="border-left: 4px solid var(--primary-color); padding-left: 10px;">TẤT CẢ SẢN PHẨM</h4>
+            </div>
+            
+            <div class="col-md-7 d-flex flex-column align-items-md-end justify-content-center">
+                <label class="form-label mb-2 fw-bold text-success">
+                    <i class="bi bi-funnel text-success"></i> Khoảng giá: <span id="priceDisplay" class="text-danger ms-1">Tất cả mức giá</span>
+                </label>
+                
+                <div class="d-flex align-items-center w-100 justify-content-md-end" style="max-width: 450px;">
+                    <span class="text-muted small me-3 fw-bold">1Tr</span>
+                    
+                    <div class="range-slider-wrapper flex-grow-1">
+                        <div class="slider-track"></div>
+                        <div class="slider-range" id="slider-range"></div>
+                        <input type="range" id="minPriceRange" min="1000000" max="100000000" step="500000" value="1000000" oninput="updatePriceDisplay(this); applyFilters();">
+                        <input type="range" id="maxPriceRange" min="1000000" max="100000000" step="500000" value="100000000" oninput="updatePriceDisplay(this); applyFilters();">
+                    </div>
+
+                    <span class="text-muted small ms-3 fw-bold">100Tr+</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-5">
         <div class="row" id="product-list"></div>
     </div>
 
     <script src="js/data.js"></script>
     <script>
-        const productList = document.getElementById('product-list');
-
         function updateCartBadge() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             const cartBadge = document.getElementById('cart-count');
-            if (cartBadge) {
-                cartBadge.innerText = totalItems;
+            if (cartBadge) cartBadge.innerText = totalItems;
+        }
+
+        // Cập nhật giá trị hiển thị khi khách hàng kéo 2 thanh trượt
+        function updatePriceDisplay(clickedSlider) {
+            const minSlider = document.getElementById('minPriceRange');
+            const maxSlider = document.getElementById('maxPriceRange');
+            const display = document.getElementById('priceDisplay');
+            const rangeLine = document.getElementById('slider-range');
+
+            let minVal = parseInt(minSlider.value);
+            let maxVal = parseInt(maxSlider.value);
+
+            // Logic chặn 2 đầu: Không cho phép Min kéo vượt qua Max (Cần chừa khoảng cách 500k)
+            if (minVal > maxVal - 500000) {
+                if (clickedSlider && clickedSlider.id === 'minPriceRange') {
+                    minSlider.value = maxVal - 500000;
+                    minVal = parseInt(minSlider.value);
+                } else {
+                    maxSlider.value = minVal + 500000;
+                    maxVal = parseInt(maxSlider.value);
+                }
+            }
+
+            // Tính % khoảng cách để vẽ cái thanh màu xanh dãn ra/thu vào
+            const percent1 = ((minVal - minSlider.min) / (minSlider.max - minSlider.min)) * 100;
+            const percent2 = ((maxVal - maxSlider.min) / (maxSlider.max - maxSlider.min)) * 100;
+            
+            rangeLine.style.left = percent1 + '%';
+            rangeLine.style.width = (percent2 - percent1) + '%';
+
+            // Cập nhật dòng text trên màn hình
+            if (minVal <= 1000000 && maxVal >= 100000000) {
+                display.innerText = 'Tất cả mức giá';
+            } else {
+                let maxText = maxVal >= 100000000 ? '100Tr+' : maxVal.toLocaleString('vi-VN') + 'đ';
+                display.innerText = minVal.toLocaleString('vi-VN') + 'đ' + ' - ' + maxText;
             }
         }
 
-        function renderProducts() {
-            const productList = document.getElementById('product-list');
+        // Hàm thiết lập trang ban đầu
+        function initPage() {
             const header = document.querySelector('header');
             const headerTitle = header.querySelector('h1');
             const headerDesc = header.querySelector('p');
+            const shopTitle = document.getElementById('shop-title');
 
             const urlParams = new URLSearchParams(window.location.search);
             const brandFilter = urlParams.get('brand');
@@ -518,6 +294,7 @@
             if (brandFilter) {
                 headerTitle.classList.add('d-none');
                 headerDesc.classList.add('d-none');
+                if (shopTitle) shopTitle.innerText = `SẢN PHẨM HÃNG ${brandFilter.toUpperCase()}`;
 
                 if (brandFilter === 'osakar') header.style.backgroundImage = "url('assets/img/BANNER_OSAKAR2.webp')";
                 else if (brandFilter == "nijia") header.style.backgroundImage = "url('assets/img/BANNER_NIJIA.png')";
@@ -529,6 +306,7 @@
                     headerDesc.classList.remove('d-none');
                     headerTitle.innerText = "XE BA BÁNH ĐIỆN";
                     headerDesc.innerText = "Các dòng xe điện ba bánh chính hãng, bền bỉ";
+                    if (shopTitle) shopTitle.innerText = `XE BA BÁNH ĐIỆN`;
                 }
                 else if (brandFilter == "landien") {
                     header.style.backgroundImage = "none";
@@ -537,6 +315,7 @@
                     headerDesc.classList.remove('d-none');
                     headerTitle.innerText = "XE LĂN ĐIỆN";
                     headerDesc.innerText = "Các dòng xe lăn điện chính hãng, giá rẻ, cho người khuyết tật";
+                    if (shopTitle) shopTitle.innerText = `XE LĂN ĐIỆN`;
                 }
                 else if (brandFilter == "sacxedien") {
                     header.style.backgroundImage = "none";
@@ -545,6 +324,7 @@
                     headerDesc.classList.remove('d-none');
                     headerTitle.innerText = "SẠC XE ĐIỆN CHÍNH HÃNG";
                     headerDesc.innerText = "Các loại sạc xe điện chính hãng, bền bỉ";
+                    if (shopTitle) shopTitle.innerText = `SẠC XE ĐIỆN`;
                 }
                 else if (brandFilter == "hitasa") header.style.backgroundImage = "url('assets/img/BANNER_HITASA.jpg')";
                 else if (brandFilter == "fiido") header.style.backgroundImage = "url('assets/img/BANNER_FIIDO.jpg')";
@@ -556,125 +336,157 @@
                 header.style.backgroundImage = "url('assets/img/BANNER_HOME2.jpg')";
                 headerTitle.classList.add('d-none');
                 headerDesc.classList.add('d-none');
+                if (shopTitle) shopTitle.innerText = `TẤT CẢ SẢN PHẨM`;
             }
 
-            let displayProducts = brandFilter ? products.filter(p => p.brand === brandFilter) : products;
-            const shuffledProducts = [...displayProducts].sort(() => Math.random() - 0.5);
-
-            productList.innerHTML = '';
-
-            if (shuffledProducts.length === 0) {
-                productList.innerHTML = '<div class="col-12 text-center py-5"><h3>Chưa có sản phẩm cho hãng này</h3></div>';
-            } else {
-                shuffledProducts.forEach(p => {
-                    const rate = p.discount || 0;
-                    
-                    const finalPrice = rate > 0 ? Math.round(p.price * (1 - rate / 100)) : p.price;
-                    const formattedOriginal = p.price.toLocaleString('vi-VN') + 'đ';
-                    const formattedFinal = finalPrice.toLocaleString('vi-VN') + 'đ';
-
-                    const badgeHtml = rate > 0 ? `<div class="badge-discount">-${rate}%</div>` : '';
-                    
-                    const priceHtml = rate > 0 
-                        ? `<p class="old-price">Giá gốc: ${formattedOriginal}</p><p class="new-price">${formattedFinal}</p>`
-                        : `<p class="old-price" style="visibility: hidden;">Giá gốc</p><p class="new-price">${formattedOriginal}</p>`;
-
-                    // Xử lý đổi màu xe - CHUẨN ĐỊNH DẠNG ĐUÔI ẢNH MỚI NHẤT CỦA BẠN
-                    let colorOptionsHtml = '';
-                    if (p.id === 7) {
-                        const winColors = ['assets/img/osakar_win.jpg', 'assets/img/osakar-win-maucam.jpg', 'assets/img/osakar-win-mauvangden.jpg', 'assets/img/osakar-win-mauvangxanh.jpg'];
-                        const dotsHtml = winColors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
-                        colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
-                    } else if (p.id === 8) { 
-                        const tailgColors = ['assets/img/TAILGGR55.jpg', 'assets/img/tailg55_mauxanh.png', 'assets/img/tailg55_mautim.png', 'assets/img/tailg55_mauhong.png', 'assets/img/tailg55_mauden.jpg'];
-                        const dotsHtml = tailgColors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
-                        colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
-                    } else if (p.id === 24) {
-                        const x8Colors = ['assets/img/osakar_x8.jpg', 'assets/img/osakar-x8-mauden.jpg', 'assets/img/osakar-x8-mautrang.webp'];
-                        const dotsHtml = x8Colors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
-                        colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
-                    } else if (p.id === 4) {
-                        const mandiColors = ['assets/img/osakar_mandi.jpg', 'assets/img/osakar-mandi-mautrang.jpg', 'assets/img/osakar-mandi-mauxam.jpg'];
-                        const dotsHtml = mandiColors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
-                        colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
-                    } else if (p.id === 21) {
-                        const i8Colors = ['assets/img/YADEAI8.jpg', 'assets/img/yadae-i8-mauhong.jpg', 'assets/img/yadae-i8-mautrangxanh.jpg', 'assets/img/yadae-i8-mauxanh.jpg'];
-                        const dotsHtml = i8Colors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
-                        colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
-                    } else if (p.id === 18) {
-                        const icandyColors = ['assets/img/YADEAVC.jpg', 'assets/img/Yadea VC Icandy-mau1.jpg', 'assets/img/Yadea VC Icandy-mau2.jpg'];
-                        const dotsHtml = icandyColors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
-                        colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
-                    }
-
-                    productList.innerHTML += `
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100 product-card shadow-sm border-0 position-relative">
-                            ${badgeHtml}
-                            <div class="product-img-wrapper">
-                                <img src="${p.img}" class="main-product-img" id="main-img-${p.id}" alt="${p.name}">
-                                ${colorOptionsHtml}
-                            </div>
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title fw-bold">${p.name}</h5>
-                                <div class="price-container mb-3">
-                                    ${priceHtml}
-                                </div>
-                                
-                                <div class="d-flex flex-column gap-2 mt-auto">
-                                    <a href="product-detail.html?id=${p.id}" class="btn btn-outline-dark">
-                                        <i class="bi bi-eye pe-1"></i> Xem chi tiết
-                                    </a>
-                                    <button class="btn btn-success" onclick="addToCart(${p.id})">
-                                        <i class="bi bi-cart-plus pe-1"></i> Thêm vào giỏ
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
-                });
-
-                // Kích hoạt tính năng đổi màu khi click hoặc rê chuột vào chấm bi
-                document.querySelectorAll('.color-dot').forEach(dot => {
-                    ['mouseenter', 'click'].forEach(evt => {
-                        dot.addEventListener(evt, function() {
-                            const targetId = this.getAttribute('data-target');
-                            const newSrc = this.getAttribute('data-src');
-                            const mainImg = document.getElementById(targetId);
-                            if (mainImg) mainImg.setAttribute('src', newSrc);
-                        });
-                    });
-                });
-            }
+            updatePriceDisplay(null); // Khởi tạo giá trị thanh kéo lần đầu
+            applyFilters();
         }
 
-        // Cập nhật hàm thêm giỏ hàng để lưu màu sắc đang chọn
+        // LỌC KÉP: Lọc theo Hãng (nếu có trên URL) VÀ Lọc theo cả Min Price & Max Price
+        function applyFilters() {
+            if (typeof products === 'undefined') return;
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const brandFilter = urlParams.get('brand');
+            
+            const minPrice = parseInt(document.getElementById('minPriceRange').value);
+            const maxPrice = parseInt(document.getElementById('maxPriceRange').value);
+
+            let filteredProducts = products;
+
+            // 1. Lọc theo hãng
+            if (brandFilter) {
+                filteredProducts = filteredProducts.filter(p => p.brand === brandFilter);
+            }
+
+            // 2. Lọc theo khoảng giá kép (Min - Max)
+            filteredProducts = filteredProducts.filter(p => {
+                const rate = p.discount || 0;
+                const finalPrice = rate > 0 ? Math.round(p.price * (1 - rate / 100)) : p.price;
+                
+                // Nếu kéo max chạm vạch 100Tr+ thì bỏ qua giới hạn trần
+                const isUnderMax = maxPrice >= 100000000 ? true : finalPrice <= maxPrice;
+                const isOverMin = finalPrice >= minPrice;
+
+                return isOverMin && isUnderMax; // Xe phải nằm kẹp giữa 2 mức này mới được hiển thị
+            });
+
+            renderProducts(filteredProducts);
+        }
+
+        // Hàm render sản phẩm ra màn hình
+        function renderProducts(productsToRender) {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+
+            if (!productsToRender || productsToRender.length === 0) {
+                productList.innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <h4 class="text-muted">Không tìm thấy sản phẩm phù hợp với mức giá này</h4>
+                    <button class="btn btn-success mt-3" onclick="document.getElementById('minPriceRange').value=1000000; document.getElementById('maxPriceRange').value=100000000; updatePriceDisplay(null); applyFilters();">Khôi phục bộ lọc</button>
+                </div>`;
+                return;
+            }
+
+            productsToRender.forEach(p => {
+                const rate = p.discount || 0;
+                const finalPrice = rate > 0 ? Math.round(p.price * (1 - rate / 100)) : p.price;
+                const formattedOriginal = p.price.toLocaleString('vi-VN') + 'đ';
+                const formattedFinal = finalPrice.toLocaleString('vi-VN') + 'đ';
+
+                const badgeHtml = rate > 0 ? `<div class="badge-discount">-${rate}%</div>` : '';
+                const priceHtml = rate > 0 
+                    ? `<p class="old-price">Giá gốc: ${formattedOriginal}</p><p class="new-price">${formattedFinal}</p>`
+                    : `<p class="old-price" style="visibility: hidden;">Giá gốc</p><p class="new-price">${formattedOriginal}</p>`;
+
+                let colorOptionsHtml = '';
+                if (p.id === 7) {
+                    const winColors = ['assets/img/osakar_win.jpg', 'assets/img/osakar-win-maucam.jpg', 'assets/img/osakar-win-mauvangden.jpg', 'assets/img/osakar-win-mauvangxanh.jpg'];
+                    const dotsHtml = winColors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
+                    colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
+                } else if (p.id === 8) { 
+                    const tailgColors = ['assets/img/TAILGGR55.jpg', 'assets/img/tailg55_mauxanh.png', 'assets/img/tailg55_mautim.png', 'assets/img/tailg55_mauhong.png', 'assets/img/tailg55_mauden.jpg'];
+                    const dotsHtml = tailgColors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
+                    colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
+                } else if (p.id === 24) {
+                    const x8Colors = ['assets/img/osakar_x8.jpg', 'assets/img/osakar-x8-mauden.jpg', 'assets/img/osakar-x8-mautrang.webp'];
+                    const dotsHtml = x8Colors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
+                    colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
+                } else if (p.id === 4) {
+                    const mandiColors = ['assets/img/osakar_mandi.jpg', 'assets/img/osakar-mandi-mautrang.jpg', 'assets/img/osakar-mandi-mauxam.jpg'];
+                    const dotsHtml = mandiColors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
+                    colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
+                } else if (p.id === 21) {
+                    const i8Colors = ['assets/img/YADEAI8.jpg', 'assets/img/yadae-i8-mauhong.jpg', 'assets/img/yadae-i8-mautrangxanh.jpg', 'assets/img/yadae-i8-mauxanh.jpg'];
+                    const dotsHtml = i8Colors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
+                    colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
+                } else if (p.id === 18) {
+                    const icandyColors = ['assets/img/YADEAVC.jpg', 'assets/img/Yadea VC Icandy-mau1.jpg', 'assets/img/Yadea VC Icandy-mau2.jpg'];
+                    const dotsHtml = icandyColors.map(color => `<div class="color-dot" data-target="main-img-${p.id}" data-src="${color}"><img src="${color}"></div>`).join('');
+                    colorOptionsHtml = `<div class="color-options">${dotsHtml}</div>`;
+                }
+
+                productList.innerHTML += `
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 product-card shadow-sm border-0 position-relative">
+                        ${badgeHtml}
+                        <div class="product-img-wrapper">
+                            <img src="${p.img}" class="main-product-img" id="main-img-${p.id}" alt="${p.name}">
+                            ${colorOptionsHtml}
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">${p.name}</h5>
+                            <div class="price-container mb-3">
+                                ${priceHtml}
+                            </div>
+                            <div class="d-flex flex-column gap-2 mt-auto">
+                                <a href="product-detail.html?id=${p.id}" class="btn btn-outline-dark">
+                                    <i class="bi bi-eye pe-1"></i> Xem chi tiết
+                                </a>
+                                <button class="btn btn-success" onclick="addToCart(${p.id})">
+                                    <i class="bi bi-cart-plus pe-1"></i> Thêm vào giỏ
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            });
+
+            // Gắn lại sự kiện đổi màu
+            document.querySelectorAll('.color-dot').forEach(dot => {
+                ['mouseenter', 'click'].forEach(evt => {
+                    dot.addEventListener(evt, function() {
+                        const targetId = this.getAttribute('data-target');
+                        const newSrc = this.getAttribute('data-src');
+                        const mainImg = document.getElementById(targetId);
+                        if (mainImg) mainImg.setAttribute('src', newSrc);
+                    });
+                });
+            });
+        }
+
+        // Hàm thêm giỏ hàng có nhớ màu
         function addToCart(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
 
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-            // BƯỚC QUAN TRỌNG: Lấy đường dẫn ảnh ĐANG HIỂN THỊ trên màn hình của cái xe đó
             const currentImgElement = document.getElementById(`main-img-${productId}`);
             const currentImgSrc = currentImgElement ? currentImgElement.getAttribute('src') : product.img;
 
-            // Kiểm tra xem trong giỏ đã có xe này VỚI ĐÚNG MÀU NÀY chưa
             const existingItemIndex = cart.findIndex(item => item.id === productId && item.img === currentImgSrc);
-
             const rate = product.discount || 0;
             const finalPrice = rate > 0 ? Math.round(product.price * (1 - rate / 100)) : product.price;
 
             if (existingItemIndex > -1) {
-                // Nếu có đúng màu đó rồi thì tăng số lượng
                 cart[existingItemIndex].quantity += 1;
             } else {
-                // Nếu chưa có màu này thì thêm dòng mới vào giỏ
                 cart.push({
                     id: product.id,
                     name: product.name,
                     price: finalPrice, 
-                    img: currentImgSrc, // Đẩy đúng cái ảnh màu đang xem vào giỏ
+                    img: currentImgSrc,
                     quantity: 1
                 });
             }
@@ -684,15 +496,22 @@
             updateCartBadge();
         }
 
-        updateCartBadge();
-        renderProducts();
+        // Kích hoạt khi trang đã tải xong
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof products !== 'undefined') {
+                initPage();
+                updateCartBadge();
+            } else {
+                document.getElementById('product-list').innerHTML = '<div class="col-12 text-center text-danger py-5">Lỗi: Không tìm thấy file data.js</div>';
+            }
+        });
     </script>
+
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-col">
                 <h3>VỀ E-Bike Shop</h3>
-                <p>Phân phối, kinh doanh sỉ & lẻ xe điện 2-3 bánh của các hãng nổi tiếng: Yadea, Osakar,
-                    Nijia... bảo hành lên đến 36 tháng.</p>
+                <p>Phân phối, kinh doanh sỉ & lẻ xe điện 2-3 bánh của các hãng nổi tiếng: Yadea, Osakar, Nijia... bảo hành lên đến 36 tháng.</p>
                 <p><strong>Thời gian mở cửa:</strong> 8:00 - 21:00 (Cả tuần)</p>
                 <p><strong>Hotline:</strong> <span class="highlight">1800.2039</span></p>
             </div>
@@ -727,12 +546,10 @@
                 <p>Địa chỉ: Số 192/2 Phạm Văn Đồng, P. Hạnh THông Tây, Quận Gò Vấp, TP. HCM</p>
                 <p>STK: 0363885042 - Ngân hàng MB</p>
                 <div class="gov-seal">
-                    <img src="assets/img/BoCongThuong-Government-VN-Logo.webp" alt="Đã thông báo bộ công thương"
-                        width="150">
+                    <img src="assets/img/BoCongThuong-Government-VN-Logo.webp" alt="Đã thông báo bộ công thương" width="150">
                 </div>
             </div>
         </div>
     </footer>
 </body>
-
 </html>
