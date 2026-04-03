@@ -5,56 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi tiết sản phẩm</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
     <style>
-        /* js/navbar.js or your styles.css */
+        /* NOTE: --- CSS TÙY CHỈNH CHO CÁC THÀNH PHẦN TRONG TRANG --- */
+
+        /* NOTE: CSS cho khung kết quả tìm kiếm thả xuống (Nổi lên trên cùng) */
         #search-results {
-            /* Đảm bảo khung luôn nằm trên các thành phần khác */
             z-index: 1000;
-
-            /* ---------------------------------------------------- */
-            /* --- SỬA CHÍNH Ở ĐÂY ĐỂ DỊCH KHUNG XUỐNG DƯỚI --- */
-            /* ---------------------------------------------------- */
-
-            /* 1. Nếu cha của nó (.search-dropdown) đã có position: absolute */
             position: absolute;
             top: 50px;
-            /* Đẩy xuống 50px tính từ đỉnh của ô nhập liệu */
             left: 0;
             width: 100%;
-            /* Rộng bằng ô nhập liệu */
-
-            /* 2. (Thêm) Nếu bạn muốn đẩy xa hơn một chút */
             margin-top: 10px;
-            /* Thêm khoảng trống 10px phía trên khung kết quả */
-
-            /* ---------------------------------------------------- */
-
-            /* Các thuộc tính trang trí khác của bạn */
             max-height: 300px;
             overflow-y: auto;
             background-color: white;
             border: 1px solid #eee;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            /* Thêm bóng cho chuyên nghiệp */
         }
 
-        /* Kiểu cho từng mục trong danh sách (giữ nguyên hoặc tối ưu) */
         .list-group-item.search-result-item {
             padding: 12px 15px;
-            /* Tăng khoảng cách để dễ bấm */
             border-bottom: 1px solid #f8f9fa;
             transition: background 0.2s ease;
         }
 
         .list-group-item.search-result-item:hover {
             background-color: #f1f8f4;
-            /* Màu xanh nhạt khi hover */
         }
 
+        /* NOTE: CSS cho thẻ (Card) sản phẩm tương tự */
         .product-card-sm:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
@@ -67,14 +52,8 @@
             overflow: hidden;
         }
 
-        .heading-row {
-            max-width: 100%;
-        }
-
-        .heading-col {
-            width: 100%;
-        }
-
+        .heading-row { max-width: 100%; }
+        .heading-col { width: 100%; }
         .heading-box {
             background-color: #ffffff;
             border: 1px solid #e0e0e0;
@@ -82,37 +61,25 @@
             padding: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
-
-        .heading-box h3 {
-            margin: 0;
-            font-size: 20px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        /* CSS cho chọn màu */
+        .heading-box h3 { margin: 0; font-size: 20px; font-weight: bold; color: #333; }
+        
+        /* NOTE: CSS cho các chấm tròn chọn màu xe */
         .color-dot-detail {
-            width: 45px;
-            height: 45px;
+            width: 45px; height: 45px;
             border: 2px solid #ddd;
             border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
             transition: 0.2s;
         }
-
         .color-dot-detail.active {
             border-color: #27ae60;
             box-shadow: 0 0 8px rgba(39, 174, 96, 0.5);
-            transform: scale(1.1);
+            transform: scale(1.1); /* Phóng to nhẹ khi đang chọn */
         }
+        .color-dot-detail img { width: 100%; height: 100%; object-fit: cover; }
 
-        .color-dot-detail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
+        /* NOTE: CSS cho phần Footer (Chân trang) */
         .footer {
             background-color: #1a2521;
             color: #ffffff;
@@ -120,69 +87,20 @@
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
         }
-
         .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            padding: 0 20px;
+            max-width: 1200px; margin: 0 auto; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; padding: 0 20px;
         }
-
-        .footer-col h3 {
-            color: #ffffff;
-            font-size: 16px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .footer-col ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-col ul li a {
-            color: #bdc3c7;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .footer-col ul li a:hover {
-            color: #2ecc71;
-            padding-left: 5px;
-        }
-
-        .highlight {
-            color: #f1c40f;
-            font-weight: bold;
-        }
-
-        .payment-methods img {
-            height: 30px;
-            margin-right: 10px;
-            filter: grayscale(100%);
-            transition: 0.3s;
-        }
-
-        .payment-methods img:hover {
-            filter: grayscale(0%);
-        }
-
-        .mt-20 {
-            margin-top: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .footer-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-        }
+        .footer-col h3 { color: #ffffff; font-size: 16px; margin-bottom: 20px; text-transform: uppercase; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #bdc3c7; text-decoration: none; transition: 0.3s; }
+        .footer-col ul li a:hover { color: #2ecc71; padding-left: 5px; }
+        .highlight { color: #f1c40f; font-weight: bold; }
+        .payment-methods img { height: 30px; margin-right: 10px; filter: grayscale(100%); transition: 0.3s; }
+        .payment-methods img:hover { filter: grayscale(0%); }
+        .mt-20 { margin-top: 20px; }
+        @media (max-width: 768px) { .footer-container { grid-template-columns: 1fr; text-align: center; } }
     </style>
 </head>
 
@@ -190,15 +108,17 @@
     <div id="nav-placeholder"></div>
 
     <script>
+        // NOTE: Kỹ thuật AJAX (Fetch API) để nhúng file navbar.html vào trang hiện tại nhằm tái sử dụng code
         fetch('navbar.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('nav-placeholder').innerHTML = data;
+                // Khởi tạo lại các thành phần Dropdown của Bootstrap sau khi nhúng HTML mới
                 var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
                 var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
                     return new bootstrap.Dropdown(dropdownToggleEl)
                 });
-                updateCartCount();
+                updateCartCount(); // Gọi hàm cập nhật số lượng trên icon giỏ hàng
             })
             .catch(error => console.error('Lỗi:', error));
     </script>
@@ -209,22 +129,29 @@
 
     <script src="js/data.js"></script>
     <script>
+        // NOTE: --- BƯỚC 1: LẤY ID SẢN PHẨM TỪ THANH ĐỊA CHỈ URL ---
         const params = new URLSearchParams(window.location.search);
         const id = parseInt(params.get('id'));
+        
+        // Truy vấn trong mảng products để tìm đúng sản phẩm có ID tương ứng
         const product = products.find(p => p.id === id);
         const content = document.getElementById('detail-content');
 
+        // NOTE: Biến trạng thái (State) rất quan trọng để ghi nhớ hình ảnh màu sắc mà khách đang chọn
         let selectedColorImg = product ? product.img : '';
 
         if (product) {
             const brandLink = product.brand ? product.brand.toLowerCase() : "all";
+            
+            // NOTE: --- BƯỚC 2: THUẬT TOÁN TÌM SẢN PHẨM TƯƠNG TỰ THEO GIÁ ---
+            // Lọc bỏ sản phẩm hiện tại ra khỏi danh sách
             const otherProducts = products.filter(p => p.id !== product.id);
-
+            // Sắp xếp các sản phẩm còn lại dựa trên độ chênh lệch giá (Gần giá nhất lên đầu)
             const relatedProducts = otherProducts.sort((a, b) => {
                 return Math.abs(a.price - product.price) - Math.abs(b.price - product.price);
-            }).slice(0, 5);
+            }).slice(0, 5); // Cắt lấy đúng 5 sản phẩm đầu tiên
 
-            // --- XỬ LÝ GIÁ KHUYẾN MÃI ---
+            // NOTE: --- BƯỚC 3: XỬ LÝ LOGIC HIỂN THỊ GIÁ KHUYẾN MÃI ---
             const rate = product.discount || 0;
             const finalPrice = rate > 0 ? Math.round(product.price * (1 - rate / 100)) : product.price;
             const formattedOriginal = product.price.toLocaleString('vi-VN') + ' VNĐ';
@@ -240,7 +167,7 @@
                 priceHtml = `<h4 class="text-danger fw-bold mb-3">Giá: ${formattedOriginal}</h4>`;
             }
 
-            // --- XỬ LÝ LỰA CHỌN MÀU SẮC ---
+            // NOTE: --- BƯỚC 4: RENDER BỘ CHỌN MÀU SẮC DỰA TRÊN ID SẢN PHẨM ---
             let colorOptionsHtml = '';
             let availableColors = [];
 
@@ -267,6 +194,7 @@
                 `;
             }
 
+            // NOTE: --- BƯỚC 5: ĐỔ TOÀN BỘ HTML CHI TIẾT SẢN PHẨM RA MÀN HÌNH ---
             content.innerHTML = `
                 <div class="col-md-4 mb-4">
                     <div class="d-flex justify-content-center align-items-center border rounded bg-white shadow-sm mb-3" 
@@ -407,7 +335,7 @@
                                         <div class="card-body p-2">
                                             <h6 class="card-title text-dark mb-1 text-truncate" style="font-size: 0.9rem;">${p.name}</h6>
                                             <p class="text-danger fw-bold mb-0" style="font-size: 0.85rem;">
-                                                ${(p.discount > 0 ? Math.round(p.price * (1 - p.discount / 100)) : p.price).toLocaleString()}đ
+                                                ${(p.discount > 0 ? Math.round(p.price * (1 - p.discount/100)) : p.price).toLocaleString()}đ
                                             </p>
                                         </div>
                                     </a>
@@ -421,14 +349,17 @@
             content.innerHTML = "<h2 class='text-center py-5'>Sản phẩm không tồn tại!</h2>";
         }
 
-        // Hàm đổi màu khi click vào chấm màu
+        // NOTE: Hàm xử lý thay đổi hình ảnh to trên cùng khi người dùng ấn vào nút chọn màu
         function selectColor(imgSrc, element) {
-            document.getElementById('main-detail-img').src = imgSrc;
-            selectedColorImg = imgSrc;
+            document.getElementById('main-detail-img').src = imgSrc; // Cập nhật src ảnh lớn
+            selectedColorImg = imgSrc; // Lưu lại trạng thái ảnh đang chọn để add vào giỏ hàng
+            
+            // Xóa border active ở tất cả các nút màu, sau đó gán lại cho nút vừa click
             document.querySelectorAll('.color-dot-detail').forEach(dot => dot.classList.remove('active'));
             element.classList.add('active');
         }
 
+        // NOTE: Hàm tăng/giảm số lượng. Đảm bảo số lượng luôn >= 1
         function changeQty(amount) {
             const qtyInput = document.getElementById('product-qty');
             let currentQty = parseInt(qtyInput.value) || 1;
@@ -437,42 +368,48 @@
             }
         }
 
-        // Đã Update để xử lý 3 luồng: Add thường, Mua Ngay và Trả Góp
+        // NOTE: --- HÀM THÊM VÀO GIỎ HÀNG (CORE LOGIC) ---
+        // Nhận tham số actionType để phân luồng (Thêm thường, Mua ngay, hoặc Trả góp)
         function addToCart(productId, actionType = 'add') {
             const quantity = parseInt(document.getElementById('product-qty').value);
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cart = JSON.parse(localStorage.getItem('cart')) || []; // Rút giỏ hàng từ LocalStorage
 
+            // Kiểm tra xem sản phẩm có TRÙNG ID VÀ TRÙNG MÀU SẮC (img) đã có trong giỏ chưa
             const existingProductIndex = cart.findIndex(item => item.id === productId && item.img === selectedColorImg);
 
             if (existingProductIndex > -1) {
-                cart[existingProductIndex].quantity += quantity;
+                cart[existingProductIndex].quantity += quantity; // Nếu trùng thì cộng dồn số lượng
             } else {
+                // Tính toán giá trị tiền cuối cùng đã trừ khuyến mãi
                 const rate = product.discount || 0;
                 const finalPrice = rate > 0 ? Math.round(product.price * (1 - rate / 100)) : product.price;
 
+                // Thêm một mảng đối tượng mới vào cấu trúc Giỏ Hàng
                 cart.push({
                     id: product.id,
                     name: product.name,
                     price: finalPrice,
-                    img: selectedColorImg,
+                    img: selectedColorImg, // LƯU Ý: Lấy đúng hình màu sắc khách đang xem
                     quantity: quantity
                 });
             }
 
+            // Lưu ngược lại mảng JSON xuống Két sắt trình duyệt (Local Storage)
             localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
+            updateCartCount(); // Thay đổi con số màu đỏ trên góc Navbar
 
-            // Xử lý các luồng dựa theo nút bấm
+            // NOTE: Xử lý các luồng trải nghiệm (UX) dựa theo nút bấm
             if (actionType === 'add') {
                 alert(`Đã thêm ${quantity} xe "${product.name}" vào giỏ hàng!`);
             } else if (actionType === 'buy_now') {
-                window.location.href = 'cart.html';
+                window.location.href = 'cart.html'; // Chuyển thẳng qua giỏ hàng
             } else if (actionType === 'installment') {
                 alert("Hợp đồng trả góp sẽ được xử lý sau. Đang chuyển hướng đến giỏ hàng...");
-                window.location.href = 'cart.html';
+                window.location.href = 'cart.html'; // Hiển thị thông báo rồi mới chuyển trang
             }
         }
 
+        // NOTE: Hàm quét tổng số lượng trong giỏ hàng để cập nhật Badge đỏ góc trên phải
         function updateCartCount() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -482,9 +419,9 @@
             }
         }
 
-        updateCartCount();
+        updateCartCount(); // Gọi hàm ngay khi vừa tải xong JavaScript
     </script>
-
+    
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-col">
@@ -524,11 +461,5 @@
             </div>
         </div>
     </footer>
-    <div id="nav-placeholder"></div>
-
-    <script src="js/data.js"></script>
-
-    <script src="js/navbar.js"></script>
 </body>
-
 </html>
