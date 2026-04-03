@@ -59,14 +59,22 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
         }
+
         .product-card-sm .card-title {
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-        .heading-row { max-width: 100%; }
-        .heading-col { width: 100%; }
+
+        .heading-row {
+            max-width: 100%;
+        }
+
+        .heading-col {
+            width: 100%;
+        }
+
         .heading-box {
             background-color: #ffffff;
             border: 1px solid #e0e0e0;
@@ -74,23 +82,36 @@
             padding: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
-        .heading-box h3 { margin: 0; font-size: 20px; font-weight: bold; color: #333; }
-        
+
+        .heading-box h3 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
         /* CSS cho chọn màu */
         .color-dot-detail {
-            width: 45px; height: 45px;
+            width: 45px;
+            height: 45px;
             border: 2px solid #ddd;
             border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
             transition: 0.2s;
         }
+
         .color-dot-detail.active {
             border-color: #27ae60;
             box-shadow: 0 0 8px rgba(39, 174, 96, 0.5);
             transform: scale(1.1);
         }
-        .color-dot-detail img { width: 100%; height: 100%; object-fit: cover; }
+
+        .color-dot-detail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         .footer {
             background-color: #1a2521;
@@ -99,20 +120,69 @@
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
         }
+
         .footer-container {
-            max-width: 1200px; margin: 0 auto; display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
         }
-        .footer-col h3 { color: #ffffff; font-size: 16px; margin-bottom: 20px; text-transform: uppercase; }
-        .footer-col ul { list-style: none; padding: 0; }
-        .footer-col ul li { margin-bottom: 10px; }
-        .footer-col ul li a { color: #bdc3c7; text-decoration: none; transition: 0.3s; }
-        .footer-col ul li a:hover { color: #2ecc71; padding-left: 5px; }
-        .highlight { color: #f1c40f; font-weight: bold; }
-        .payment-methods img { height: 30px; margin-right: 10px; filter: grayscale(100%); transition: 0.3s; }
-        .payment-methods img:hover { filter: grayscale(0%); }
-        .mt-20 { margin-top: 20px; }
-        @media (max-width: 768px) { .footer-container { grid-template-columns: 1fr; text-align: center; } }
+
+        .footer-col h3 {
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #2ecc71;
+            padding-left: 5px;
+        }
+
+        .highlight {
+            color: #f1c40f;
+            font-weight: bold;
+        }
+
+        .payment-methods img {
+            height: 30px;
+            margin-right: 10px;
+            filter: grayscale(100%);
+            transition: 0.3s;
+        }
+
+        .payment-methods img:hover {
+            filter: grayscale(0%);
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
@@ -143,7 +213,7 @@
         const id = parseInt(params.get('id'));
         const product = products.find(p => p.id === id);
         const content = document.getElementById('detail-content');
-        
+
         let selectedColorImg = product ? product.img : '';
 
         if (product) {
@@ -173,7 +243,7 @@
             // --- XỬ LÝ LỰA CHỌN MÀU SẮC ---
             let colorOptionsHtml = '';
             let availableColors = [];
-            
+
             if (product.id === 7) availableColors = ['assets/img/osakar_win.jpg', 'assets/img/osakar-win-maucam.jpg', 'assets/img/osakar-win-mauvangden.jpg', 'assets/img/osakar-win-mauvangxanh.jpg'];
             else if (product.id === 8) availableColors = ['assets/img/TAILGGR55.jpg', 'assets/img/tailg55_mauxanh.png', 'assets/img/tailg55_mautim.png', 'assets/img/tailg55_mauhong.png', 'assets/img/tailg55_mauden.jpg'];
             else if (product.id === 24) availableColors = ['assets/img/osakar_x8.jpg', 'assets/img/osakar-x8-mauden.jpg', 'assets/img/osakar-x8-mautrang.webp'];
@@ -337,7 +407,7 @@
                                         <div class="card-body p-2">
                                             <h6 class="card-title text-dark mb-1 text-truncate" style="font-size: 0.9rem;">${p.name}</h6>
                                             <p class="text-danger fw-bold mb-0" style="font-size: 0.85rem;">
-                                                ${(p.discount > 0 ? Math.round(p.price * (1 - p.discount/100)) : p.price).toLocaleString()}đ
+                                                ${(p.discount > 0 ? Math.round(p.price * (1 - p.discount / 100)) : p.price).toLocaleString()}đ
                                             </p>
                                         </div>
                                     </a>
@@ -379,7 +449,7 @@
             } else {
                 const rate = product.discount || 0;
                 const finalPrice = rate > 0 ? Math.round(product.price * (1 - rate / 100)) : product.price;
-                
+
                 cart.push({
                     id: product.id,
                     name: product.name,
@@ -406,7 +476,7 @@
         function updateCartCount() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const cartBadge = document.getElementById('cart-count'); 
+            const cartBadge = document.getElementById('cart-count');
             if (cartBadge) {
                 cartBadge.innerText = totalItems;
             }
@@ -414,7 +484,7 @@
 
         updateCartCount();
     </script>
-    
+
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-col">
@@ -460,4 +530,5 @@
 
     <script src="js/navbar.js"></script>
 </body>
+
 </html>
